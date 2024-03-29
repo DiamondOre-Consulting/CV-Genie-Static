@@ -13,7 +13,7 @@ import Footer from '../../Components/Commancomponents/Footer'
 const MainHome = () => {
   return (
     <>
-    <div >
+    <div className='bg-green-50' >
         <Navbar/>
         <Hero/>
         <Services/>

@@ -24,29 +24,29 @@ const Navbar = () => {
                         </svg>
                     </button>
                     <div className="hidden w-full md:block md:w-auto " id="navbar-default">
-                        <ul className="items-center font-sm flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <ul className="items-center font-sm flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                             <li className='relative group'>
-                                <a href="#home" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:p-0  md:dark:text-blue-500" aria-current="page">Home</a>
+                                <a href="#home" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:p-0" aria-current="page">Home</a>
                                 <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gray-200 group-hover:w-full group-hover:transition-all"></span>
                             </li>
                             <li className='relative group'>
-                                <a href="#services" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+                                <a href="#services" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0">Services</a>
                                 <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gray-200 group-hover:w-full group-hover:transition-all"></span>
                             </li>
                             <li className='relative group'>
-                                <a href="#template" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Templates</a>
+                                <a href="#template" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0">Templates</a>
                                 <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gray-200 group-hover:w-full group-hover:transition-all"></span>
                             </li>
                             <li className='relative group'>
-                                <a href="#feature" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Features</a>
+                                <a href="#feature" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0">Features</a>
                                 <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gray-200 group-hover:w-full group-hover:transition-all"></span>
                             </li>
                             <li className='relative group'>
-                                <a href="#contact" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                                <a href="#contact" className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md: md:p-0">Contact</a>
                                 <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gray-200 group-hover:w-full group-hover:transition-all"></span>
                             </li>
                             <li onClick={handleWhatsAppChat}>
-                                <a href="#" className="block py-2 px-3 text-teal-900 rounded-full hover:bg-gray-100 bg-white  md:border-0 md: md:py-1 md:px-2  dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Chat us</a>
+                                <a href="#" className="block py-2 px-3 text-teal-900 rounded-full hover:bg-gray-300 bg-white  md:border-0 md: md:py-1 md:px-2 ">Chat with us</a>
                             </li>
                         </ul>
                     </div>

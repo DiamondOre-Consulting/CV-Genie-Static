@@ -74,9 +74,9 @@ const Contactus = () => {
                             <div className='flex flex-col justify-center items-center'>
                                 <div className='rounded-full px-4 py-2 w-fit text-center bg-gray-300  text-3xl text-teal-900'><i class="fa fa-envelope" aria-hidden="true"></i></div>
                                 <p className='uppercase font-semibold text-gray-200 mt-2'>Email</p>
-                                <p className='text-sm text-gray-300'>hr@diamondore.in</p>
-                                <p className='text-sm text-gray-300'>zoyas3423@gmail.com</p>
-                                <p className='text-sm text-gray-300'>mani@gmail.com</p>
+                                <a className='text-sm text-gray-300' href='mailto:admin@cvgenie.in'>admin@cvgenie.in</a>
+                                {/* <p className='text-sm text-gray-300'>zoyas3423@gmail.com</p>
+                                <p className='text-sm text-gray-300'>mani@gmail.com</p> */}
 
                             </div>
 
@@ -111,26 +111,26 @@ const Contactus = () => {
                         <div className=''>
                             <form class="max-w-lg mx-auto" onSubmit={handleSubmit}>
                                 <div class="mb-5">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                    <input type="name" id="name" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.name} onChange={handleChange}/>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                                    <input type="name" id="name" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.name} onChange={handleChange}/>
                                 </div>
                                 <div class="mb-5">
-                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="email" id="email" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.email} onChange={handleChange}/>
-                                </div>
-
-                                <div class="mb-5">
-                                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                                    <input type="phone" id="phone" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.phone} onChange={handleChange}/>
+                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                    <input type="email" id="email" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.email} onChange={handleChange}/>
                                 </div>
 
                                 <div class="mb-5">
-                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-                                    <textarea type="text" id="message" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.message} onChange={handleChange}/>
+                                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone</label>
+                                    <input type="phone" id="phone" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.phone} onChange={handleChange}/>
+                                </div>
+
+                                <div class="mb-5">
+                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+                                    <textarea type="text" id="message" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.message} onChange={handleChange}/>
                                 </div>
 
                                 {/* <div class="mb-5">
-                                    <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload you updated resume</label>
+                                    <label for="file" class="block mb-2 text-sm font-medium text-gray-900">Upload you updated resume</label>
                                     <input class="block w-full text-sm text-teal-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-teal-900 dark:border-teal-600 dark:placeholder-gray-400" id="file_input" type="file" />
                                 </div> */}
 
