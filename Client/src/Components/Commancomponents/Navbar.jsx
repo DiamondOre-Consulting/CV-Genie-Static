@@ -9,7 +9,7 @@ const Navbar = () => {
     };
 
     const handleWhatsAppChat = () => {
-        const phoneNumber = "9811839410";
+        const phoneNumber = "8448875033";
         const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
         window.open(url, '_blank');
     };
