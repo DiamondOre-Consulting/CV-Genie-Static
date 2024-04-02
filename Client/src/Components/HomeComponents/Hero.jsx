@@ -5,7 +5,7 @@ const Hero = () => {
     return (
         <>
             <div className="py-12 md:py-20" id="home">
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 ">
+                <div className="lg:container mx-auto grid grid-cols-1 md:grid-cols-2 ">
                     <div className="md:col-span-1 px-8 md:pl-10">
                         <h1 className="text-4xl font-semibold text-teal-900 mb-4">CV-Genie</h1>
                         <p className='text-4xl uppercase text-teal-900 mb-4'>Career Wish Granted !!!</p>
@@ -18,7 +18,7 @@ const Hero = () => {
 
                     </div>
                     <div className="md:col-span-1 flex justify-center hidden md:flex">
-                        <img src={genie} alt="Hero Image" className="w-8/12" />
+                        <img src={genie} alt="Hero Image" className=" w-full lg:w-8/12" />
                     </div>
                 </div>
             </div>
