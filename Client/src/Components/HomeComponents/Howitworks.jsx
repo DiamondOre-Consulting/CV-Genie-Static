@@ -13,19 +13,19 @@ const Howitworks = () => {
 
                         <div class="grid gap-4 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">
 
-                            <div class="flex flex-col rounded-lg border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
+                            <div class="flex flex-col rounded-xl border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
                                 <p className='text-4xl mb-2'><i class="fa fa-headphones" aria-hidden="true"></i></p>
                                 <h3 class="mb-2 text-lg font-semibold md:text-xl text-teal-900">Discussion</h3>
                                 <p class="mb-4 text-gray-500">Once the payment is done, a professional resume writer will be assigned to you who will then reach out to discuss your expectation and ask for relevant details.</p>
                             </div>
 
-                            <div class="flex flex-col rounded-lg border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
+                            <div class="flex flex-col rounded-xl border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
                                 <p className='text-4xl mb-2'><i class="fa fa-file-image-o" aria-hidden="true"></i></p>
                                 <h3 class="mb-2 text-lg font-semibold md:text-xl text-teal-900">First Draft</h3>
                                 <p class="mb-4 text-gray-500">You will recive the first draft of your new resume to review and other feedback on, based on the information shared during your consultation call.</p>
                             </div>
 
-                            <div class="flex flex-col rounded-lg border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
+                            <div class="flex flex-col rounded-xl border p-4 md:p-6 bg-white border-0 shadow-xl transition-all duration-700 hover:scale-110">
                                 <p className='text-4xl mb-2'><i class="fa fa-file-text" aria-hidden="true"></i></p>
                                 <h3 class="mb-2 text-lg font-semibold md:text-xl text-teal-900">Final File</h3>
                                 <p class="mb-4 text-gray-500">After incopration your feedback and making the necessary revisions, the writer will be provide you with the final version of your resume.</p>

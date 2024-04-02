@@ -97,8 +97,7 @@ const Contactus = () => {
                         <div className='flex flex-col mt-4'>
                             <h1 className='text-black font-semibold text-4xl'>Message Us</h1>
                             <p className='text-sm mt-4 text-gray-400'>
-                                Yes, the generated WhatsApp API link will work on mobile devices as well. When the link is clicked on a mobile device, it will typically open the WhatsApp application (if installed) or prompt the user to download the WhatsApp application if it's not installed. Once the WhatsApp application is opened, it will redirect the user to the chat screen with the specified phone number pre-filled.
-                                It's worth noting that the behavior may vary slightly depending on the device and browser settings. However, in most cases, clicking the link should open the WhatsApp application or redirect to the WhatsApp website to initiate the chat with the specified phone number.
+                                Ready to elevate your professional profile? At CV-Genie, we specialize in crafting bespoke CVs tailored to your unique strengths and aspirations. Our dedicated team is committed to guiding you through the process, ensuring every detail reflects your potential. Let's collaborate to create a standout CV that opens doors to new opportunities. Reach out to us today and embark on a journey towards career success. With our expertise and personalized approach, we'll help you shine in today's competitive job market. Don't settle for an ordinary CV—let CV-Genie transform it into a powerful tool that showcases your talents and propels your career forward. Contact us now to get started on crafting your path to success.
                             </p>
                             <div>
                                 <img className="w-10" src={logo} alt="" />
@@ -132,7 +131,7 @@ const Contactus = () => {
                                 {/* <div class="mb-5">
                                     <label for="file" class="block mb-2 text-sm font-medium text-gray-900">Upload you updated resume</label>
                                     <input class="block w-full text-sm text-teal-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-teal-900 dark:border-teal-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                                </div> */}
+                                </div>  */}
 
 
                                 <button class="border-teal-900 text-white hover:before:bg-tealborder-teal-900 relative h-[50px] w-full rounded-md overflow-hidden border  bg-teal-900 px-8 text-white  transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-white before:transition-all before:duration-500 hover:text-teal-900 before:border-teal-900 border-1  hover:before:left-0 hover:before:w-full"><span class="relative z-10">Submit</span></button>

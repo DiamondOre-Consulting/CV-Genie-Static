@@ -7,7 +7,7 @@ const Testimonials = () => {
                 <div className="grid items-center gap-4 xl:grid-cols-5">
                     <div className="max-w-2xl mx-auto my-8 space-y-4 text-center xl:col-span-2 xl:text-left">
                         <h2 className="text-4xl font-bold text-black">What our Client Say ? </h2>
-                        <p className="text-gray-400">Pri ex magna scaevola moderatius. Nullam accommodare no vix, est ei diceret alienum, et sit cetero malorum. Et sea iudico consequat, est sanctus adipisci ex.</p>
+                        <p className="text-gray-400"> Crafting CVs with precision, CV-Genie ensures your professional narrative resonates authentically, setting you apart in the job market.</p>
                     </div>
                     <div className="p-6 xl:col-span-3">
                         <div className="grid gap-4 md:grid-cols-2">
@@ -38,7 +38,7 @@ const Testimonials = () => {
                                 <div className="p-6 rounded shadow-md bg-white">
                                     <p className='text-gray-500'>I owe a great deal of gratitude to CVGenie for helping me secure my dream job. Their expertly crafted resume not only highlighted my skills and experience but also showcased my unique qualities in a way that caught the attention of employers. With their personalized approach and attention to detail, CVGenie transformed my application, making it stand out in a competitive job market. I highly recommend their services to anyone seeking professional career support. Thank you, CV~Genie, for your invaluable assistance</p>
                                     <div className="flex items-center mt-4 space-x-4">
-                                        <img src="https://source.unsplash.com/50x50/?portrait?3" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-gray-500" />
+                                        <img src="https://www.shutterstock.com/image-vector/man-avatar-formal-suit-red-260nw-1083946805.jpg" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-gray-500" />
                                         <div>
                                             <p className="text-lg font-semibold text-gray-700">Shyam Nath Ram</p>
                                         </div>
@@ -47,7 +47,7 @@ const Testimonials = () => {
                                 <div className="p-6 rounded shadow-md bg-white">
                                     <p className='text-gray-500'>CV~Genie transformed my resume into a masterpiece! Their expertise in resume writing is exceptional. The team was professional and delivered beyond my expectations. Thank you for helping me stand out in the job market, CV~Genie!</p>
                                     <div className="flex items-center mt-4 space-x-4">
-                                        <img src="https://source.unsplash.com/50x50/?portrait?4" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-gray-500" />
+                                        <img src="https://cdn4.vectorstock.com/i/1000x1000/52/38/avatar-icon-vector-11835238.jpg" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-gray-500" />
                                         <div>
                                             <p className="text-lg font-semibold text-gray-700">Dheeraj </p>
 

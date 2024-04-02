@@ -29,9 +29,9 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center mt-8'>
+                {/* <div className='flex justify-center mt-8'>
                 <button class=" rounded-full text-white  hover:before:bg-tealborder-teal-900 relative h-[50px] w-auto overflow-hidden border  bg-teal-900 px-8 text-white  transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-white before:transition-all before:duration-500 hover:text-teal-900  hover:before:left-0 hover:before:w-full"><span class="relative z-10">Create Your Resume Now</span></button>
-                </div>
+                </div> */}
 
             </section>
         </>
