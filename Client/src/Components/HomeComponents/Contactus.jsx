@@ -3,6 +3,12 @@ import logo from '..//..//assets/logo.png'
 import emailjs from 'emailjs-com';
 emailjs.init('v4J4xN9s0rL7eRYnG');
 const Contactus = () => {
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleClose = () => {
+        setShowPopup(false);
+    };
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,7 +25,7 @@ const Contactus = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // Replace placeholders with form data
         const templateParams = {
             Name: formData.name,
@@ -32,7 +38,7 @@ const Contactus = () => {
         emailjs.send('service_cswvwur', 'template_q45ioi6', templateParams, 'v4J4xN9s0rL7eRYnG')
             .then((result) => {
                 console.log(result.text);
-                alert('Form submitted successfully!');
+                setShowPopup(true);
             }, (error) => {
                 console.error(error.text);
                 alert('Failed to submit form. Please try again later.');
@@ -99,10 +105,7 @@ const Contactus = () => {
                             <p className='text-sm mt-4 text-gray-400'>
                                 Ready to elevate your professional profile? At CV-Genie, we specialize in crafting bespoke CVs tailored to your unique strengths and aspirations. Our dedicated team is committed to guiding you through the process, ensuring every detail reflects your potential. Let's collaborate to create a standout CV that opens doors to new opportunities. Reach out to us today and embark on a journey towards career success. With our expertise and personalized approach, we'll help you shine in today's competitive job market. Don't settle for an ordinary CV—let CV-Genie transform it into a powerful tool that showcases your talents and propels your career forward. Contact us now to get started on crafting your path to success.
                             </p>
-                            <div>
-                                <img className="w-10" src={logo} alt="" />
-                                <p className='text-sm mt-4 text-gray-400'>Yes, the generated WhatsApp API link will work on mobile devices as well.  </p>
-                            </div>
+                           
 
 
                         </div>
@@ -111,21 +114,21 @@ const Contactus = () => {
                             <form class="max-w-lg mx-auto" onSubmit={handleSubmit}>
                                 <div class="mb-5">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
-                                    <input type="name" id="name" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.name} onChange={handleChange}/>
+                                    <input type="name" id="name" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.name} onChange={handleChange} />
                                 </div>
                                 <div class="mb-5">
                                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                                    <input type="email" id="email" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.email} onChange={handleChange}/>
+                                    <input type="email" id="email" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.email} onChange={handleChange} />
                                 </div>
 
                                 <div class="mb-5">
                                     <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone</label>
-                                    <input type="phone" id="phone" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.phone} onChange={handleChange}/>
+                                    <input type="phone" id="phone" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.phone} onChange={handleChange} />
                                 </div>
 
                                 <div class="mb-5">
                                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
-                                    <textarea type="text" id="message" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.message} onChange={handleChange}/>
+                                    <textarea type="text" id="message" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={formData.message} onChange={handleChange} />
                                 </div>
 
                                 {/* <div class="mb-5">
@@ -136,6 +139,24 @@ const Contactus = () => {
 
                                 <button class="border-teal-900 text-white hover:before:bg-tealborder-teal-900 relative h-[50px] w-full rounded-md overflow-hidden border  bg-teal-900 px-8 text-white  transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-white before:transition-all before:duration-500 hover:text-teal-900 before:border-teal-900 border-1  hover:before:left-0 hover:before:w-full"><span class="relative z-10">Submit</span></button>
                             </form>
+                            {showPopup ? (
+                                <div className="fixed inset-0 flex items-center justify-center">
+                                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                                    <section className="rounded-lg shadow-xl bg-white w-4/5 sm:w-3/5 lg:w-1/3">
+                                        <div className="p-6 text-center">
+                                            <h2 className="text-xl font-bold text-teal-green-900 mb-4">Thank you!!</h2>
+                                            <p className="text-sm text-gray-600 mb-6">We will connect with you soon.</p>
+                                            <button
+                                                className="block w-full px-4 py-2 bg-teal-900 text-sm font-semibold text-white rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+                                                onClick={handleClose}
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </section>
+                                </div>
+                            ) : null}
+
 
 
 
