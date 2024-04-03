@@ -6,7 +6,7 @@ const Testimonials = () => {
             <div className="container px-6 py-12 mx-auto">
                 <div className="grid items-center gap-4 xl:grid-cols-5">
                     <div className="max-w-2xl mx-auto my-8 space-y-4 text-center xl:col-span-2 xl:text-left">
-                        <h2 className="text-4xl font-bold text-black">What our Client Say ? </h2>
+                        <h2 className="text-4xl font-bold text-black">What our Clients Say ? </h2>
                         <p className="text-gray-400"> Crafting CVs with precision, CV-Genie ensures your professional narrative resonates authentically, setting you apart in the job market.</p>
                     </div>
                     <div className="p-6 xl:col-span-3">

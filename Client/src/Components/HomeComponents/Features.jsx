@@ -4,7 +4,7 @@ const Features = () => {
   return (
     <>
       <section className='mt-24 px-10 ' id="feature">
-        <h1 className='text-3xl text-gray-700 pl-8'><span className='text-teal-900  font-semibold'>Our Special Features</span> Even more Reason to shop with us</h1>
+        <h1 className='text-3xl text-gray-700 md:pl-8 '><span className='text-teal-900  font-semibold'>Our Special Features</span> Even More Reasons To Shop With Us</h1>
         <div className="py-6 sm:py-8 lg:py-12 mt-4">
           <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
             <div className="grid gap-8 sm:grid-cols-2 md:gap-12 xl:grid-cols-3 xl:gap-16">
@@ -15,7 +15,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">Personalized Attention</h3>
-                  <p className="mb-2 text-gray-500 text-sm">Our resume writing serivice provides Personalized Attention to ensure that your unique skills and experiences are highlighed in your resume.</p>
+                  <p className="mb-2 text-gray-500 text-sm">Our resume writing serivice provides Personalized Attention to ensure that your unique skills and experiences are highlighed in your resume</p>
                 </div>
               </div>
 
@@ -26,7 +26,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">ATS Optimization </h3>
-                  <p className="mb-2 text-gray-500 text-sm">We use industry-specific Keyword in your resume to optimize it for (ATS), which are commonly used by employers to screen job application.</p>
+                  <p className="mb-2 text-gray-500 text-sm">We use industry-specific Keyword in your resume to optimize it for (ATS), which are commonly used by employers to screen job application</p>
                 </div>
               </div>
 
@@ -38,7 +38,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">Confidentiality and Privacy</h3>
-                  <p className="mb-2 text-gray-500 text-sm">We understand that your job search can be sensitive, and we take Confidentiality and privacy seriously.</p>
+                  <p className="mb-2 text-gray-500 text-sm">We understand that your job search can be sensitive, and we take Confidentiality and privacy seriously</p>
                 </div>
               </div>
 
@@ -49,7 +49,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">Guaranteed Satisfaction</h3>
-                  <p className="mb-2 text-gray-500 text-sm">We are confident in the quality of our work and stand behind our resume writing service with a satisfaction guarantee. </p>
+                  <p className="mb-2 text-gray-500 text-sm">We are confident in the quality of our work and stand behind our resume writing service with a satisfaction guarantee</p>
                 </div>
               </div>
               <div className="flex gap-4 md:gap-6">
@@ -59,7 +59,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">Keyword Optimization</h3>
-                  <p className="mb-2 text-gray-500 text-sm">This increase the chances of your resume being seen by hiring managers and can help you get noticed in a competitive job market.</p>
+                  <p className="mb-2 text-gray-500 text-sm">This increase the chances of your resume being seen by hiring managers and can help you get noticed in a competitive job market</p>
                 </div>
               </div>
               <div className="flex gap-4 md:gap-6">
@@ -69,7 +69,7 @@ const Features = () => {
 
                 <div>
                   <h3 className="mb-2 text-lg font-semibold md:text-xl">24/7 Customer Support</h3>
-                  <p className="mb-2 text-gray-500 text-sm">We offer 24/7 Customer Support our team is available to assist you at any time.</p>
+                  <p className="mb-2 text-gray-500 text-sm">We offer 24/7 Customer Support our team is available to assist you at any time</p>
                 </div>
               </div>
 
