@@ -9,6 +9,9 @@
   margin: 0;
   padding: 0;
 }
+.logoside{
+  font-family: "Puppies Play", cursive;
+}
 
 ::selection {
   background-color: theme('colors.customSelection'); /* Use the custom color defined in tailwind.config.js */

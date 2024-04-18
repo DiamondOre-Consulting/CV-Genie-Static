@@ -56,7 +56,7 @@ const Contactus = () => {
 
 
     const handleWhatsAppChat = () => {
-        const phoneNumber = "8448875033";
+        const phoneNumber = "8178087758";
         const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
         window.open(url, '_blank');
     };
@@ -83,7 +83,7 @@ const Contactus = () => {
                             <div className='flex flex-col items-center'>
                                 <div className='rounded-full px-4 py-2 w-fit text-center bg-gray-300  text-3xl text-teal-900'><i class="fa fa-phone" aria-hidden="true"></i></div>
                                 <p className='uppercase font-semibold text-gray-200 mt-2'>Phone</p>
-                                <p className='text-sm text-gray-300'>+91 097736 93017</p>
+                                <p className='text-sm text-gray-300'>+91 8178087758</p>
                             </div>
 
                             <div className='flex flex-col justify-center items-center'>
@@ -99,7 +99,6 @@ const Contactus = () => {
                                 <div className='rounded-full px-4 py-2 w-fit text-center bg-gray-300  text-3xl text-teal-900'><i class="fa fa-whatsapp" aria-hidden="true"></i></div>
                                 <p className='uppercase font-semibold text-gray-200 mt-2'>Chat online</p>
                                 <p className='text-sm text-gray-300'><a className='underline cursor-pointer' onClick={handleWhatsAppChat}>Chat now</a></p>
-
 
                             </div>
 

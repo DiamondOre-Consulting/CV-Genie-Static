@@ -9,7 +9,7 @@ const Navbar = () => {
     };
 
     const handleWhatsAppChat = () => {
-        const phoneNumber = "8448875033";
+        const phoneNumber = "8178087758";
         const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
         window.open(url, '_blank');
     };
@@ -18,7 +18,7 @@ const Navbar = () => {
         <nav className="md:pt-6">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 bg-teal-900 md:rounded-3xl">
                 <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src={logo} className="h-10" alt="CV Genie Logo" />
+                    <img src={logo} className="h-10" alt="CV Genie Logo" /> <span className='text-white logoside text-3xl'>CV-Genie</span>
                 </a>
                 <button
                     onClick={handleToggleMenu}
