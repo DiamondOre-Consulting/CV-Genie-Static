@@ -7,6 +7,17 @@ const Footer = () => {
         const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
         window.open(url, '_blank');
     };
+
+    const handleTermsDownload = () => {
+        // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
+        const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Terms%20and%20conditions-CV%20genie.pdf';
+        window.open(pdfUrl, '_blank');
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'terms_of_service.pdf';
+        link.click();
+    };
+
     return (
         <>
             <footer className="bg-teal-900 text-gray-50">
@@ -17,6 +28,8 @@ const Footer = () => {
                         <li><a href='#template'>Templates</a></li>
                         <li><a href='#feature'>Features</a></li>
                         <li><a href='#contact'>Contact</a></li>
+                        <li><a href='' onClick={handleTermsDownload}>Terms of Services</a></li>
+
                     </ul>
                     <div className="flex flex-col justify-center pt-6 lg:pt-0">
                         <div className="flex justify-center space-x-4">
