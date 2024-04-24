@@ -1,5 +1,5 @@
 import express from "express";
-import Clients from "../Models/Clients.js";
+import Client from "../Models/Clients.js";
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ router.get("/my-profile", async (req, res) => {
     try {
         const {email} = req.body;
 
-        const myProfile = await Clients.findOne({email});
+        const myProfile = await Client.findOne({email});
         if(!myProfile) {
             return res.status(404).json({message: "No records found with this email id!!!"})
         }
