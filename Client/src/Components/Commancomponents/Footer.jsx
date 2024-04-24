@@ -41,7 +41,7 @@ const Footer = () => {
                         <li><a href='#feature'>Features</a></li>
                         <li><a href='#contact'>Contact</a></li>
                         <li><a href='' onClick={handleTermsDownload}>Terms of Services</a></li>
-                        <li><a href='#contact' onClick={handleReturnandrefundDownload}>Return & Refund Policies</a></li>
+                        <li><a href='' onClick={handleReturnandrefundDownload}>Return & Refund Policies</a></li>
                         <Link to={'/admin-login'}><li><a href='#contact'>Admin Login</a></li></Link>
 
                     </ul>
