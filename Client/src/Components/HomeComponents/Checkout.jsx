@@ -1,45 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Commancomponents/Navbar';
 import Footer from '../Commancomponents/Footer';
+import axios from "axios";
 
 const Checkout = () => {
 
-    const [searchEmail, setSearchEmail] = useState('');
-    const [personDetails, setPersonDetails] = useState(null);
+    const [email, setEmail] = useState("");
+    const [profile, setProfile] = useState(null);
+    const [error, setError] = useState("");
 
-    // Sample data array of objects
-    const data = [
-        {
-            name: 'Zoya',
-            email: 'zoya@gmail.com',
-            phone: '1234567890',
-            ispaid: 4000
-        },
-        {
-            name: 'saniya',
-            email: 'saniya@gmail.com',
-            phone: '0987654321',
-            ispaid: 5000
-        },
+    // useEffect(() => {
+    //     if (email) {
+    //         handleSearch();
+    //     }
+    // }, [email]);
 
-        {
-            name: 'zara',
-            email: 'zara@gmail.com',
-            phone: '1234567890',
-            ispaid: 700
-        },
-        {
-            name: 'haya',
-            email: 'hya@gmail.com',
-            phone: '0987654321',
-            ispaid: 800
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get("http://localhost:5112/api/client/my-profile", 
+                 { email:email } 
+            );
+            if (response.status === 200) {
+                setProfile(response.data);
+                setError(""); // Clear any previous error
+            } else {
+                setError("No data found"); // Set error message if response or data is empty
+                setProfile(null);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            setError(error.response?.data?.message || "An error occurred"); // Use custom error message if available
+            setProfile(null);
         }
-    ];
-
-    const handleSearch = () => {
-        const foundPerson = data.find(person => person.email === searchEmail);
-        setPersonDetails(foundPerson);
     };
+    
+
+    
+ 
 
 
     return (
@@ -52,8 +49,7 @@ const Checkout = () => {
                         type="text"
                         placeholder="Search by Email"
                         className="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none"
-                        value={searchEmail}
-                        onChange={(e) => setSearchEmail(e.target.value)}
+                        value={email} onChange={(e) => setEmail(e.target.value)}
                     />
                     <button
                         className="px-4 py-2 bg-teal-900 text-white rounded-r-md hover:bg-teal-800 focus:outline-none"
@@ -62,15 +58,25 @@ const Checkout = () => {
                         Search
                     </button>
                 </div>
-                {personDetails && (
+                {error && <p>{error}</p>}
+                {profile && (
                     <div className=" rounded-md  mx-auto text-gray-800 bg-gray-50 border w-fit">
                         <div className='pl-4 pr-24 text-xl py-4 mt-2'>
-                        <p><span className="font-semibold mb-1">Name :</span> {personDetails.name}</p>
-                        <p><span className="font-semibold mb-1">Email :</span> {personDetails.email}</p>
-                        <p><span className="font-semibold mb-1">Phone :</span> {personDetails.phone}</p>
-                        <p><span className="font-semibold mb-1">Total Amount :</span> {personDetails.ispaid}</p>
+                        <p><span className="font-semibold mb-1">Name :</span> {profile.name}</p>
+                        <p><span className="font-semibold mb-1">Email :</span> {profile.email}</p>
+                        <p><span className="font-semibold mb-1">Phone :</span> {profile.phone}</p>
+                        <p><span className="font-semibold mb-1">Total Amount :</span> {profile.amount}</p>
+                        
                         </div>
-                        <button className='bg-teal-800 hover:bg-teal-900 text-gray-100 w-full !px-0 mt-4 p-4 '>Pay Now {personDetails.ispaid}</button>
+                        {profile.ispaid ? (
+                            <button className='bg-green-600 hover:bg-green-700 text-gray-100 w-full !px-0 mt-4 p-4'>
+                                Paid
+                            </button>
+                        ) : (
+                            <button className='bg-red-600 hover:bg-red-700 text-gray-100 w-full !px-0 mt-4 p-4' >
+                                Pay Now {profile.amount}
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
