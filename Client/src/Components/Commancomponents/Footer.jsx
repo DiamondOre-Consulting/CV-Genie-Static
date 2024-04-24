@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
@@ -18,17 +19,30 @@ const Footer = () => {
         link.click();
     };
 
+
+    const handleReturnandrefundDownload = () => {
+        // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
+        const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Return%20and%20refund-CV%20genie.pdf';
+        window.open(pdfUrl, '_blank');
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'Return_and_refund_policies.pdf';
+        link.click();
+    };
+
     return (
         <>
             <footer className="bg-teal-900 text-gray-50">
                 <div className="container flex flex-col p-4 mx-auto md:p-8 lg:flex-row divide-gray-400">
-                    <ul className="self-center py-6 space-y-4 text-center sm:flex sm:space-y-0 sm:justify-around sm:space-x-4 lg:flex-1 lg:justify-start">
+                    <ul className="self-center py-6 text-sm  space-y-4 text-center sm:flex sm:space-y-0 sm:justify-around sm:space-x-4 lg:flex-1 lg:justify-start">
                         <li><a href='#home'>Home</a></li>
                         <li><a href='#services'>Services</a></li>
                         <li><a href='#template'>Templates</a></li>
                         <li><a href='#feature'>Features</a></li>
                         <li><a href='#contact'>Contact</a></li>
                         <li><a href='' onClick={handleTermsDownload}>Terms of Services</a></li>
+                        <li><a href='#contact' onClick={handleReturnandrefundDownload}>Return & Refund Policies</a></li>
+                        <Link to={'/admin-login'}><li><a href='#contact'>Admin Login</a></li></Link>
 
                     </ul>
                     <div className="flex flex-col justify-center pt-6 lg:pt-0">
