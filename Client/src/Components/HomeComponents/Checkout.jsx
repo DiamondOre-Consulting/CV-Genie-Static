@@ -17,27 +17,22 @@ const Checkout = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get("http://localhost:5112/api/client/my-profile", 
-                 { email:email } 
+            const response = await axios.post(`http://localhost:5112/api/client/my-profile`, {email}
             );
             if (response.status === 200) {
+                console.log(response.data);
                 setProfile(response.data);
                 setError(""); // Clear any previous error
             } else {
                 setError("No data found"); // Set error message if response or data is empty
-                setProfile(null);
+                // setProfile(null);
             }
         } catch (error) {
             console.error("Error:", error);
             setError(error.response?.data?.message || "An error occurred"); // Use custom error message if available
-            setProfile(null);
+            // setProfile(null);
         }
     };
-    
-
-    
- 
-
 
     return (
         <div className='bg-green-50'>
