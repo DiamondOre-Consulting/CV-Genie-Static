@@ -9,7 +9,7 @@ dotnev.config();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 5112;
+const PORT = 7001;
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -31,5 +31,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on PORT: ${5112}`);
+    console.log(`Server running on PORT: ${PORT}`);
 });
