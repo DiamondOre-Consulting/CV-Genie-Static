@@ -17,7 +17,7 @@ const Checkout = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.post(`http://localhost:5112/api/client/my-profile`, {email}
+            const response = await axios.post(`https://cv-genie-static-backend.onrender.com/api/client/my-profile`, {email}
             );
             if (response.status === 200) {
                 console.log(response.data);
