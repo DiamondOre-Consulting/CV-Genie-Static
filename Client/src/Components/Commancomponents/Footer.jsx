@@ -9,26 +9,26 @@ const Footer = () => {
         window.open(url, '_blank');
     };
 
-    const handleTermsDownload = () => {
-        // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
-        const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Terms%20and%20conditions-CV%20genie.pdf';
-        window.open(pdfUrl, '_blank');
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'terms_of_service.pdf';
-        link.click();
-    };
+    // const handleTermsDownload = () => {
+    //     // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
+    //     const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Terms%20and%20conditions-CV%20genie.pdf';
+    //     window.open(pdfUrl, '_blank');
+    //     const link = document.createElement('a');
+    //     link.href = pdfUrl;
+    //     link.download = 'terms_of_service.pdf';
+    //     link.click();
+    // };
 
 
-    const handleReturnandrefundDownload = () => {
-        // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
-        const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Return%20and%20refund-CV%20genie.pdf';
-        window.open(pdfUrl, '_blank');
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'Return_and_refund_policies.pdf';
-        link.click();
-    };
+    // const handleReturnandrefundDownload = () => {
+    //     // Assuming your PDF file is named "Terms and conditions-CV genie.pdf" and is located in the "assets" folder
+    //     const pdfUrl = 'https://s3.tebi.io/cvgeniedocs/Return%20and%20refund-CV%20genie.pdf';
+    //     window.open(pdfUrl, '_blank');
+    //     const link = document.createElement('a');
+    //     link.href = pdfUrl;
+    //     link.download = 'Return_and_refund_policies.pdf';
+    //     link.click();
+    // };
 
     return (
         <>
@@ -40,8 +40,8 @@ const Footer = () => {
                         <li><a href='#template'>Templates</a></li>
                         <li><a href='#feature'>Features</a></li>
                         <li><a href='#contact'>Contact</a></li>
-                        <li><a href='' onClick={handleTermsDownload}>Terms of Services</a></li>
-                        <li><a href='' onClick={handleReturnandrefundDownload}>Return & Refund Policies</a></li>
+                        <li><Link to={"/terms-of-services"}>Terms of Services</Link></li>
+                        <li><Link to={'/return-and-refund'}>Return & Refund Policies</Link></li>
                         <Link to={'/admin-login'}><li><a href='#contact'>Admin Login</a></li></Link>
 
                     </ul>
