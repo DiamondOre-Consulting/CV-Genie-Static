@@ -8,12 +8,25 @@ const Checkout = () => {
     const [email, setEmail] = useState("");
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
+    // const [form, setForm] = useState({name: '', number: ''});
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [amount, setAmount] = useState(0);
 
-    // useEffect(() => {
-    //     if (email) {
-    //         handleSearch();
-    //     }
-    // }, [email]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('', {
+            name: name,
+            number: number,
+            amount: amount
+        })
+        .then(response => {
+            window.location.href = response.data
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
     const handleSearch = async () => {
         try {
@@ -22,6 +35,9 @@ const Checkout = () => {
             if (response.status === 200) {
                 console.log(response.data);
                 setProfile(response.data);
+                setName(response.data.name);
+                setNumber(response.data.phone);
+                setAmount(response.data.amount);
                 setError(""); // Clear any previous error
             } else {
                 setError("No data found"); // Set error message if response or data is empty
@@ -68,7 +84,7 @@ const Checkout = () => {
                                 Paid
                             </button>
                         ) : (
-                            <button className='bg-red-600 hover:bg-red-700 text-gray-100 w-full !px-0 mt-4 p-4' >
+                            <button onClick={handleSubmit} className='bg-red-600 hover:bg-red-700 text-gray-100 w-full !px-0 mt-4 p-4' >
                                 Pay Now {profile.amount}
                             </button>
                         )}
