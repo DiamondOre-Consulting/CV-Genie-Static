@@ -13,7 +13,7 @@ const AdminLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:5112/api/admin/login",
+            const response = await axios.post("https://cv-genie-static-backend.onrender.com/api/admin/login",
                 {
                     userName,
                     password

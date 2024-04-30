@@ -3,7 +3,7 @@ import Client from "../Models/Clients.js";
 
 const router = express.Router();
 
-router.get("/my-profile", async (req, res) => {
+router.post("/my-profile", async (req, res) => {
     try {
         const {email} = req.body;
 

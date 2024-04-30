@@ -20,7 +20,7 @@ const AdminForm = () => {
                 navigate("/login");
                 return;
             }
-            const clientsResponse = await axios.get('http://localhost:5112/api/admin/all-clients', {
+            const clientsResponse = await axios.get('https://cv-genie-static-backend.onrender.com/api/admin/all-clients', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -48,7 +48,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.post(
-                "http://localhost:5112/api/admin/register",
+                "https://cv-genie-static-backend.onrender.com/api/admin/register",
                 {
                     name,
                     email,
@@ -96,7 +96,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.put(
-                `http://localhost:5112/api/admin/client/${id}`,
+                `https://cv-genie-static-backend.onrender.com/api/admin/client/${id}`,
                 { paid },
                 {
                     headers: {
