@@ -40,7 +40,7 @@ router.post("/payment", async (req, res) => {
       merchantTransactionId: generateTransactionId(),
       merchantUserId: "MUID123",
       name: name,
-      amount: amount,
+      amount: amount*100,
       redirectUrl: "https://cv-genie-static-backend.onrender.com/api/client/status",
       redirectMode: "POST",
       // callbackUrl: "https://webhook.site/callback-url",
