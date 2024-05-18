@@ -34,6 +34,15 @@ const Checkout = () => {
         }
     };
 
+    const handleClick = async () => {
+        try {
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/payment')
+        } catch(error) {
+            console.error("Error:", error);
+            setError(error)
+        }
+    }
+
 
     useEffect(() => {
         const typewriter = new Typewriter(typeRef.current, {
@@ -103,7 +112,7 @@ const Checkout = () => {
                                         You Have Already Paid
                                 </button>
                             ) : (
-                                <button className='bg-red-600 hover:bg-red-700 text-gray-100 w-full !px-0 mt-4 p-4'>
+                                <button onClick={handleClick} className='bg-red-600 hover:bg-red-700 text-gray-100 w-full !px-0 mt-4 p-4'>
                                     Pay Now {profile.amount}
                                 </button>
                             )}
