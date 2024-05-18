@@ -36,7 +36,15 @@ const Checkout = () => {
 
     const handleClick = async () => {
         try {
-            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/payment')
+            console.log(profile.name);
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/payment',
+                {
+                    name: profile.name,
+                    email: profile.email,
+                    amount: profile.amount
+                }
+            )
+            console.log(response.data);
         } catch(error) {
             console.error("Error:", error);
             setError(error)
