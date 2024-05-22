@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import genie from '../../assets/Genie.png'
+import PopUpForm from './PopUpForm';
 
 const Hero = () => {
-   
+    const [showModal, setShowModal] = useState(true);
+ 
+
+    const closeModal = () => {
+      setShowModal(false);
+    };
     return (
+
         <>
+         {showModal && <PopUpForm closeModal={closeModal} setShowModal={setShowModal} />} 
             <div className="py-12 md:py-20" id="home">
                 <div className="lg:container mx-auto grid grid-cols-1 md:grid-cols-2 ">
                     <div className="md:col-span-1 px-8 md:pl-10">
