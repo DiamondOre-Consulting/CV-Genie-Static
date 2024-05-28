@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import emailjs from 'emailjs-com';
-emailjs.init('v4J4xN9s0rL7eRYnG');
 import logo from '..//..//assets/greenlogo.png'
 
-const PopUpForm = ({ closeModal , setShowModal }) => {
+const PopUpForm = ({ closeModal, setShowModal }) => {
 
     const [isVisible, setIsVisible] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
+    const [resumeFile, setResumeFile] = useState(null);
+
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -15,7 +17,9 @@ const PopUpForm = ({ closeModal , setShowModal }) => {
     }, []);
 
 
-
+    const handleClose = () => {
+        setShowPopup(false);
+    };
 
     const [formData, setFormData] = useState({
         name: '',
@@ -31,39 +35,54 @@ const PopUpForm = ({ closeModal , setShowModal }) => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleFileChange = (e) => {
+        setResumeFile(e.target.files[0]);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setShowLoader(true);
-        // Replace placeholders with form data
-        const templateParams = {
-            Name: formData.name,
-            Email: formData.email,
-            Phone: formData.phone,
-            Message: formData.message
-        };
 
-        // Send email using EmailJS
-        emailjs.send('service_cswvwur', 'template_q45ioi6', templateParams, 'v4J4xN9s0rL7eRYnG')
-            .then((result) => {
-                console.log(result.text);
-                setShowLoader(false);
-                setShowModal(false) 
-                setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    message: '',
+        try {
+            let resumeUrl = '';
+            if (resumeFile) {
+                const formData = new FormData();
+                formData.append('myFileResume', resumeFile);
+
+                const uploadResponse = await axios.post('https://cv-genie-static-backend.onrender.com/api/users/upload-resume', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 });
 
-            }, (error) => {
-                setShowLoader(false);
-                setIsVisible(false);
-                setShowModal(false);
-                setShowPopup(false);
-                console.error(error.text);
-                alert('Failed to submit form. Please try again later.');
+                resumeUrl = uploadResponse.data;
+            }
+
+            const contactFormData = {
+                ...formData,
+                pdf: resumeUrl
+            };
+
+            await axios.post('https://cv-genie-static-backend.onrender.com/api/users/contact-form', contactFormData);
+
+            setShowLoader(false);
+            setShowPopup(true);
+            setIsVisible(false);
+            setShowModal(false)
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                message: '',
             });
+            setResumeFile(null);
+        } catch (error) {
+            setShowLoader(false);
+            console.error(error);
+            alert('Failed to submit form. Please try again later.');
+        }
     };
+
 
 
 
@@ -72,30 +91,38 @@ const PopUpForm = ({ closeModal , setShowModal }) => {
         <>
             <div className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
                 <div className={`bg-white p-6 rounded-md w-full max-w-lg mx-4 transform ${isVisible ? 'scale-100' : 'scale-90'} transition-transform duration-500`}>
-                    <div className='flex items-center'>
-                    <h2 className="text-2xl mb-4">Contact Us</h2>
-                    <img className='w-16 animate-bounce focus:animate-none hover:animate-none inline-flex text-md font-medium rounded-lg tracking-wide text-white' src={logo} alt="" />
+                <svg class="h-8 w-8 text-red-500 float-right cursor-pointer" onClick={closeModal}  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <div className='flex items-center '>
+                        <h2 className="text-2xl mb-2">Contact Us</h2>
+                        <img className='w-16 animate-bounce focus:animate-none hover:animate-none inline-flex text-md font-medium rounded-lg tracking-wide text-white' src={logo} alt="" />
+                       
                     </div>
-                   
+
                     <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
                             <input type="text" id="name" name="name" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" value={formData.name} onChange={handleChange} />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email:</label>
                             <input type="email" id="email" name="email" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" required value={formData.email} onChange={handleChange} />
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone:</label>
                             <input type="phone" id="phone" name="phone" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" required value={formData.phone} onChange={handleChange} />
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message:</label>
                             <textarea id="message" name="message" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" required value={formData.message} onChange={handleChange}></textarea>
                         </div>
+
+                        <div class="mb-2">
+                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Upload Resume</label>
+                            <input type="file" id="resume" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg  block h-full w-full " onChange={handleFileChange} />
+                        </div>
+
                         <button type='submit' class="border-teal-900 text-white hover:before:bg-tealborder-teal-900 relative h-[50px] w-full rounded-md overflow-hidden border  bg-teal-900 px-8 text-white  transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-white before:transition-all before:duration-500 hover:text-teal-900 before:border-teal-900 border-1  hover:before:left-0 hover:before:w-full" disabled={showLoader}>
                             {showLoader ? (
                                 <svg aria-hidden="true" class="inline w-4 h-4 text-gray-200 animate-spin  fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +133,7 @@ const PopUpForm = ({ closeModal , setShowModal }) => {
                                 <span class="relative z-10">Submit</span>
                             )}
                         </button>
-                        <button type="button" onClick={closeModal} className="mt-2 w-full bg-gray-300 text-black p-2 rounded-md">Close</button>
+                        {/* <button type="button" onClick={closeModal} className="mt-2 w-full bg-gray-300 text-black p-2 rounded-md">Close</button> */}
                     </form>
                     {/* {showPopup && (
                         <div className="fixed inset-0 flex items-center justify-center">
