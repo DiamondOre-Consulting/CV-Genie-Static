@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import logo from '..//..//assets/logo.png'
-import emailjs from 'emailjs-com';
-emailjs.init('v4J4xN9s0rL7eRYnG');
+import React, { useState } from 'react';
+import logo from '../../assets/logo.png';
+import axios from 'axios';
+
 const Contactus = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
+    const [resumeFile, setResumeFile] = useState(null);
 
     const handleClose = () => {
         setShowPopup(false);
@@ -24,42 +25,58 @@ const Contactus = () => {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setShowLoader(true);
-        // Replace placeholders with form data
-        const templateParams = {
-            Name: formData.name,
-            Email: formData.email,
-            Phone: formData.phone,
-            Message: formData.message
-        };
-
-        // Send email using EmailJS
-        emailjs.send('service_cswvwur', 'template_q45ioi6', templateParams, 'v4J4xN9s0rL7eRYnG')
-            .then((result) => {
-                console.log(result.text);
-                setShowLoader(false);
-                setShowPopup(true);
-                setFormData({ 
-                    name: '',
-                    email: '',
-                    phone: '',
-                    message: '',
-                });
-            }, (error) => {
-                setShowLoader(false);
-                console.error(error.text);
-                alert('Failed to submit form. Please try again later.');
-            });
+    const handleFileChange = (e) => {
+        setResumeFile(e.target.files[0]);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setShowLoader(true);
+
+        try {
+            let resumeUrl = '';
+            if (resumeFile) {
+                const formData = new FormData();
+                formData.append('myFileResume', resumeFile);
+
+                const uploadResponse = await axios.post('https://cv-genie-static-backend.onrender.com/api/users/upload-resume', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
+                resumeUrl = uploadResponse.data;
+            }
+
+            const contactFormData = {
+                ...formData,
+                pdf: resumeUrl
+            };
+
+            await axios.post('https://cv-genie-static-backend.onrender.com/api/users/contact-form', contactFormData);
+
+            setShowLoader(false);
+            setShowPopup(true);
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                message: '',
+            });
+            setResumeFile(null);
+        } catch (error) {
+            setShowLoader(false);
+            console.error(error);
+            alert('Failed to submit form. Please try again later.');
+        }
+    };
 
     const handleWhatsAppChat = () => {
         const phoneNumber = "8178087758";
         const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
         window.open(url, '_blank');
     };
+
 
     return (
         <>
@@ -114,8 +131,6 @@ const Contactus = () => {
                                 Ready to elevate your professional profile? At CV-Genie, we specialize in crafting bespoke CVs tailored to your unique strengths and aspirations. Our dedicated team is committed to guiding you through the process, ensuring every detail reflects your potential. Let's collaborate to create a standout CV that opens doors to new opportunities. Reach out to us today and embark on a journey towards career success. With our expertise and personalized approach, we'll help you shine in today's competitive job market. Don't settle for an ordinary CV—let CV-Genie transform it into a powerful tool that showcases your talents and propels your career forward. Contact us now to get started on crafting your path to success.
                             </p>
 
-
-
                         </div>
 
                         <div className=''>
@@ -138,6 +153,12 @@ const Contactus = () => {
                                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
                                     <textarea type="text" id="message" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5    " required value={formData.message} onChange={handleChange} />
                                 </div>
+
+                                <div class="mb-5">
+                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Upload Resume</label>
+                                    <input type="file" id="resume" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg  block h-full w-full " onChange={handleFileChange} />
+                                </div>
+
 
                                 {/* <div class="mb-5">
                                     <label for="file" class="block mb-2 text-sm font-medium text-gray-900">Upload you updated resume</label>
