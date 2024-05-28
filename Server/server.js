@@ -22,9 +22,11 @@ mongoose
 
 import AdminController from "./Controllers/admin.js";
 import ClientController from "./Controllers/client.js";
+import User from "./Controllers/User.js";
 
 app.use('/api/admin', AdminController);
 app.use('/api/client', ClientController);
+app.use('/api/users', User)
 
 app.get('/', (req, res) => {
     res.send("Hello CV-Genie!!!");
