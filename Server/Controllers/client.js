@@ -14,6 +14,9 @@ import Client from "../Models/Clients.js";
 
 const router = express.Router();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 function generateTransactionId() {
   const timeStamp = Date.now();
   const randNum = Math.floor(Math.random() * 1000000);
