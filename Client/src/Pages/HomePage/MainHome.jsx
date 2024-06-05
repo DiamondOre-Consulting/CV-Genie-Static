@@ -8,6 +8,8 @@ import Howitworks from '../../Components/HomeComponents/Howitworks'
 import Contactus from '../../Components/HomeComponents/Contactus'
 import Testimonials from '../../Components/HomeComponents/Testimonials'
 import Footer from '../../Components/Commancomponents/Footer'
+import ResumeServices from '../../Components/HomeComponents/ResumeServices'
+import PortwolioWebsiteServices from '../../Components/HomeComponents/PortwolioWebsiteServices'
 
 
 const MainHome = () => {
@@ -18,6 +20,8 @@ const MainHome = () => {
         <Hero/>
         <Services/>
         <Templates/>
+        <ResumeServices/>
+        <PortwolioWebsiteServices/>
         <Features/>
         <Howitworks/>
         <Testimonials/>

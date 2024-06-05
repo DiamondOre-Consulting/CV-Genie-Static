@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Commancomponents/Navbar";
+import Navbar from '../Commancomponents/Navbar'
 import Footer from "../Commancomponents/Footer";
 
 const TermsofServices = () => {

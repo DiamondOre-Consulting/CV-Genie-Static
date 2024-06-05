@@ -18,7 +18,18 @@
   color: white; /* Optional: Change text color */
 } 
 
+@keyframes slideDown {
+  0% {
+    object-position: top;
+  }
+  100% {
+    object-position: bottom;
+  }
+}
 
+.auto-slide {
+  animation: slideDown 10s ease-in-out infinite alternate;
+}
 
 /* a {
   font-weight: 500;

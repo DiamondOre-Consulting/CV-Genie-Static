@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import genie from '../../assets/Genie.png'
 import PopUpForm from './PopUpForm';
 
 const Hero = () => {
-    const [showModal, setShowModal] = useState(true);
- 
+    const [showModal, setShowModal] = useState(() => {
+        const isPopupShown = sessionStorage.getItem('isPopupShown');
+        return !isPopupShown;
+      });
+    
+      useEffect(() => {
+        if (showModal) {
+          sessionStorage.setItem('isPopupShown', 'true');
+        }
+      }, [showModal]);
+  
 
     const closeModal = () => {
       setShowModal(false);
