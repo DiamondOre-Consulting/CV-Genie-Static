@@ -4,6 +4,10 @@ import WebNav from './PortFolioWebComponent.jsx/WebNav';
 import WebHero from './PortFolioWebComponent.jsx/WebHero';
 import Aboutme from './PortFolioWebComponent.jsx/Aboutme';
 import Services from './PortFolioWebComponent.jsx/Services';
+import WebCaseStudy from './PortFolioWebComponent.jsx/WebCaseStudy';
+import WebContactus from './PortFolioWebComponent.jsx/WebContactus';
+ import WebFooter from './PortFolioWebComponent.jsx/WebFooter';
+import WebAttachment from './PortFolioWebComponent.jsx/WebAttachment';
 
 const PortFolioTemp1 = ({ formData }) => {
   return (
@@ -13,7 +17,11 @@ const PortFolioTemp1 = ({ formData }) => {
     <WebNav formData={formData}/>
     <WebHero formData={formData}/>
     <Aboutme formData={formData}/>
+    <WebAttachment formData={formData}/>
     <Services formData={formData}/>
+    <WebCaseStudy formData={formData}/>
+    <WebContactus formData={formData}/>
+    <WebFooter formData={formData}/>
 
       {/* <h1>{formData['website-name']}</h1>
       <p>{formData['about-me']}</p> */}

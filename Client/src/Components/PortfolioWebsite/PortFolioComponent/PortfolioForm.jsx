@@ -3,49 +3,75 @@ import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/Property 1=Default.png';
 import PortfolioNav from './PortfolioNav';
 
+const socialMediaIcons = {
+    facebook: 'https://img.icons8.com/fluent/30/000000/facebook-new.png',
+    twitter: 'https://img.icons8.com/fluent/30/000000/twitter.png',
+    linkedin: 'https://img.icons8.com/fluent/30/000000/linkedin.png',
+    instagram: 'https://img.icons8.com/fluent/30/000000/instagram-new.png',
+};
+
 const PortfolioForm = ({ setFormData }) => {
     const [services, setServices] = useState([{ heading: '', description: '' }]);
-    const [caseStudies, setCaseStudies] = useState([{ projectName: '', description: '', links: '', image: '' }]);
-    const [socialMediaLinks, setSocialMediaLinks] = useState(['']);
+    const [caseStudies, setCaseStudies] = useState([{ projectName: '', description: '', links: '', image: null }]);
+    const [socialMediaLinks, setSocialMediaLinks] = useState({});
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = new FormData(e.target);
         const formDataObj = Object.fromEntries(data.entries());
-        formDataObj.services = services; // Update formDataObj with the current state of services
+        formDataObj.services = services;
         formDataObj.caseStudies = caseStudies;
         formDataObj.socialMediaLinks = socialMediaLinks;
         setFormData(formDataObj);
         navigate('web-preview');
     };
 
-
     const addService = () => {
         setServices([...services, { heading: '', description: '' }]);
     };
-    
+
     const handleServiceChange = (index, field, value) => {
         const updatedServices = [...services];
         updatedServices[index][field] = value;
         setServices(updatedServices);
     };
-    
+
+    const handleCaseStudyChange = (index, field, value) => {
+        const updatedCaseStudies = [...caseStudies];
+        updatedCaseStudies[index][field] = value;
+        setCaseStudies(updatedCaseStudies);
+    };
 
     const addCaseStudy = () => {
-        setCaseStudies([...caseStudies, { projectName: '', description: '', links: '', image: '' }]);
+        setCaseStudies([...caseStudies, { projectName: '', description: '', links: '', image: null }]);
     };
 
-    const addSocialMediaLink = () => {
-        setSocialMediaLinks([...socialMediaLinks, '']);
+    const handleCaseStudyImageChange = (index, e) => {
+        const file = e.target.files[0];
+        const updatedCaseStudies = [...caseStudies];
+        updatedCaseStudies[index].image = file;
+        setCaseStudies(updatedCaseStudies);
     };
 
-    const handleSocialMediaLinkChange = (index, value) => {
-        const updatedLinks = [...socialMediaLinks];
-        updatedLinks[index] = value;
-        setSocialMediaLinks(updatedLinks);
+    const handleSocialMediaLinkChange = (platform, value) => {
+        setSocialMediaLinks({
+            ...socialMediaLinks,
+            [platform]: value,
+        });
     };
 
+    const removeService = (index) => {
+        const updatedServices = [...services];
+        updatedServices.splice(index, 1);
+        setServices(updatedServices);
+    };
+
+    const removeCaseStudy = (index) => {
+        const updatedCaseStudies = [...caseStudies];
+        updatedCaseStudies.splice(index, 1);
+        setCaseStudies(updatedCaseStudies);
+    };
     return (
         <>
             <PortfolioNav />
@@ -57,18 +83,6 @@ const PortfolioForm = ({ setFormData }) => {
                     <div className="p-6 space-y-6">
                         <form onSubmit={handleSubmit}>
                             <div className="grid grid-cols-6 gap-6">
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="website-name" className="text-sm font-medium text-gray-900 block mb-2">
-                                        Website Name
-                                    </label>
-                                    <input type="text" name="website-name" id="website-name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
-                                </div>
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="logo" className="text-sm font-medium text-gray-900 block mb-2">
-                                        Upload Logo
-                                    </label>
-                                    <input type="file" name="logo" id="logo" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
-                                </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="full-name" className="text-sm font-medium text-gray-900 block mb-2">
                                         Full Name
@@ -88,8 +102,14 @@ const PortfolioForm = ({ setFormData }) => {
                                     <input type="text" name="tagline" id="tagline" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                 </div>
                                 <div className="col-span-full">
+                                    <label htmlFor="shortsummery" className="text-sm font-medium text-gray-900 block mb-2">
+                                        Short Summary
+                                    </label>
+                                    <input type="text" name="shortsummery" id="shortsummery" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                </div>
+                                <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">About Me</h4>
-                                    <textarea id="aboutme" name="aboutme" rows="6" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4" placeholder="Summary" ></textarea>
+                                    <textarea id="aboutme" name="aboutme" rows="6" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4" placeholder="Summary"></textarea>
                                 </div>
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Services</h4>
@@ -109,32 +129,72 @@ const PortfolioForm = ({ setFormData }) => {
                                                 placeholder="Service Description"
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
                                             ></textarea>
+                                            <button
+                                                type="button"
+                                                onClick={() => removeService(index)}
+                                                className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            >
+                                                Remove Service
+                                            </button>
+
                                         </div>
                                     ))}
-
-
                                     <button type="button" onClick={addService} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Service</button>
                                 </div>
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Case Studies</h4>
                                     {caseStudies.map((caseStudy, index) => (
                                         <div key={index} className="space-y-4 mb-4">
-                                            <input type="text" name={`case-study-name-${index}`} placeholder="Project Name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
-                                            <textarea name={`case-study-description-${index}`} rows="4" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4" ></textarea>
-                                            <input type="text" name={`case-study-links-${index}`} placeholder="Links" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
-                                            <input type="file" name={`case-study-image-${index}`} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                            <input type="text" onChange={(e) => handleCaseStudyChange(index, 'projectName', e.target.value)} value={caseStudy.projectName} placeholder="Project Name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                            <textarea type="text" onChange={(e) => handleCaseStudyChange(index, 'description', e.target.value)} value={caseStudy.description} rows="4" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"></textarea>
+                                            <input type="text" onChange={(e) => handleCaseStudyChange(index, 'links', e.target.value)} value={caseStudy.links} placeholder="Links" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                            <input type="file" onChange={(e) => handleCaseStudyImageChange(index, e)} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeCaseStudy(index)}
+                                                className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            >
+                                                Remove CaseStudy
+                                            </button>
                                         </div>
                                     ))}
                                     <button type="button" onClick={addCaseStudy} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Case Study</button>
                                 </div>
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Social Media Links</h4>
-                                    {socialMediaLinks.map((link, index) => (
-                                        <div key={index} className="mb-4">
-                                            <input type="text" name={`social-media-link-${index}`} value={link} onChange={(e) => handleSocialMediaLinkChange(index, e.target.value)} placeholder="Social Media Link" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    {Object.keys(socialMediaIcons).map((platform) => (
+                                        <div key={platform} className="mb-4 flex items-center">
+                                            <img src={socialMediaIcons[platform]} alt={`${platform} icon`} className="mr-2" />
+                                            <input type="text" name={`social-media-link-${platform}`} value={socialMediaLinks[platform] || ''} onChange={(e) => handleSocialMediaLinkChange(platform, e.target.value)} placeholder={`${platform.charAt(0).toUpperCase() + platform.slice(1)} Link`} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                         </div>
                                     ))}
-                                    <button type="button" onClick={addSocialMediaLink} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Social Media Link</button>
+                                </div>
+                                <div className="col-span-full">
+                                    <h4 className="text-lg font-medium text-gray-900 block mb-2">Contact Us</h4>
+                                    <div className="mb-4">
+                                        <label htmlFor="address" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Address
+                                        </label>
+                                        <input type="text" name="address" id="address" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="email" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Email
+                                        </label>
+                                        <input type="email" name="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="phone" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Phone
+                                        </label>
+                                        <input type="tel" name="phone" id="phone" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="file" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Attach File
+                                        </label>
+                                        <input type="file" name="file" id="file" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    </div>
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">

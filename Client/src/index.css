@@ -13,6 +13,10 @@
   font-family: "Gideon Roman", serif;
 }
 
+.webfont{
+  font-family: "Merriweather", serif;
+}
+
 ::selection {
   background-color: theme('colors.customSelection'); /* Use the custom color defined in tailwind.config.js */
   color: white; /* Optional: Change text color */

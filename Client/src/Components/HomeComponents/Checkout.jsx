@@ -141,7 +141,7 @@ const Checkout = () => {
                                             ) : (
 
                                                 <div class="rounded-md shadow"><a href="https://example.com/checkout"
-                                                    class="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-900 ">
+                                                    class="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-900 "onClick={handleSubmit}>
                                                     Pay Now</a>
 
                                                 </div>
