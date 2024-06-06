@@ -27,18 +27,18 @@ const Services = ({ formData }) => {
 
         <>
             {shouldRender && (
-                <div>
-                    <div className="p-8 mt-10" id='service'>
-                        <h1 className="text-5xl webfont font-bold  text-gray-500 text-center mt-6">
+                <div className='bg-black pb-20'>
+                    <div className="p-8 pt-10 pb-10" id='service'>
+                        <h1 className="text-5xl webfont font-bold  text-gray-300 text-center mt-6">
                             Our Services
                         </h1>
-                        <div className='w-28 h-0.5 bg-customBrown mx-auto'></div>
+                        <div className='w-28 h-0.5 bg-orange-500 mx-auto'></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 mb-10">
                         {formData.services.map((service, index) => (
-                            <div className="p-8 rounded-md shadow-md" key={index} >
-                                <div className="bg-gray-200 rounded-full w-16 h-16 flex justify-center items-center text-gray-600 shadow-2xl border-1 border">
+                            <div className="p-8 rounded-md  border  border-stone-700 border-4 shadow-md" key={index} >
+                                <div className=" rounded-full w-16 h-16 flex justify-center items-center text-stone-700 shadow-2xl border-1 border-0">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="h-8 w-8"
@@ -52,11 +52,11 @@ const Services = ({ formData }) => {
                                         />
                                     </svg>
                                 </div>
-                                <h2 className="uppercase mt-6 text-customBrown webfont font-medium mb-3">
+                                <h2 className="uppercase mt-4 text-gray-100 webfont font-medium mb-3">
                                     {service.heading}
                                     {/* {service.heading || 'No Heading'} */}
                                 </h2>
-                                <p className="font-light text-sm text-gray-500 mb-3">
+                                <p className="font-light text-sm text-gray-400 mb-3">
                                     {service.description}
                                     {/* {service.description || 'No Description'} */}
                                 </p>
@@ -64,7 +64,11 @@ const Services = ({ formData }) => {
                         ))}
                     </div>
 
+                    <div className='bg-stone-700 w-1/2 h-1 mt-20 mx-auto'></div>
+
                 </div>
+
+                
 
             )}
         </>

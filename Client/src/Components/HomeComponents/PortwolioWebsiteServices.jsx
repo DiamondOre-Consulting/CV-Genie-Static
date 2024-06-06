@@ -26,12 +26,12 @@ const PortfolioWebsiteServices = () => {
 
                 <div className='hidden md:block'>
                     <img src={tab} alt="Tablet" className="absolute z-20 w-7/12 top-64 left-1/2 transform -translate-x-1/2" />
-                    <div className='absolute  left-0 w-full h-full overflow-hidden z-20' style={{ top: "230px" }}>
+                    <div className='absolute  left-0 w-full h-full overflow-hidden z-20 ' style={{ top: "230px" }}>
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md"
-                            style={{ width: '30%', height: '46%', objectFit: 'cover', top: '10%', left: '35%' }}
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[30%] h-[34%] xl:h-[46%] lg:h-[29%] lg:top-[8%]  xl:top-[10%]"
+                            style={{ objectFit: 'cover', left: '35%' }}
                         />
                     </div>
                 </div>
@@ -42,8 +42,8 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md"
-                            style={{ width: '14%', height: '28%', objectFit: 'cover', top: '20%', left: '60%' }}
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[14%] h-[28%] top-[20%] lg:h-[19%] lg:top-[16%] xl:h-[28%] xl:top-[20%]"
+                            style={{ objectFit: 'cover', left: '60%' }}
                         />
                     </div>
                 </div>
@@ -99,11 +99,11 @@ const PortfolioWebsiteServices = () => {
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <span className='ml-2'>Exquisite selection of customizable templates meticulously designed to resonate with your unique brand identity.</span>
+                            <span className='ml-2 mb-4'>Exquisite selection of customizable templates meticulously designed to resonate with your unique brand identity.</span>
                         </li>
 
 
-                        <Link to={'/user-Signup'} className='bg-teal-900 px-10 py-2 rounded-md text-gray-100 rounded-md mt-8 float-right'>Create My Portfolio</Link>
+                        <Link to={'/portfolio-form'} className='bg-teal-900 px-10 py-2 rounded-md text-gray-100 rounded-md  '>Create My Portfolio</Link>
 
 
                     </ul>

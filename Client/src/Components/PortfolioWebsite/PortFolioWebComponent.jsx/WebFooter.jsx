@@ -5,9 +5,9 @@ const WebFooter = ({ formData }) => {
 
     return (
         <>
-            <footer className="flex flex-col space-y-10 justify-center">
+            <footer className="flex flex-col space-y-4 justify-center">
                 {formData?.socialMediaLinks && (
-                    <div className="flex justify-center space-x-5 mt-10 ml-10 mr-10">
+                    <div className="flex justify-center space-x-5 mt-4 ml-10 mr-10">
                         {formData?.socialMediaLinks?.facebook && (
                             <a href={formData.socialMediaLinks.facebook} target="_blank" rel="noopener noreferrer">
                                 <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" alt="Facebook" />
@@ -30,7 +30,7 @@ const WebFooter = ({ formData }) => {
                         )}
                     </div>
                 )}
-                <p className="text-center text-gray-200 font-medium bg-customBrown py-4">&copy; 2022 Company Ltd. All rights reserved.</p>
+                <p className="text-center text-gray-500 font-medium bg-black py-4">&copy; 2022 Company Ltd. All rights reserved.</p>
             </footer>
         </>
     );

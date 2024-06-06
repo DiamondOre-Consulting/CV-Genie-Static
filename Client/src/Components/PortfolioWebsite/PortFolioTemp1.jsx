@@ -8,6 +8,7 @@ import WebCaseStudy from './PortFolioWebComponent.jsx/WebCaseStudy';
 import WebContactus from './PortFolioWebComponent.jsx/WebContactus';
  import WebFooter from './PortFolioWebComponent.jsx/WebFooter';
 import WebAttachment from './PortFolioWebComponent.jsx/WebAttachment';
+import WebProducts from './PortFolioWebComponent.jsx/WebProducts';
 
 const PortFolioTemp1 = ({ formData }) => {
   return (
@@ -19,6 +20,7 @@ const PortFolioTemp1 = ({ formData }) => {
     <Aboutme formData={formData}/>
     <WebAttachment formData={formData}/>
     <Services formData={formData}/>
+    <WebProducts formData={formData}/>
     <WebCaseStudy formData={formData}/>
     <WebContactus formData={formData}/>
     <WebFooter formData={formData}/>

@@ -3,10 +3,10 @@ import React from 'react'
 const WebContactus = ({ formData }) => {
     return (
         <div id="contact">
-            <div class="bg-gray-50 dark:bg-gray-900" id="contact">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
-                    <h2 class="text-4xl font-bold dark:text-gray-100">Contact</h2>
-                    <p class="pt-6 pb-6 text-base max-w-2xl text-center m-auto dark:text-gray-400">
+            <div class="bg-black" id="contact">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 text-center">
+                    <h2 class="text-5xl font-bold text-gray-300 webfont">Contact</h2>
+                    <p class="pt-6 pb-6 text-base max-w-2xl text-center m-auto text-gray-400">
                         Want to contact us? Choose an
                         option below and well be happy to show you how we can transform companys web experience.
                     </p>
@@ -14,12 +14,12 @@ const WebContactus = ({ formData }) => {
                 <div
                     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
                     <div>
-                        <h2 class="text-lg font-bold dark:text-gray-100">Contact Us</h2>
-                        <p class="max-w-sm mt-4 mb-4 dark:text-gray-400">Have something to say? We are here to help. Fill up the
+                        <h2 class="text-lg font-bold text-gray-100">Contact Us</h2>
+                        <p class="max-w-sm mt-4 mb-4 text-gray-500">Have something to say? We are here to help. Fill up the
                             form or send email or call phone.</p>
 
                         {formData?.address && (
-                            <div class="flex items-center mt-8 space-x-2 text-dark-600 dark:text-gray-400">
+                            <div class="flex items-center mt-8 space-x-2 text-gray-400 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@ const WebContactus = ({ formData }) => {
                         )}
 
                         {formData?.email && (
-                            <div class="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
+                            <div class="flex items-center mt-2 space-x-2 text-gray-400 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -44,7 +44,7 @@ const WebContactus = ({ formData }) => {
                         )}
 
                         {formData?.phone && (
-                            <div class="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
+                            <div class="flex items-center mt-2 space-x-2 text-dark-600 text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@ const WebContactus = ({ formData }) => {
                                 </textarea>
                             </div>
                             <button type="submit"
-                                class="w-full py-4 font-semibold text-white transition-colors bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">Send
+                                class="w-full py-4 font-semibold text-gray-700  transition-colors bg-gray-100 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">Send
                                 Message
                             </button>
                         </form>

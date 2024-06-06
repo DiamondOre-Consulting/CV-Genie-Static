@@ -8,7 +8,7 @@ const Howitworks = () => {
                     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
                         <div class="mb-10 md:mb-16">
                             <h2 class=" text-center text-2xl font-bold text-teal-900 lg:text-3xl">How it Works?</h2>
-                            <p className='text-center text-red-600'>Process</p>
+                            {/* <p className='text-center text-red-600'>Process</p> */}
                         </div>
 
                         <div class="grid gap-4 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">

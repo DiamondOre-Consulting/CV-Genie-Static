@@ -11,8 +11,9 @@ const socialMediaIcons = {
 };
 
 const PortfolioForm = ({ setFormData }) => {
-    const [services, setServices] = useState([{ heading: '', description: '' }]);
-    const [caseStudies, setCaseStudies] = useState([{ projectName: '', description: '', links: '', image: null }]);
+    const [services, setServices] = useState([]);
+    const [caseStudies, setCaseStudies] = useState([]);
+    const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
     const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const PortfolioForm = ({ setFormData }) => {
         const formDataObj = Object.fromEntries(data.entries());
         formDataObj.services = services;
         formDataObj.caseStudies = caseStudies;
+        formDataObj.products = products;
         formDataObj.socialMediaLinks = socialMediaLinks;
         setFormData(formDataObj);
         navigate('web-preview');
@@ -72,6 +74,32 @@ const PortfolioForm = ({ setFormData }) => {
         updatedCaseStudies.splice(index, 1);
         setCaseStudies(updatedCaseStudies);
     };
+
+
+
+    const addProduct = () => {
+        setProducts([...products, { heading: '', description: '', image: null }]);
+    };
+
+    const handleProductChange = (index, field, value) => {
+        const updatedProducts = [...products];
+        updatedProducts[index][field] = value;
+        setProducts(updatedProducts);
+    };
+
+    const handleProductImageChange = (index, e) => {
+        const file = e.target.files[0];
+        const updatedProducts = [...products];
+        updatedProducts[index].image = file;
+        setProducts(updatedProducts);
+    };
+
+    const removeProduct = (index) => {
+        const updatedProducts = [...products];
+        updatedProducts.splice(index, 1);
+        setProducts(updatedProducts);
+    };
+
     return (
         <>
             <PortfolioNav />
@@ -141,6 +169,49 @@ const PortfolioForm = ({ setFormData }) => {
                                     ))}
                                     <button type="button" onClick={addService} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Service</button>
                                 </div>
+
+                                <div className="col-span-full">
+                                    <h4 className="text-lg font-medium text-gray-900 block mb-2">Products</h4>
+                                    {products.map((product, index) => (
+                                        <div key={index} className="space-y-4 mb-4">
+                                            <input
+                                                type="text"
+                                                value={product.heading}
+                                                onChange={(e) => handleProductChange(index, 'heading', e.target.value)}
+                                                placeholder="Product Heading"
+                                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                            />
+                                            <textarea
+                                                value={product.description}
+                                                onChange={(e) => handleProductChange(index, 'description', e.target.value)}
+                                                rows="4"
+                                                placeholder="Product Description"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+                                            ></textarea>
+                                            <input
+                                                type="file"
+                                                onChange={(e) => handleProductImageChange(index, e)}
+                                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeProduct(index)}
+                                                className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            >
+                                                Remove Product
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={addProduct}
+                                        className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                    >
+                                        Add Product
+                                    </button>
+                                </div>
+
+                                
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Case Studies</h4>
                                     {caseStudies.map((caseStudy, index) => (

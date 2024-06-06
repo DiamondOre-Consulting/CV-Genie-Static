@@ -31,7 +31,7 @@ function App() {
           <Route path='/user-login' element={<UserLogin/>}/>
           <Route path='/terms-of-services' element={<TermsofServices/>}/>
           <Route path='/return-and-refund' element={<ReturnAndRefund/>}/>
-          <Route path='/portfolio-website/*' element={<Portfolio/>}/>
+          <Route path='/portfolio-form/*' element={<Portfolio/>}/>
         </Routes>
       </BrowserRouter>
 
