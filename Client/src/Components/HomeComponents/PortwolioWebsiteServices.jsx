@@ -30,7 +30,7 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[30%] h-[34%] xl:h-[46%] lg:h-[29%] lg:top-[8%]  xl:top-[10%]"
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[31%] h-[34%] xl:h-[46%] lg:h-[29%] lg:top-[8%]  xl:top-[10%]"
                             style={{ objectFit: 'cover', left: '35%' }}
                         />
                     </div>
@@ -42,7 +42,7 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[14%] h-[28%] top-[20%] lg:h-[19%] lg:top-[16%] xl:h-[28%] xl:top-[20%]"
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[13.5%] h-[28%] top-[20%] lg:h-[19%] lg:top-[16%] xl:h-[28%] xl:top-[20%]"
                             style={{ objectFit: 'cover', left: '60%' }}
                         />
                     </div>
