@@ -77,7 +77,7 @@ const WebContactus = ({ formData }) => {
                                 </textarea>
                             </div>
                             <button type="submit"
-                                class="w-full py-4 font-semibold text-gray-700  transition-colors bg-gray-100 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">Send
+                                class="w-full py-4 font-semibold text-gray-700  transition-colors bg-gray-100 rounded-md  focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">Send
                                 Message
                             </button>
                         </form>

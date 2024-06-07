@@ -103,8 +103,8 @@ const PortfolioForm = ({ setFormData }) => {
     return (
         <>
             <PortfolioNav />
-            <div className="grid grid-cols-4">
-                <div className="bg-white border rounded-lg shadow relative m-10 col-span-3">
+            <div className="grid md:grid-cols-4 grid-cols-1">
+                <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3">
                     <div className="flex items-start justify-between p-5 border-b rounded-t">
                         <h3 className="text-xl font-semibold">Portfolio Website Form</h3>
                     </div>
@@ -276,7 +276,7 @@ const PortfolioForm = ({ setFormData }) => {
                         </form>
                     </div>
                 </div>
-                <div className="mt-10 mr-10">
+                <div className="mt-10 ml-10 md:ml-0 mr-10">
                     <img src={img} alt="Portfolio" />
                 </div>
             </div>
