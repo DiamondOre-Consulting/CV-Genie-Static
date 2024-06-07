@@ -21,7 +21,7 @@ const PortFolioTemp1 = ({ formData }) => {
     <WebAttachment formData={formData}/>
     <Services formData={formData}/>
     <WebProducts formData={formData}/>
-    <WebCaseStudy formData={formData}/>
+    {/* <WebCaseStudy formData={formData}/> */}
     <WebContactus formData={formData}/>
     <WebFooter formData={formData}/>
 

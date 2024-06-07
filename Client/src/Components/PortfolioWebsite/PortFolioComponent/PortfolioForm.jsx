@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import img from '../../../assets/Property 1=Default.png';
+import img from '../../../assets/template.png';
 import Navbar from '../../Commancomponents/Navbar'
 
 const socialMediaIcons = {
@@ -12,7 +12,7 @@ const socialMediaIcons = {
 
 const PortfolioForm = ({ setFormData }) => {
     const [services, setServices] = useState([]);
-    const [caseStudies, setCaseStudies] = useState([]);
+    // const [caseStudies, setCaseStudies] = useState([]);
     const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const PortfolioForm = ({ setFormData }) => {
         const data = new FormData(e.target);
         const formDataObj = Object.fromEntries(data.entries());
         formDataObj.services = services;
-        formDataObj.caseStudies = caseStudies;
+        // formDataObj.caseStudies = caseStudies;
         formDataObj.products = products;
         formDataObj.socialMediaLinks = socialMediaLinks;
         setFormData(formDataObj);
@@ -39,22 +39,22 @@ const PortfolioForm = ({ setFormData }) => {
         setServices(updatedServices);
     };
 
-    const handleCaseStudyChange = (index, field, value) => {
-        const updatedCaseStudies = [...caseStudies];
-        updatedCaseStudies[index][field] = value;
-        setCaseStudies(updatedCaseStudies);
-    };
+    // const handleCaseStudyChange = (index, field, value) => {
+    //     const updatedCaseStudies = [...caseStudies];
+    //     updatedCaseStudies[index][field] = value;
+    //     setCaseStudies(updatedCaseStudies);
+    // };
 
-    const addCaseStudy = () => {
-        setCaseStudies([...caseStudies, { projectName: '', description: '', links: '', image: null }]);
-    };
+    // const addCaseStudy = () => {
+    //     setCaseStudies([...caseStudies, { projectName: '', description: '', links: '', image: null }]);
+    // };
 
-    const handleCaseStudyImageChange = (index, e) => {
-        const file = e.target.files[0];
-        const updatedCaseStudies = [...caseStudies];
-        updatedCaseStudies[index].image = file;
-        setCaseStudies(updatedCaseStudies);
-    };
+    // const handleCaseStudyImageChange = (index, e) => {
+    //     const file = e.target.files[0];
+    //     const updatedCaseStudies = [...caseStudies];
+    //     updatedCaseStudies[index].image = file;
+    //     setCaseStudies(updatedCaseStudies);
+    // };
 
     const handleSocialMediaLinkChange = (platform, value) => {
         setSocialMediaLinks({
@@ -69,12 +69,11 @@ const PortfolioForm = ({ setFormData }) => {
         setServices(updatedServices);
     };
 
-    const removeCaseStudy = (index) => {
-        const updatedCaseStudies = [...caseStudies];
-        updatedCaseStudies.splice(index, 1);
-        setCaseStudies(updatedCaseStudies);
-    };
-
+    // const removeCaseStudy = (index) => {
+    //     const updatedCaseStudies = [...caseStudies];
+    //     updatedCaseStudies.splice(index, 1);
+    //     setCaseStudies(updatedCaseStudies);
+    // };
 
 
     const addProduct = () => {
@@ -167,7 +166,7 @@ const PortfolioForm = ({ setFormData }) => {
 
                                         </div>
                                     ))}
-                                    <button type="button" onClick={addService} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Service</button>
+                                    <button type="button" onClick={addService} className="text-white bg-teal-900  focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Service</button>
                                 </div>
 
                                 <div className="col-span-full">
@@ -205,13 +204,13 @@ const PortfolioForm = ({ setFormData }) => {
                                     <button
                                         type="button"
                                         onClick={addProduct}
-                                        className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        className="text-white bg-teal-900 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                     >
                                         Add Product
                                     </button>
                                 </div>
 
-                                
+{/*                                 
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Case Studies</h4>
                                     {caseStudies.map((caseStudy, index) => (
@@ -230,7 +229,7 @@ const PortfolioForm = ({ setFormData }) => {
                                         </div>
                                     ))}
                                     <button type="button" onClick={addCaseStudy} className="text-white bg-teal-900 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Case Study</button>
-                                </div>
+                                </div> */}
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Social Media Links</h4>
                                     {Object.keys(socialMediaIcons).map((platform) => (

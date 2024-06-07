@@ -16,11 +16,11 @@ const WebProducts = ({ formData }) => {
                 <div className='w-28 h-0.5 bg-orange-500 mb-10 mx-auto'></div>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 px-10'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10 md:gap-y-4 px-10'>
                 {formData.products.map((product, index) => (
                     <div key={index} className="bg-white rounded-xl border border-4 border-stone-700 overflow-hidden">
                         <div className="relative">
-                            {product.image && <img className="w-full h-48 object-cover" src={URL.createObjectURL(product.image)} alt="Product" />}
+                            {product.image && <img className="w-full h-48 object-fit" src={URL.createObjectURL(product.image)} alt="Product" />}
                             {/* <div className="absolute bottom-0 right-0 bg-gray-800 text-white px-2 py-1 m-2 rounded-md text-xs">3 min read
                             </div> */}
                         </div>

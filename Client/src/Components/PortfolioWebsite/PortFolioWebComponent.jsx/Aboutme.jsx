@@ -13,7 +13,7 @@ const Aboutme = ({ formData }) => {
             <div className='mt-8 pb-8 md:px-20 px-10 text-gray-400 pb-20 text-center'>
                 <p>{formData.aboutme}</p>
             </div>
-            <div className='bg-stone-700 w-1/2 h-1  mx-auto'></div>
+            <div className='bg-stone-700 w-1/2 h-1 mt-10 mx-auto'></div>
         </div>
         
     ) : null;

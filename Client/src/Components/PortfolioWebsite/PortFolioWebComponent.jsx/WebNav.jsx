@@ -7,9 +7,19 @@ const WebNav = ({ formData }) => {
         setShowMobileMenu(!showMobileMenu);
     };
 
+    const phone = formData.phone
+
+    const handleWhatsAppChat = () => {
+        const phoneNumber = {phone};
+        const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}`;
+        window.open(url, '_blank');
+    };
+
+
+
     return (
         <>
-            <nav className="bg-stone-700 fixed w-full p-4 md:p-6 text-gray-100 webfont shadow-xl z-10">
+            <nav className="bg-stone-900 fixed w-full p-4 md:p-6 text-gray-100 webfont shadow-xl z-10">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-4">
                         {/* <div className='bg-orange-500 w-5 h-5 rounded-full'></div> */}
@@ -32,7 +42,7 @@ const WebNav = ({ formData }) => {
                             Services
                             <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
                         </a>
-                        <a href="#contact" className="hover:text-gray-100 text-xs md:text-md relative group">
+                        <a href="#contact" className="hover:text-gray-100 text-xs md:text-md relative group" >
                             Get In Touch
                             <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
                         </a>
@@ -52,18 +62,18 @@ const WebNav = ({ formData }) => {
                             </svg>
                         </button>
                     </div>
-                    <div className="hidden md:flex items-center">
-                        <span className="bg-stone-600 hover:bg-orange-500 cursor-pointer px-4 py-1 text-md rounded-md">
+                    <div className="hidden md:flex items-center" onClick={handleWhatsAppChat}>
+                        <span className=" bg-orange-500 cursor-pointer px-4 py-1 text-md rounded-md">
                             Let's talk
                         </span>
                     </div>
                 </div>
                 {showMobileMenu && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <div className="px-2 pt-6 text-center pb-3 space-y-1 sm:px-3">
                             <a
                                 href="/"
-                                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium border-1  border-white"
                             >
                                 Home
                             </a>

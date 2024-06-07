@@ -26,21 +26,15 @@ const PortfolioWebsiteServices = () => {
 
                 <div className='hidden md:block'>
                     <img src={tab} alt="Tablet" className="absolute z-20 w-7/12 top-64 left-1/2 transform -translate-x-1/2" />
-                    <div className='absolute  left-0 w-full h-full overflow-hidden z-20 ' style={{ top: "230px" }}>
+                    <div className='absolute left-0 w-full h-full overflow-hidden z-20' style={{ top: "230px" }}>
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md "
-                            style={{
-                                width: '30%',
-                                height: '46%',
-                                top: '10%',
-                                objectFit: 'cover',
-                                left: '35%'
-                            }}
+                            className="absolute left-[35%] top-[10%] w-[30%] h-[46%] sm:h-[46%] lg:h-[29%] xl:h-[46%] 2xl:h-[37%] sm:top-[10%] lg:top-[8%] xl:top-[10%] 2xl:top-[7.5%] cursor-pointer object-cover object-top auto-slide rounded-md"
                         />
                     </div>
                 </div>
+
 
                 <div className='hidden md:block'>
                     <img src={phone} alt="Phone" className="absolute z-30 w-4/12 top-80 right-0 transform -translate-x-1/2" />
@@ -48,14 +42,8 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md "
-                            style={{
-                                width: '13.5%',
-                                height: '28%',
-                                top: '20%',
-                                objectFit: 'cover',
-                                left: '60%'
-                            }}
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md left-[60%] top-[10%] w-[14%] h-[46%] sm:h-[46%] lg:h-[29%] xl:h-[28%] 2xl:h-[23%] sm:top-[10%] lg:top-[8%] xl:top-[20%] 2xl:top-[14%]"
+                         
                         />
                     </div>
                 </div>
