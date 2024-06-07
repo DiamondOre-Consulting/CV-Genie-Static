@@ -6,7 +6,7 @@ import cvgenie from '..//../assets/cvgenie.png'
 import { Link } from 'react-router-dom';
 
 const PortfolioWebsiteServices = () => {
-    
+
     return (
         <div className='grid grid-cols-1  md:grid-cols-2 gap-4 px-10 min-h-screen '>
             <div className='relative flex justify-center items-center'>
@@ -30,8 +30,14 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[31%] h-[34%] xl:h-[46%] lg:h-[29%] lg:top-[8%]  xl:top-[10%]"
-                            style={{ objectFit: 'cover', left: '35%' }}
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md "
+                            style={{
+                                width: '30%',
+                                height: '46%',
+                                top: '10%',
+                                objectFit: 'cover',
+                                left: '35%'
+                            }}
                         />
                     </div>
                 </div>
@@ -42,8 +48,14 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md w-[13.5%] h-[28%] top-[20%] lg:h-[19%] lg:top-[16%] xl:h-[28%] xl:top-[20%]"
-                            style={{ objectFit: 'cover', left: '60%' }}
+                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md "
+                            style={{
+                                width: '13.5%',
+                                height: '28%',
+                                top: '20%',
+                                objectFit: 'cover',
+                                left: '60%'
+                            }}
                         />
                     </div>
                 </div>
