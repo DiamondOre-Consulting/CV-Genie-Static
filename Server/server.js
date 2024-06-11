@@ -2,12 +2,14 @@ import express from "express";
 import cors from "cors";
 import dotnev from "dotenv";
 import mongoose from "mongoose";
+import bodyParser from 'body-parser';
 
 const app = express();
 dotnev.config();
 
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 const PORT = 7001;
 
@@ -21,7 +23,7 @@ mongoose
   });
 
 import AdminController from "./Controllers/admin.js";
-import ClientController from "./Controllers/client.js";
+import ClientController from "./Controllers/client.js"; 
 import User from "./Controllers/User.js";
 
 app.use('/api/admin', AdminController);
