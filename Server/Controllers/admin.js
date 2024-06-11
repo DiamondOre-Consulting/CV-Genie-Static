@@ -397,4 +397,25 @@ router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
   }
 });
 
+// GET PORTFOLIO
+router.get("/portfolio/:uniqueUserName", async (req, res) => {
+  try{
+    const {uniqueUserName} = req.params;
+
+    if(!uniqueUserName) {
+      return res.status(402).json({message: "Please provide unique username!!!"});
+    }
+
+    const onePortfolio = await Portfolio.findOne({uniqueUserName});
+    if(!onePortfolio) {
+      return res.status(403).json({message: "No portfolio found with this username!!!"});
+    }
+
+    res.status(200).json(onePortfolio); 
+  } catch(error) {
+    console.log("Something went wrong!!! ", error.message);
+    res.status(500).json(error.message);
+  }
+})
+
 export default router;
