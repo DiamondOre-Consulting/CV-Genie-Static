@@ -1,12 +1,12 @@
 import React from 'react'
 
-const WebContactus = ({ formData }) => {
+const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBgColor }) => {
     return (
         <div id="contact">
-            <div class="bg-black" id="contact">
+            <div class="" id="contact">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 text-center">
-                    <h2 class="text-5xl font-bold text-gray-300 webfont">Contact</h2>
-                    <p class="pt-6 pb-6 text-base max-w-2xl text-center m-auto text-gray-400">
+                    <h2 class="text-5xl font-bold  webfont" style={{ color: secondaryTextColor }}>Contact</h2>
+                    <p class="pt-6 pb-6 text-base max-w-2xl text-center m-auto " style={{ color: primaryTextColor }}>
                         Want to contact us? Choose an
                         option below and well be happy to show you how we can transform companys web experience.
                     </p>
@@ -15,11 +15,11 @@ const WebContactus = ({ formData }) => {
                     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
                     <div>
                         <h2 class="text-lg font-bold text-gray-100">Contact Us</h2>
-                        <p class="max-w-sm mt-4 mb-4 text-gray-500">Have something to say? We are here to help. Fill up the
+                        <p class="max-w-sm mt-4 mb-4 " style={{ color: primaryTextColor }}> Have something to say? We are here to help. Fill up the
                             form or send email or call phone.</p>
 
                         {formData?.address && (
-                            <div class="flex items-center mt-8 space-x-2 text-gray-400 ">
+                            <div class="flex items-center mt-8 space-x-2  " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@ const WebContactus = ({ formData }) => {
                         )}
 
                         {formData?.email && (
-                            <div class="flex items-center mt-2 space-x-2 text-gray-400 ">
+                            <div class="flex items-center mt-2 space-x-2 " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -44,7 +44,7 @@ const WebContactus = ({ formData }) => {
                         )}
 
                         {formData?.phone && (
-                            <div class="flex items-center mt-2 space-x-2 text-dark-600 text-gray-400">
+                            <div class="flex items-center mt-2 space-x-2 text-dark-600 " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -61,23 +61,23 @@ const WebContactus = ({ formData }) => {
                             <input type="checkbox" id="" class="hidden" name="botcheck" />
                             <div class="mb-5">
                                 <input type="text" placeholder="Full Name" autocomplete="false"
-                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 focus:ring-4 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
                                     name="name" />
                             </div>
                             <div class="mb-5">
                                 <label for="email_address" class="sr-only">Email Address</label>
                                 <input id="email_address" type="email" placeholder="Email Address" autocomplete="false"
-                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900   focus:ring-4  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white rounded-md outline-none dark:placeholder:text-gray-200 dark:bg-gray-900 border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
                                     name="email" />
                             </div>
                             <div class="mb-3">
                                 <textarea placeholder="Your Message"
-                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white dark:placeholder:text-gray-200 dark:bg-gray-900   rounded-md outline-none  h-36 focus:ring-4  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
+                                    class="w-full px-4 py-3 border-2 placeholder:text-gray-800 dark:text-white dark:placeholder:text-gray-200 dark:bg-gray-900 rounded-md outline-none  h-36  border-gray-300 focus:border-gray-600 ring-gray-100 dark:border-gray-600 dark:focus:border-white dark:ring-0"
                                     name="message">
                                 </textarea>
                             </div>
                             <button type="submit"
-                                class="w-full py-4 font-semibold text-gray-700  transition-colors bg-gray-100 rounded-md  focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black ">Send
+                                class="w-full py-4 font-semibold  transition-colors  rounded-md  focus:outline-none focus:ring-offset-2 focus:ring focus:ring-gray-200 px-7 dark:bg-white dark:text-black " style={{ backgroundColor: buttonBgColor, color: primaryTextColor }}>Send
                                 Message
                             </button>
                         </form>

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import 'animate.css';
 
-const Services = ({ formData }) => {
+const Services = ({ formData  , primaryTextColor , secondaryTextColor,  buttonBgColor}) => {
     console.log("formData in PortfolioForm:", formData);
 
     // Check if formData.services exists and log its length
@@ -21,23 +23,28 @@ const Services = ({ formData }) => {
     );
 
 
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
 
 
     return (
 
         <>
             {shouldRender && (
-                <div className='bg-black pb-20'>
+                <div className=' pb-20'>
                     <div className="p-8 pt-10 pb-10" id='service'>
-                        <h1 className="text-5xl webfont font-bold  text-gray-300 text-center mt-6">
+                        <h1 className={`text-5xl webfont font-bold   text-center mt-6 ${inView ? 'animate__animated animate__backInLeft' : ''}`} ref={ref} style={{color:secondaryTextColor}}>
                             Our Services
                         </h1>
-                        <div className='w-28 h-0.5 bg-orange-500 mx-auto'></div>
+                        <div className='w-28 h-0.5  mx-auto' style={{backgroundColor: buttonBgColor}}></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 mb-10">
                         {formData.services.map((service, index) => (
-                            <div className="p-8 rounded-md  border  border-stone-700 border-4 shadow-md" key={index} >
+                            <div className={`p-8 rounded-md  border  border-stone-700 border-4 shadow-md  ${inView ? 'animate__animated animate__fadeIn' : ''}`} ref={ref} key={index} >
                                 <div className=" rounded-full w-16 h-16 flex justify-center items-center text-stone-700 shadow-2xl border-1 border-0">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +63,7 @@ const Services = ({ formData }) => {
                                     {service.heading}
                                     {/* {service.heading || 'No Heading'} */}
                                 </h2>
-                                <p className="font-light text-sm text-gray-400 mb-3">
+                                <p className="font-light text-sm  mb-3" style={{color : primaryTextColor}}>
                                     {service.description}
                                     {/* {service.description || 'No Description'} */}
                                 </p>

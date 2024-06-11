@@ -15,6 +15,10 @@ const PortfolioForm = ({ setFormData }) => {
     // const [caseStudies, setCaseStudies] = useState([]);
     const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
+    const [backgroundColor, setBackgroundColor] = useState("#000000");
+    const [primaryTextColor, setPrimaryTextColor] = useState("#ced4da"); // State for primary text color
+    const [secondaryTextColor, setSecondaryTextColor] = useState("#dee2e6"); // State for secondary text color
+    const [buttonBgColor, setButtonBgColor] = useState("#f97316") // chage bgorange color
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -29,6 +33,11 @@ const PortfolioForm = ({ setFormData }) => {
         navigate('web-preview');
     };
 
+    const handleBackgroundColorChange = (e) => {
+        setBackgroundColor(e.target.value);
+    };
+
+
     const addService = () => {
         setServices([...services, { heading: '', description: '' }]);
     };
@@ -39,6 +48,18 @@ const PortfolioForm = ({ setFormData }) => {
         setServices(updatedServices);
     };
 
+
+    const handlePrimaryTextColorChange = (e) => {
+        setPrimaryTextColor(e.target.value);
+    };
+
+    const handleSecondaryTextColorChange = (e) => {
+        setSecondaryTextColor(e.target.value);
+    };
+
+    const handlebuttonBgColor = (e) => {
+        setButtonBgColor(e.target.value);
+    };
     // const handleCaseStudyChange = (index, field, value) => {
     //     const updatedCaseStudies = [...caseStudies];
     //     updatedCaseStudies[index][field] = value;
@@ -101,7 +122,7 @@ const PortfolioForm = ({ setFormData }) => {
 
     return (
         <>
-           <Navbar/>
+            <Navbar />
             <div className="grid md:grid-cols-4 grid-cols-1">
                 <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3">
                     <div className="flex items-start justify-between p-5 border-b rounded-t">
@@ -210,7 +231,7 @@ const PortfolioForm = ({ setFormData }) => {
                                     </button>
                                 </div>
 
-{/*                                 
+                                {/*                                 
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">Case Studies</h4>
                                     {caseStudies.map((caseStudy, index) => (
@@ -265,6 +286,36 @@ const PortfolioForm = ({ setFormData }) => {
                                         </label>
                                         <input type="file" name="file" id="file" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                     </div>
+
+                                    <div className="mb-4">
+                                        <label for="backgroundColor" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Select Background Color
+                                        </label>
+                                        <input type="color" id="backgroundColor" name="backgroundColor" value={backgroundColor} onChange={handleBackgroundColorChange} className='cursor-pointer' />
+
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <label htmlFor="primaryTextColor" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Select Primary Text Color
+                                        </label>
+                                        <input type="color" id="primaryTextColor" name="primaryTextColor" value={primaryTextColor} onChange={handlePrimaryTextColorChange} className='cursor-pointer' />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <label htmlFor="secondaryTextColor" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Select Secondary Text Color
+                                        </label>
+                                        <input type="color" id="secondaryTextColor" name="secondaryTextColor" value={secondaryTextColor} onChange={handleSecondaryTextColorChange} className='cursor-pointer' />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <label htmlFor="secondaryTextColor" className="text-sm font-medium text-gray-900 block mb-2">
+                                            Select Button Colors
+                                        </label>
+                                        <input type="color" id="buttonBgColor" name="buttonBgColor" value={buttonBgColor} onChange={handlebuttonBgColor} className='cursor-pointer' />
+                                    </div>
+
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">

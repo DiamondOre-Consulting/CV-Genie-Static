@@ -30,7 +30,7 @@ const WebFooter = ({ formData }) => {
                         )}
                     </div>
                 )}
-                <p className="text-center text-gray-500 font-medium bg-black py-4">&copy; 2024 Company Ltd. All rights reserved.</p>
+                <p className="text-center text-gray-500 font-medium  py-4">&copy; 2024 Company Ltd. All rights reserved.</p>
             </footer>
         </>
     );

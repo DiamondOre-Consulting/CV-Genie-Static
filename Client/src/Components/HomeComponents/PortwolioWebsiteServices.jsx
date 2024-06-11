@@ -22,6 +22,7 @@ const PortfolioWebsiteServices = () => {
                             />
                         </div>
                     </div>
+
                 </a>
 
                 <div className='hidden md:block'>
@@ -42,8 +43,7 @@ const PortfolioWebsiteServices = () => {
                         <img
                             src={cvgenie}
                             alt="CVGenie"
-                            className="absolute top-0 left-0 w-full h-full cursor-pointer object-cover object-top auto-slide rounded-md left-[60%] top-[10%] w-[14%] h-[46%] sm:h-[46%] lg:h-[29%] xl:h-[28%] 2xl:h-[23%] sm:top-[10%] lg:top-[8%] xl:top-[20%] 2xl:top-[14%]"
-                         
+                            className="absolute top-0 left-0 h-full cursor-pointer object-cover object-top auto-slide rounded-md left-[60%] top-[10%] w-[14%] h-[46%] sm:h-[46%] lg:h-[29%] xl:h-[28%] 2xl:h-[23%] sm:top-[10%] lg:top-[8%] xl:top-[20%] 2xl:top-[14%]"
                         />
                     </div>
                 </div>

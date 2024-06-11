@@ -15,7 +15,7 @@ const WebCaseStudy = ({ formData }) => {
     return (
         <>
             {shouldRender && (
-                <div className="bg-black pb-10" id="casestudy">
+                <div className=" pb-10" id="casestudy">
                     <div className="p-8 ">
                         <h1 className="text-5xl webfont font-bold text-gray-300 mb-2 text-center mt-6">
                             Case Study

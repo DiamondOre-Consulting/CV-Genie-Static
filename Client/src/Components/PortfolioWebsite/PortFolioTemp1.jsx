@@ -11,19 +11,29 @@ import WebAttachment from './PortFolioWebComponent.jsx/WebAttachment';
 import WebProducts from './PortFolioWebComponent.jsx/WebProducts';
 
 const PortFolioTemp1 = ({ formData }) => {
+  console.log(formData.backgroundColor)
+
+  const backgroundColor = formData.backgroundColor || '#000000'; 
+  const primaryTextColor = formData.primaryTextColor || '#ced4da'
+  const secondaryTextColor = formData.secondaryTextColor || '#dee2e6'
+  const buttonBgColor = formData.buttonBgColor || '#f97316'
+
+
+
+
   return (
-    <div className='overflow-x-hidden'>
+    <div className='overflow-x-hidden bg-black'style={{ backgroundColor: backgroundColor }}>
     
 
-    <WebNav formData={formData}/>
-    <WebHero formData={formData}/>
-    <Aboutme formData={formData}/>
-    <WebAttachment formData={formData}/>
-    <Services formData={formData}/>
-    <WebProducts formData={formData}/>
+    <WebNav formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} backgroundColor={backgroundColor} buttonBgColor={buttonBgColor}/>
+    <WebHero formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/>
+    <Aboutme formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/>
+    <WebAttachment formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/>
+    <Services formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/>
+    <WebProducts formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} backgroundColor={backgroundColor}/>
     {/* <WebCaseStudy formData={formData}/> */}
-    <WebContactus formData={formData}/>
-    <WebFooter formData={formData}/>
+    <WebContactus formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/>
+    <WebFooter formData={formData} primaryTextColor={primaryTextColor} secondaryTextColor={secondaryTextColor} buttonBgColor={buttonBgColor}/> 
 
       {/* <h1>{formData['website-name']}</h1>
       <p>{formData['about-me']}</p> */}
