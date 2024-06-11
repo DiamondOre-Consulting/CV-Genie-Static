@@ -1,4 +1,5 @@
 import express from "express";
+import fileUpload from 'express-fileupload';
 import cors from "cors";
 import dotnev from "dotenv";
 import mongoose from "mongoose";
@@ -8,6 +9,7 @@ const app = express();
 dotnev.config();
 
 app.use(express.json());
+app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
 

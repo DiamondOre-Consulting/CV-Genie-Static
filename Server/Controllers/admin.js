@@ -210,7 +210,7 @@ router.post("/upload-profile-pic", async (req, res) => {
 
     const uploadData = await s3Client.send(
       new PutObjectCommand({
-        Bucket: "profilepics",
+        Bucket: "portfoliopics",
         Key: uniqueFileName, // Use the unique filename for the S3 object key
         Body: fileBuffer, // Provide the file buffer as the Body
       })
@@ -218,7 +218,7 @@ router.post("/upload-profile-pic", async (req, res) => {
 
     // Generate a public URL for the uploaded file
     const getObjectCommand = new GetObjectCommand({
-      Bucket: "profilepics",
+      Bucket: "portfoliopics",
       Key: uniqueFileName,
     });
 
