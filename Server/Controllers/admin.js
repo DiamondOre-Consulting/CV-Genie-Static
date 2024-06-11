@@ -210,7 +210,7 @@ router.post("/upload-profile-pic", async (req, res) => {
 
     const uploadData = await s3Client.send(
       new PutObjectCommand({
-        Bucket: "portfoliopics",
+        Bucket: "profilepics",
         Key: uniqueFileName, // Use the unique filename for the S3 object key
         Body: fileBuffer, // Provide the file buffer as the Body
       })
@@ -218,7 +218,7 @@ router.post("/upload-profile-pic", async (req, res) => {
 
     // Generate a public URL for the uploaded file
     const getObjectCommand = new GetObjectCommand({
-      Bucket: "portfoliopics",
+      Bucket: "profilepics",
       Key: uniqueFileName,
     });
 
@@ -296,42 +296,42 @@ router.post("/upload-product-image", async (req, res) => {
 
 
 // CREATE PORTFOLIO
-router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
+router.post("/create-portfolio", async (req, res) => {
   try {
-    const file = req.files && req.files.myDocument; 
+    // const file = req.files && req.files.myDocument; 
 
-    if (!file) {
-      return res.status(400).send("No file uploaded");
-    }
+    // // if (!file) {
+    // //   return res.status(400).send("No file uploaded");
+    // // }
 
-    const uniqueIdentifier = uuidv4();
+    // const uniqueIdentifier = uuidv4();
 
-    const fileExtension = file.name.split(".").pop();
+    // const fileExtension = file.name.split(".").pop();
 
-    const uniqueFileName = `${uniqueIdentifier}.${fileExtension}`;
+    // const uniqueFileName = `${uniqueIdentifier}.${fileExtension}`;
 
-    const base64Data = file.data.toString("base64");
+    // const base64Data = file.data.toString("base64");
 
-    const fileBuffer = Buffer.from(base64Data, "base64");
+    // const fileBuffer = Buffer.from(base64Data, "base64");
 
-    const uploadDataDoc = await s3ClientDocs.send(
-      new PutObjectCommand({
-        Bucket: "portfoliodocs",
-        Key: uniqueFileName, // Use the unique filename for the S3 object key
-        Body: fileBuffer, // Provide the file buffer as the Body
-      })
-    );
+    // const uploadDataDoc = await s3ClientDocs.send(
+    //   new PutObjectCommand({
+    //     Bucket: "portfoliodocs",
+    //     Key: uniqueFileName, // Use the unique filename for the S3 object key
+    //     Body: fileBuffer, // Provide the file buffer as the Body
+    //   })
+    // );
 
-    const getObjectCommandDoc = new GetObjectCommand({
-      Bucket: "portfoliodocs",
-      Key: uniqueFileName,
-    });
+    // const getObjectCommandDoc = new GetObjectCommand({
+    //   Bucket: "portfoliodocs",
+    //   Key: uniqueFileName,
+    // });
 
-    const signedUrlDoc = await getSignedUrl(s3ClientDocs, getObjectCommandDoc);
+    // const signedUrlDoc = await getSignedUrl(s3ClientDocs, getObjectCommandDoc);
 
-    // Parse the signed URL to extract the base URL
-    const parsedUrlDoc = new URL(signedUrlDoc);
-    const baseUrlDoc = `${parsedUrlDoc.protocol}//${parsedUrlDoc.hostname}${parsedUrlDoc.pathname}`;
+    // // Parse the signed URL to extract the base URL
+    // const parsedUrlDoc = new URL(signedUrlDoc);
+    // const baseUrlDoc = `${parsedUrlDoc.protocol}//${parsedUrlDoc.hostname}${parsedUrlDoc.pathname}`;
 
     const {
       name,
@@ -340,8 +340,8 @@ router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
       phone,
       tagline,
       aboutMe,
-      heading,
-      description,
+      profileImage,
+      services,
       products,
       address,
       facebook,
@@ -353,6 +353,8 @@ router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
       secondaryTextColor,
       buttonColor
     } = req.body;
+
+    console.log(name)
 
     const findExist = await Portfolio.findOne({ email });
     if (findExist) {
@@ -369,11 +371,8 @@ router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
       tagline,
       profileImage,
       aboutMe,
-      document: baseUrlDoc,
-      services: {
-        heading,
-        description
-      },
+      // document: baseUrlDoc,
+      services: services,
       products: products,
       contact: {
         address: address
@@ -391,8 +390,10 @@ router.post("/create-portfolio", AdminAuthenticateToken, async (req, res) => {
     });
 
     await newPortfolio.save();
+
+    res.status(200).json(newPortfolio)
   } catch (error) {
-    console.log("Something went wrong!!! ", error);
+    console.log("Something went wrong!!! ", error.message);
     res.status(500).json(error);
   }
 });
