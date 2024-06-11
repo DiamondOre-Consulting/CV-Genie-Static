@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/template.png';
-import Navbar from '../../Commancomponents/Navbar'
+import Navbar from '../../Commancomponents/Navbar';
 
 const socialMediaIcons = {
     facebook: 'https://img.icons8.com/fluent/30/000000/facebook-new.png',
@@ -12,31 +12,98 @@ const socialMediaIcons = {
 
 const PortfolioForm = ({ setFormData }) => {
     const [services, setServices] = useState([]);
-    // const [caseStudies, setCaseStudies] = useState([]);
     const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
     const [backgroundColor, setBackgroundColor] = useState("#000000");
-    const [primaryTextColor, setPrimaryTextColor] = useState("#ced4da"); // State for primary text color
-    const [secondaryTextColor, setSecondaryTextColor] = useState("#dee2e6"); // State for secondary text color
-    const [buttonBgColor, setButtonBgColor] = useState("#f97316") // chage bgorange color
+    const [primaryTextColor, setPrimaryTextColor] = useState("#ced4da");
+    const [secondaryTextColor, setSecondaryTextColor] = useState("#dee2e6");
+    const [buttonBgColor, setButtonBgColor] = useState("#f97316");
+    const [profileImage, setProfileImage] = useState(null);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleProfileImageUpload = async (file) => {
+        const formData = new FormData();
+        formData.append('myFileImage', file);
+        const response = await fetch('http://localhost:5000/upload-profile-pic', {
+            method: 'POST',
+            body: formData,
+        });
+        const data = await response.json();
+        return data;
+    };
+
+    const handleProductImageUpload = async (file) => {
+        const formData = new FormData();
+        formData.append('myProductImage', file);
+        const response = await fetch('http://localhost:5000/upload-product-image', {
+            method: 'POST',
+            body: formData,
+        });
+        const data = await response.json();
+        return data;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = new FormData(e.target);
-        const formDataObj = Object.fromEntries(data.entries());
-        formDataObj.services = services;
-        // formDataObj.caseStudies = caseStudies;
-        formDataObj.products = products;
-        formDataObj.socialMediaLinks = socialMediaLinks;
-        setFormData(formDataObj);
-        navigate('web-preview');
+        const formData = new FormData(e.target);
+        let profileImageUrl = null;
+        if (profileImage) {
+            profileImageUrl = await handleProfileImageUpload(profileImage);
+        }
+        const updatedProducts = await Promise.all(
+            products.map(async (product) => {
+                let productImageUrl = null;
+                if (product.image) {
+                    productImageUrl = await handleProductImageUpload(product.image);
+                }
+                return {
+                    heading: product.heading,
+                    description: product.description,
+                    image: productImageUrl,
+                };
+            })
+        );
+
+        const payload = {
+            name: formData.get('full-name'),
+            uniqueUserName: formData.get('userName'),
+            tagline: formData.get('tagline'),
+            aboutMe: formData.get('aboutme'),
+            profileImage: profileImageUrl,
+            services: services,
+            products: updatedProducts,
+            email: formData.get('email'), // assuming you added an email field in the form
+            phone: formData.get('phone'), // assuming you added a phone field in the form
+            address: formData.get('address'), // assuming you added an address field in the form
+            facebook: socialMediaLinks.facebook,
+            twitter: socialMediaLinks.twitter,
+            linkedin: socialMediaLinks.linkedin,
+            instagram: socialMediaLinks.instagram,
+            bgColor: backgroundColor,
+            primaryTextColor: primaryTextColor,
+            secondaryTextColor: secondaryTextColor,
+            buttonColor: buttonBgColor,
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/create-portfolio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            const data = await response.json();
+            setFormData(data);
+            navigate('web-preview');
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const handleBackgroundColorChange = (e) => {
         setBackgroundColor(e.target.value);
     };
-
 
     const addService = () => {
         setServices([...services, { heading: '', description: '' }]);
@@ -48,7 +115,6 @@ const PortfolioForm = ({ setFormData }) => {
         setServices(updatedServices);
     };
 
-
     const handlePrimaryTextColorChange = (e) => {
         setPrimaryTextColor(e.target.value);
     };
@@ -57,25 +123,9 @@ const PortfolioForm = ({ setFormData }) => {
         setSecondaryTextColor(e.target.value);
     };
 
-    const handlebuttonBgColor = (e) => {
+    const handleButtonBgColor = (e) => {
         setButtonBgColor(e.target.value);
     };
-    // const handleCaseStudyChange = (index, field, value) => {
-    //     const updatedCaseStudies = [...caseStudies];
-    //     updatedCaseStudies[index][field] = value;
-    //     setCaseStudies(updatedCaseStudies);
-    // };
-
-    // const addCaseStudy = () => {
-    //     setCaseStudies([...caseStudies, { projectName: '', description: '', links: '', image: null }]);
-    // };
-
-    // const handleCaseStudyImageChange = (index, e) => {
-    //     const file = e.target.files[0];
-    //     const updatedCaseStudies = [...caseStudies];
-    //     updatedCaseStudies[index].image = file;
-    //     setCaseStudies(updatedCaseStudies);
-    // };
 
     const handleSocialMediaLinkChange = (platform, value) => {
         setSocialMediaLinks({
@@ -89,13 +139,6 @@ const PortfolioForm = ({ setFormData }) => {
         updatedServices.splice(index, 1);
         setServices(updatedServices);
     };
-
-    // const removeCaseStudy = (index) => {
-    //     const updatedCaseStudies = [...caseStudies];
-    //     updatedCaseStudies.splice(index, 1);
-    //     setCaseStudies(updatedCaseStudies);
-    // };
-
 
     const addProduct = () => {
         setProducts([...products, { heading: '', description: '', image: null }]);
@@ -119,7 +162,6 @@ const PortfolioForm = ({ setFormData }) => {
         updatedProducts.splice(index, 1);
         setProducts(updatedProducts);
     };
-
     return (
         <>
             <Navbar />
@@ -138,10 +180,16 @@ const PortfolioForm = ({ setFormData }) => {
                                     <input type="text" name="full-name" id="full-name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
+                                    <label htmlFor="full-name" className="text-sm font-medium text-gray-900 block mb-2">
+                                       UserName
+                                    </label>
+                                    <input type="text" name="userName" id="useName" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="person-image" className="text-sm font-medium text-gray-900 block mb-2">
                                         Upload Your Image
                                     </label>
-                                    <input type="file" name="image" id="image" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
+                                    <input type="file" name="image" id="image" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" onChange={handleProfileImageChange} />
                                 </div>
                                 <div className="col-span-full">
                                     <label htmlFor="tagline" className="text-sm font-medium text-gray-900 block mb-2">
