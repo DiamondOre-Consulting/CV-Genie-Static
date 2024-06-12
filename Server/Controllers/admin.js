@@ -356,12 +356,12 @@ router.post("/create-portfolio", async (req, res) => {
 
     console.log(name)
 
-    const findExist = await Portfolio.findOne({ email });
-    if (findExist) {
-      return res
-        .status(402)
-        .json({ message: "Portfolio already exists with this email id!!!" });
-    }
+    // const findExist = await Portfolio.findOne({ email: email });
+    // if (findExist) {
+    //   return res
+    //     .status(402)
+    //     .json({ message: "Portfolio already exists with this email id!!!" });
+    // }
 
     const newPortfolio = new Portfolio({
       name,
