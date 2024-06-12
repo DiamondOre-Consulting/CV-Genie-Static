@@ -1,11 +1,17 @@
 import React from 'react'
 
-const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBgColor }) => {
+const WebContactus = ({ portfolioData }) => {
+
+    const primaryTextColor = portfolioData.primaryTextColor;
+    const buttonBgColor = portfolioData.buttonColor;
+    const secondaryTextColor = portfolioData.secondaryTextColor
+
+
     return (
         <div id="contact">
             <div class="" id="contact">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 text-center">
-                    <h2 class="text-5xl font-bold  webfont" style={{ color: secondaryTextColor }}>Contact</h2>
+                    <h2 class="text-5xl font-bold  webfont" style={{ color: buttonBgColor }}>Contact</h2>
                     <p class="pt-6 pb-6 text-base max-w-2xl text-center m-auto " style={{ color: primaryTextColor }}>
                         Want to contact us? Choose an
                         option below and well be happy to show you how we can transform companys web experience.
@@ -14,11 +20,11 @@ const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBg
                 <div
                     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 grid md:grid-cols-2 lg:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-8 lg:gap-x-8 lg:gap-y-16">
                     <div>
-                        <h2 class="text-lg font-bold text-gray-100">Contact Us</h2>
+                        <h2 class="text-lg font-bold text-gray-100" style={{ color:primaryTextColor }}>Contact Us</h2>
                         <p class="max-w-sm mt-4 mb-4 " style={{ color: primaryTextColor }}> Have something to say? We are here to help. Fill up the
                             form or send email or call phone.</p>
 
-                        {formData?.address && (
+                        {portfolioData.contact?.address && (
                             <div class="flex items-center mt-8 space-x-2  " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
@@ -27,11 +33,11 @@ const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBg
                                     </path>
                                 </svg>
 
-                                <span> {formData.address} </span>
+                                <span> {portfolioData.contact.address} </span>
                             </div>
                         )}
 
-                        {formData?.email && (
+                        {portfolioData?.email && (
                             <div class="flex items-center mt-2 space-x-2 " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
@@ -39,11 +45,11 @@ const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBg
                                         d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75">
                                     </path>
                                 </svg>
-                                <a href="mailto:hello@company.com">{formData.email}</a>
+                                <a href="mailto:hello@company.com">{portfolioData.email}</a>
                             </div>
                         )}
 
-                        {formData?.phone && (
+                        {portfolioData?.phone && (
                             <div class="flex items-center mt-2 space-x-2 text-dark-600 " style={{ color: primaryTextColor }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true" class="w-4 h-4">
@@ -51,7 +57,7 @@ const WebContactus = ({ formData, primaryTextColor, secondaryTextColor, buttonBg
                                         d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z">
                                     </path>
                                 </svg>
-                                <a href="tel:11111111111">{formData.phone}</a>
+                                <a href="tel:11111111111">{portfolioData.phone}</a>
                             </div>
                         )}
 

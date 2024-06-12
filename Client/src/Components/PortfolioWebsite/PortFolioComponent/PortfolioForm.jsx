@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/template.png';
 import Navbar from '../../Commancomponents/Navbar';
+import axios from 'axios';
 
 const socialMediaIcons = {
     facebook: 'https://img.icons8.com/fluent/30/000000/facebook-new.png',
@@ -10,7 +11,8 @@ const socialMediaIcons = {
     instagram: 'https://img.icons8.com/fluent/30/000000/instagram-new.png',
 };
 
-const PortfolioForm = ({ setFormData }) => {
+const PortfolioForm = () => {
+    const [popup, setPopUp] = useState(false)
     const [services, setServices] = useState([]);
     const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
@@ -20,30 +22,47 @@ const PortfolioForm = ({ setFormData }) => {
     const [buttonBgColor, setButtonBgColor] = useState("#f97316");
     const [profileImage, setProfileImage] = useState(null);
     const navigate = useNavigate();
-
+    const [showLoader, setShowLoader] = useState(false);
     const handleProfileImageUpload = async (file) => {
-        const formData = new FormData();
-        formData.append('myFileImage', file);
-        const response = await fetch('http://localhost:5000/upload-profile-pic', {
-            method: 'POST',
-            body: formData,
-        });
-        const data = await response.json();
-        return data;
+        try {
+            const formData = new FormData();
+            formData.append('myFileImage', file);
+            const response = await axios.post('http://localhost:7001/api/admin/upload-profile-pic', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
+            if (!response.data) {
+                throw new Error('Error uploading profile image');
+            }
+
+            return response.data;
+        } catch (error) {
+            console.error('Error uploading profile image:', error);
+            return null;
+        }
     };
 
     const handleProductImageUpload = async (file) => {
-        const formData = new FormData();
-        formData.append('myProductImage', file);
-        const response = await fetch('http://localhost:5000/upload-product-image', {
-            method: 'POST',
-            body: formData,
-        });
-        const data = await response.json();
-        return data;
+        try {
+            const formData = new FormData();
+            formData.append('myProductImage', file);
+            const response = await axios.post('http://localhost:7001/api/admin/upload-product-image', formData);
+
+            if (!response.data) {
+                throw new Error('Error uploading product image');
+            }
+
+            return response.data;
+        } catch (error) {
+            console.error('Error uploading product image:', error);
+            return null;
+        }
     };
 
     const handleSubmit = async (e) => {
+        setShowLoader(true);
         e.preventDefault();
         const formData = new FormData(e.target);
         let profileImageUrl = null;
@@ -57,9 +76,9 @@ const PortfolioForm = ({ setFormData }) => {
                     productImageUrl = await handleProductImageUpload(product.image);
                 }
                 return {
-                    heading: product.heading,
-                    description: product.description,
-                    image: productImageUrl,
+                    productName: product.heading,
+                    productDescription: product.description,
+                    productImage: productImageUrl,
                 };
             })
         );
@@ -69,12 +88,12 @@ const PortfolioForm = ({ setFormData }) => {
             uniqueUserName: formData.get('userName'),
             tagline: formData.get('tagline'),
             aboutMe: formData.get('aboutme'),
-            profileImage: profileImageUrl,
+            profileImage: profileImageUrl, 
             services: services,
             products: updatedProducts,
-            email: formData.get('email'), // assuming you added an email field in the form
-            phone: formData.get('phone'), // assuming you added a phone field in the form
-            address: formData.get('address'), // assuming you added an address field in the form
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            address: formData.get('address'),
             facebook: socialMediaLinks.facebook,
             twitter: socialMediaLinks.twitter,
             linkedin: socialMediaLinks.linkedin,
@@ -86,18 +105,26 @@ const PortfolioForm = ({ setFormData }) => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/create-portfolio', {
-                method: 'POST',
+            const response = await axios.post('http://localhost:7001/api/admin/create-portfolio', payload, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
             });
-            const data = await response.json();
-            setFormData(data);
-            navigate('web-preview');
+            const data = response.data;
+            const productsData = data.products.map(product => ({
+                _id: product._id,
+                image: product.image,
+                heading: product.heading,
+                description: product.description,
+            }));
+            // Do something with the response data if needed
+            // navigate('web-preview'); // Navigate to web preview page
+            console.log('portfolio created sucessufully')
+            setPopUp(true)
+            setShowLoader(false);
         } catch (error) {
             console.error('Error:', error);
+            setShowLoader(false);
         }
     };
 
@@ -162,6 +189,14 @@ const PortfolioForm = ({ setFormData }) => {
         updatedProducts.splice(index, 1);
         setProducts(updatedProducts);
     };
+
+
+    const handleProfileImageChange = (e) => {
+        const file = e.target.files[0];
+        setProfileImage(file);
+    };
+
+
     return (
         <>
             <Navbar />
@@ -181,7 +216,7 @@ const PortfolioForm = ({ setFormData }) => {
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="full-name" className="text-sm font-medium text-gray-900 block mb-2">
-                                       UserName
+                                        UserName
                                     </label>
                                     <input type="text" name="userName" id="useName" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                 </div>
@@ -190,6 +225,8 @@ const PortfolioForm = ({ setFormData }) => {
                                         Upload Your Image
                                     </label>
                                     <input type="file" name="image" id="image" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" onChange={handleProfileImageChange} />
+
+
                                 </div>
                                 <div className="col-span-full">
                                     <label htmlFor="tagline" className="text-sm font-medium text-gray-900 block mb-2">
@@ -197,12 +234,7 @@ const PortfolioForm = ({ setFormData }) => {
                                     </label>
                                     <input type="text" name="tagline" id="tagline" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
                                 </div>
-                                <div className="col-span-full">
-                                    <label htmlFor="shortsummery" className="text-sm font-medium text-gray-900 block mb-2">
-                                        Short Summary
-                                    </label>
-                                    <input type="text" name="shortsummery" id="shortsummery" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" />
-                                </div>
+                               
                                 <div className="col-span-full">
                                     <h4 className="text-lg font-medium text-gray-900 block mb-2">About Me</h4>
                                     <textarea id="aboutme" name="aboutme" rows="6" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4" placeholder="Summary"></textarea>
@@ -361,7 +393,8 @@ const PortfolioForm = ({ setFormData }) => {
                                         <label htmlFor="secondaryTextColor" className="text-sm font-medium text-gray-900 block mb-2">
                                             Select Button Colors
                                         </label>
-                                        <input type="color" id="buttonBgColor" name="buttonBgColor" value={buttonBgColor} onChange={handlebuttonBgColor} className='cursor-pointer' />
+                                        <input type="color" id="buttonBgColor" name="buttonBgColor" value={buttonBgColor} onChange={handleButtonBgColor} className='cursor-pointer' />
+
                                     </div>
 
                                 </div>
@@ -378,6 +411,58 @@ const PortfolioForm = ({ setFormData }) => {
                     <img src={img} alt="Portfolio" />
                 </div>
             </div>
+
+            {popup && (
+                <div id="YOUR_ID" class="fixed z-50 inset-0 overflow-y-auto">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+            
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            
+                    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
+                            <button onClick={()=> setPopUp(false)}  type="button" data-behavior="cancel" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <span class="sr-only">Close</span>
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                                    Portfolio has been created sucessfully
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        Thank you!!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                            <button type="button" data-behavior="commit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-900 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={()=> setPopUp(false)} >
+                               okk
+                            </button>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            )}
         </>
     );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Commancomponents/Navbar'
 import Footer from '../Commancomponents/Footer'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios";
 
 const AdminForm = () => {
@@ -122,10 +122,9 @@ const AdminForm = () => {
     return (
         <div className=''>
             <Navbar />
-            <div className='grid  grid-cols-1 md:grid-cols-2 gap-4'>
-
+            <Link to= '/portfolio-form' className='mt-4  bg-teal-900 text-white rounded-md float-right mx-10 py-4 px-4'>Create Portfolio</Link>
+            <div className='grid  grid-cols-1 md:grid-cols-2 gap-4  mt-20'>
                 <div className=''>
-
                     <div class=" my-4 md:my-0 md:min-h-screen flex items-center justify-center ">
                         <div class="bg-white  shadow-md rounded-lg px-8 py-6 max-w-md">
                             <h1 class="text-2xl font-bold text-center mb-4 ">Add Details</h1>

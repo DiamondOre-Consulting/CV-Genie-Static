@@ -10,7 +10,9 @@ import ReturnAndRefund from './Components/HomeComponents/ReturnAndRefund'
 import FreeCv from './Pages/FreeCv'
 import UserSignup from './Pages/UserSignup'
 import UserLogin from './Pages/UserLogin'
-import Portfolio from './Components/PortfolioWebsite/Portfolio'
+import PortfolioForm from './Components/PortfolioWebsite/PortFolioComponent/PortfolioForm'
+import PortFolioTemp1 from './Components/PortfolioWebsite/PortFolioTemp1'
+
 
 
 
@@ -31,7 +33,9 @@ function App() {
           <Route path='/user-login' element={<UserLogin/>}/>
           <Route path='/terms-of-services' element={<TermsofServices/>}/>
           <Route path='/return-and-refund' element={<ReturnAndRefund/>}/>
-          <Route path='/portfolio-form/*' element={<Portfolio/>}/>
+          <Route path='/portfolio-form' element={<PortfolioForm/>}/>
+          <Route path='/portfolio/:uniqueUserName' element={<PortFolioTemp1/>}/>
+       
         </Routes>
       </BrowserRouter>
 

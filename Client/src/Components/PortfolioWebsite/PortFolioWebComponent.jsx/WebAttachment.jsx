@@ -1,31 +1,35 @@
 import React from 'react';
 
-const WebAttachment = ({ formData, primaryTextColor, secondaryTextColor ,buttonBgColor }) => {
+const WebAttachment = ({ portfolioData }) => {
     const handleDownload = () => {
-        const url = URL.createObjectURL(formData.file);
+        const url = portfolioData.attachmentUrl;
         const a = document.createElement('a');
         a.href = url;
-        a.download = formData.file.name;
+        a.download = portfolioData.attachmentName || 'download';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url);
     };
 
-    // Check if formData.image is defined and its name property is not empty
-    const shouldRender = formData && formData.file && formData.file.name && formData.file.name.trim() !== '';
+    const primaryTextColor = portfolioData.primaryTextColor;
+    const secondaryTextColor = portfolioData.secondaryTextColor;
+    const buttonBgColor = portfolioData.buttonColor;
 
-    // Render the component only if formData.file is not null or undefined
+    const shouldRender = portfolioData && portfolioData.attachmentUrl && portfolioData.attachmentUrl.trim() !== '';
+
     return shouldRender ? (
-        <div className="p-6 rounded-lg  pt-20">
-            <h2 className="text-5xl font-bold webfont text-center  mb-8" style={{ color: secondaryTextColor }}>Attachment</h2>
-            <p className=" mb-6 px-10 md:px-20" style={{ color: primaryTextColor }}>
+        <div className="p-6 rounded-lg pt-20">
+            <h2 className="text-5xl font-bold webfont text-center mb-8" style={{ color: secondaryTextColor }}>
+                Attachment
+            </h2>
+            <p className="mb-6 px-10 md:px-20" style={{ color: primaryTextColor }}>
                 We have included a document that provides detailed insights and important information.
                 Please feel free to download it for your reference.
             </p>
             <button
                 onClick={handleDownload}
-                className="text-white px-4 py-2 rounded-md flex items-center justify-center text-center mx-auto" style={{backgroundColor: buttonBgColor}}
+                className="text-white px-4 py-2 rounded-md flex items-center justify-center text-center mx-auto"
+                style={{ backgroundColor: buttonBgColor }}
             >
                 Download
             </button>

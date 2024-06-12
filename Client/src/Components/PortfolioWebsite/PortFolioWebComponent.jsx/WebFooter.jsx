@@ -1,30 +1,30 @@
 import React from 'react';
 
-const WebFooter = ({ formData }) => {
-    console.log(formData);
+const WebFooter = ({ portfolioData }) => {
+    console.log(portfolioData);
 
     return (
         <>
             <footer className="flex flex-col space-y-4 justify-center">
-                {formData?.socialMediaLinks && (
+                {portfolioData?.socialMedias && (
                     <div className="flex justify-center space-x-5 mt-4 ml-10 mr-10">
-                        {formData?.socialMediaLinks?.facebook && (
-                            <a href={formData.socialMediaLinks.facebook} target="_blank" rel="noopener noreferrer">
+                        {portfolioData?.socialMedias?.facebook && (
+                            <a href={portfolioData.socialMedias.facebook} target="_blank" rel="noopener noreferrer">
                                 <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" alt="Facebook" />
                             </a>
                         )}
-                        {formData?.socialMediaLinks?.linkedin && (
-                            <a href={formData.socialMediaLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                        {portfolioData?.socialMedias?.linkedin && (
+                            <a href={portfolioData.socialMedias.linkedin} target="_blank" rel="noopener noreferrer">
                                 <img src="https://img.icons8.com/fluent/30/000000/linkedin-2.png" alt="LinkedIn" />
                             </a>
                         )}
-                        {formData?.socialMediaLinks?.instagram && (
-                            <a href={formData.socialMediaLinks.instagram} target="_blank" rel="noopener noreferrer">
+                        {portfolioData?.socialMedias?.instagram && (
+                            <a href={portfolioData.socialMedias.instagram} target="_blank" rel="noopener noreferrer">
                                 <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" alt="Instagram" />
                             </a>
                         )}
-                        {formData?.socialMediaLinks?.twitter && (
-                            <a href={formData.socialMediaLinks.twitter} target="_blank" rel="noopener noreferrer">
+                        {portfolioData?.socialMedias?.twitter && (
+                            <a href={portfolioData.socialMedias.twitter} target="_blank" rel="noopener noreferrer">
                                 <img src="https://img.icons8.com/fluent/30/000000/twitter.png" alt="Twitter" />
                             </a>
                         )}
