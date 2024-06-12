@@ -277,7 +277,7 @@ router.post("/upload-product-image", async (req, res) => {
       Key: uniqueFileName,
     });
 
-    const signedUrl = await getSignedUrl(s3Client, getObjectCommand); // Generate URL valid for 1 hour
+    const signedUrl = await getSignedUrl(s3ClientProducts, getObjectCommand); // Generate URL valid for 1 hour
 
     // Parse the signed URL to extract the base URL
     const parsedUrl = new URL(signedUrl);
