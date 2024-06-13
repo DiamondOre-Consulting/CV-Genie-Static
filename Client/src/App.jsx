@@ -12,6 +12,7 @@ import UserSignup from './Pages/UserSignup'
 import UserLogin from './Pages/UserLogin'
 import PortfolioForm from './Components/PortfolioWebsite/PortFolioComponent/PortfolioForm'
 import PortFolioTemp1 from './Components/PortfolioWebsite/PortFolioTemp1'
+import Facebook from './tracking/Facebook'
 
 
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <Facebook />
         <Routes>
           <Route path='/' element={<MainHome />} />
           <Route path='/checkout' element={<Checkout />} />
