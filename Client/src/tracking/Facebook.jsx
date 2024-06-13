@@ -12,6 +12,7 @@ const Facebook = () => {
       'https://connect.facebook.net/en_US/fbevents.js');
        fbq('init', '989802819426456'); 
       fbq('track', 'PageView');
+      fbq('track', 'InitiateCheckout')
     }, [])
   return null;
 }
