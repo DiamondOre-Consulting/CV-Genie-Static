@@ -36,9 +36,10 @@ const Checkout = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(profile);
         axios.post('https://cv-genie-static-backend.onrender.com/api/client/payment', {
             name: profile.name,
-            number: profile.number,
+            number: profile.phone,
             amount: profile.amount
         })
             .then(response => {

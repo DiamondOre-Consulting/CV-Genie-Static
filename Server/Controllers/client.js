@@ -16,6 +16,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import PDFDocument from "pdfkit";
 import { createReport } from "docx-templates";
 import Client from "../Models/Clients.js";
+import  crypto from "crypto";
 
 import ejs from "ejs";
 import pdf from "html-pdf"
@@ -107,6 +108,7 @@ router.post("/payment", async (req, res) => {
         console.error(error);
       });
   } catch (error) {
+    console.log(error.message);
     res.status(500).send({
       message: error.message,
       success: false,

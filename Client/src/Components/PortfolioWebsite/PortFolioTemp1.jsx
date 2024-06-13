@@ -19,7 +19,7 @@ const PortFolioTemp1 = () => {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await fetch(`http://localhost:7001/api/admin/portfolio/${uniqueUserName}`);
+        const response = await fetch(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`);
         const data = await response.json();
 
         if (response.ok) {

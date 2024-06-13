@@ -27,7 +27,7 @@ const PortfolioForm = () => {
         try {
             const formData = new FormData();
             formData.append('myFileImage', file);
-            const response = await axios.post('http://localhost:7001/api/admin/upload-profile-pic', formData, {
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/admin/upload-profile-pic', formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -48,7 +48,7 @@ const PortfolioForm = () => {
         try {
             const formData = new FormData();
             formData.append('myProductImage', file);
-            const response = await axios.post('http://localhost:7001/api/admin/upload-product-image', formData);
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/admin/upload-product-image', formData);
 
             if (!response.data) {
                 throw new Error('Error uploading product image');
@@ -105,7 +105,7 @@ const PortfolioForm = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:7001/api/admin/create-portfolio', payload, {
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/admin/create-portfolio', payload, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
