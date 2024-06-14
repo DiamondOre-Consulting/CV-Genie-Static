@@ -5,7 +5,7 @@ import 'animate.css';
 const WebProducts = ({ portfolioData }) => {
     console.log(portfolioData);
 
-    // Check if portfolioData.products array is not empty
+    
     const shouldRender = portfolioData.products && portfolioData.products.length > 0;
 
     const [ref, inView] = useInView({
@@ -20,7 +20,7 @@ const WebProducts = ({ portfolioData }) => {
     const backgroundColor = portfolioData.bgColor || '#000000';
 
     return shouldRender ? (
-        <div className=''>
+        <div className='' id="products">
             <div className="p-8 pt-10 pb-10" id='service'>
                 <h1 className={`text-5xl webfont font-bold text-center mt-6 ${inView ? 'animate__animated animate__backInLeft' : ''}`} ref={ref} style={{ color: buttonBgColor }}>
                     Our Products

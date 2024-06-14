@@ -31,8 +31,8 @@ const WebNav = ({ portfolioData }) => {
               About me
               <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 transition-all group-hover:w-full" style={{ backgroundColor: buttonColor }}></span>
             </a>
-            <a href="#casestudy" className="text-xs md:text-md relative group">
-              Case Studies
+            <a href="#products" className="text-xs md:text-md relative group">
+              Products
               <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 transition-all group-hover:w-full" style={{ backgroundColor: buttonColor }}></span>
             </a>
             <a href="#service" className="text-xs md:text-md relative group">
@@ -83,11 +83,11 @@ const WebNav = ({ portfolioData }) => {
                 About me
               </a>
               <a
-                href="#casestudy"
+                href="#products"
                 className="block px-3 py-2 rounded-md text-base font-medium"
                 style={{ color: primaryTextColor }}
               >
-                Case Studies
+                Products
               </a>
               <a
                 href="#service"

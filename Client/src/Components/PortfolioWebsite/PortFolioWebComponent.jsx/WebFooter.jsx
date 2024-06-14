@@ -2,6 +2,7 @@ import React from 'react';
 
 const WebFooter = ({ portfolioData }) => {
     console.log(portfolioData);
+    const primaryTextColor = portfolioData.primaryTextColor;
 
     return (
         <>
@@ -30,7 +31,7 @@ const WebFooter = ({ portfolioData }) => {
                         )}
                     </div>
                 )}
-                <p className="text-center text-gray-500 font-medium  py-4">&copy; 2024 Company Ltd. All rights reserved.</p>
+                <p className="text-center font-medium  py-4" style={{ color: primaryTextColor }}>&copy; 2024 Company Ltd. All rights reserved.</p>
             </footer>
         </>
     );
