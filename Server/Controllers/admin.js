@@ -162,8 +162,8 @@ const credentialsDoc = {
 };
 
 const credentialsProduct = {
-  accessKeyId: "ZWLc5XbESdSUlJMF",
-  secretAccessKey: "pyyg7xRqpixT0Q2ceZ9dD5lXLRqrPtJxF0jOL5wi",
+  accessKeyId: "07pbb42bOtzFxk1s",
+  secretAccessKey: "X9VmvnrYkVPEGLeNjvd26oMibJL9DbtaPli7Dvxr",
 }
 
 const s3Client = new S3Client({
@@ -263,9 +263,9 @@ router.post("/upload-product-image", async (req, res) => {
     // Create a buffer from the base64 data
     const fileBuffer = Buffer.from(base64Data, "base64");
 
-    const uploadData = await s3ClientProducts.send(
+    const uploadData = await s3Client.send(
       new PutObjectCommand({
-        Bucket: "productsimages",
+        Bucket: "portfoliopics",
         Key: uniqueFileName, // Use the unique filename for the S3 object key
         Body: fileBuffer, // Provide the file buffer as the Body
       })
@@ -273,7 +273,7 @@ router.post("/upload-product-image", async (req, res) => {
 
     // Generate a public URL for the uploaded file
     const getObjectCommand = new GetObjectCommand({
-      Bucket: "productsimages",
+      Bucket: "portfoliopics",
       Key: uniqueFileName,
     });
 
