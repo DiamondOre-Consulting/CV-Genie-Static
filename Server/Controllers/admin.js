@@ -10,6 +10,7 @@ import Admin from "../Models/Admin.js";
 import AdminAuthenticateToken from "../Middlewares/AdminAuthenticateToken.js";
 import Clients from "../Models/Clients.js";
 import Portfolio from "../Models/Portfolio.js";
+import DeletedUsers from "../Models/DeletedUsers.js";
 
 dotenv.config();
 
@@ -150,6 +151,73 @@ router.put("/client/:id", AdminAuthenticateToken, async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+router.put("/edit-account/:id", AdminAuthenticateToken, async (req, res) => {
+  try {
+    const {name, email, phone, amount} = req.body;
+    const {id} = req.params;
+
+    const user = await Clients.findById({_id: id});
+    if(!editUser) {
+      return res.status(402).json({message: "No user found!!!"})
+    }
+
+    if(name) {
+      user.name = name;
+      await user.save();
+    }
+
+    if(email) {
+      user.email = email;
+      await user.save();
+    }
+
+    if(phone) {
+      user.phone = phone;
+      await user.save();
+    }
+
+    if(amount) {
+      user.amount = amount;
+      await user.save();
+    }
+
+    res.status(200).json({message: "Profile updated successfully!!!"});
+
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({message: "Something went wrong!!!", error})
+  }
+})
+
+router.delete("/delete-account/:id", AdminAuthenticateToken, async (req, res) => {
+  try {
+    const {id} = req.params;
+
+    const user = await Clients.findById({_id: id});
+
+    const deletedUser = new DeletedUsers({
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      amount: user.amount,
+      paid: user.paid
+    });
+
+    await deletedUser.save();
+    
+    if(deletedUser) {
+      await Clients.findByIdAndDelete({_id: id});
+    }
+
+    res.status(200).json({message: "Client has been removed from Clients DB and moved to Deleted Users!!!"})
+  } catch(error) {
+    console.log(error);
+    return res.status(500).json({message: "Something went wrong!!!", error})
+  }
+})
+
+// PORTFOLIO SECTION
 
 const credentials = {
   accessKeyId: "IGMGlez1Zm5uraQ2",
