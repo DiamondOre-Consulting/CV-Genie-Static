@@ -158,7 +158,7 @@ router.put("/edit-account/:id", AdminAuthenticateToken, async (req, res) => {
     const {id} = req.params;
 
     const user = await Clients.findById({_id: id});
-    if(!editUser) {
+    if(!user) {
       return res.status(402).json({message: "No user found!!!"})
     }
 
