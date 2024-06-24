@@ -26,6 +26,13 @@ const Checkout = () => {
                 setProfile(null);
             }
         } catch (error) {
+            if (error.response) {
+                const status = error.response.status;
+                if (status === 404) {
+                    setError("No records found with this phone number!!!");
+                    console.log("this is eroror", error)
+                }
+            }
             console.error("Error:", error);
             setError(error.response?.data?.message || "An error occurred");
             setProfile(null);
@@ -142,7 +149,7 @@ const Checkout = () => {
                                             ) : (
 
                                                 <div class="rounded-md shadow"><a href="https://example.com/checkout"
-                                                    class="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-900 "onClick={handleSubmit}>
+                                                    class="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-900 " onClick={handleSubmit}>
                                                     Pay Now</a>
 
                                                 </div>
@@ -158,6 +165,11 @@ const Checkout = () => {
                         )
                     )}
                 </div>
+                {error && (
+                    <div className="flex items-center justify-center  p-4 rounded-m mt-4">
+                        <p className="text-center text-sm text-red-500">{error}</p>
+                    </div>
+                )}
             </div>
             <Footer />
 
