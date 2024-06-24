@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/template.png';
-import Navbar from '../../Commancomponents/Navbar';
 import axios from 'axios';
+import AdminNavbar from '../../AdminComponent/AdminNavbar';
 
 const socialMediaIcons = {
     facebook: 'https://img.icons8.com/fluent/30/000000/facebook-new.png',
@@ -199,7 +199,7 @@ const PortfolioForm = () => {
 
     return (
         <>
-            <Navbar />
+           <AdminNavbar/>
             <div className="grid md:grid-cols-4 grid-cols-1">
                 <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3">
                     <div className="flex items-start justify-between p-5 border-b rounded-t">

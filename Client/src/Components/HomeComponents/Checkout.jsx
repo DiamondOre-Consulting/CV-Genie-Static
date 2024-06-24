@@ -7,7 +7,7 @@ import Typewriter from 'typewriter-effect/dist/core';
 const Checkout = () => {
 
     const typeRef = useRef(null);
-    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
     const [showLoader, setShowLoader] = useState(false);
@@ -16,7 +16,7 @@ const Checkout = () => {
     const handleSearch = async () => {
         try {
             setShowLoader(true);
-            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/my-profile', { email });
+            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/my-profile', { phone });
             if (response.status === 200) {
                 setProfile(response.data);
                 console.log(response.data)
@@ -85,8 +85,8 @@ const Checkout = () => {
                 <div class="relative pt-8">
 
                     <div class="relative w-11/12 md:max-w-xl mx-auto bg-white rounded-full mt-4 mb-10">
-                        <input placeholder="Search by Email" class="rounded-full w-full h-16 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none focus:ring-teal-200 focus:border-teal-200" type="text" name="query" id="query" value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
+                        <input placeholder="Search by Phone" class="rounded-full w-full h-16 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none focus:ring-teal-200 focus:border-teal-200" type="text" name="query" id="query" value={phone}
+                            onChange={(e) => setPhone(e.target.value)} />
                         <button type="submit" onClick={handleSearch} class="absolute inline-flex items-center h-10 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-3 top-3 bg-teal-900 sm:px-6 sm:text-base sm:font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                             <svg class="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -112,7 +112,7 @@ const Checkout = () => {
                                         <div class="mt-8">
                                             <div class="flex items-center">
                                                 <h4 class="flex-shrink-0 pr-4 bg-white  text-sm tracking-wider font-semibold uppercase text-rose-600">
-                                                    {profile.email}</h4>
+                                                    {profile?.email}</h4>
                                                 <div class="flex-1 border-t-2 border-gray-200 "></div>
                                             </div>
                                             <ul role="list" class="mt-8 space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-5">
