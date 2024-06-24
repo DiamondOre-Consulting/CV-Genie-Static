@@ -36,13 +36,13 @@ function generateTransactionId() {
 
 router.post("/my-profile", async (req, res) => {
   try {
-    const { email } = req.body;
+    const { phone } = req.body;
 
-    const myProfile = await Client.findOne({ email });
+    const myProfile = await Client.findOne({ phone });
     if (!myProfile) {
       return res
         .status(404)
-        .json({ message: "No records found with this email id!!!" });
+        .json({ message: "No records found with this phone number!!!" });
     }
 
     res.status(200).json(myProfile);
