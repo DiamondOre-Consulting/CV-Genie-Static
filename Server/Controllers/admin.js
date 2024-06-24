@@ -91,7 +91,7 @@ router.post("/register", AdminAuthenticateToken, async (req, res) => {
   try {
     const { name, email, phone, amount } = req.body;
 
-    if (!name || !email || !phone || !amount) {
+    if (!name || !phone || !amount) {
       return res.status(403).json({ message: "Please fill all the fields!!!" });
     }
 
