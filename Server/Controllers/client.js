@@ -458,9 +458,12 @@ let students = [
    country: "USA"
 }];
 
-router.get("/generate-pdf", (req, res) => {
-  ejs.renderFile(path.join(__dirname, "sample.ejs"), {students: students}, (err, data) => {
+router.post("/generate-pdf", (req, res) => {
+  const userData = req.body;
+  console.log(userData);
+  ejs.renderFile(path.join(__dirname, "Resume.ejs"), {student: userData }, (err, data) => {
   if (err) {
+    console.log(err);
         res.send(err);
   } else {
       let options = {
@@ -473,12 +476,23 @@ router.get("/generate-pdf", (req, res) => {
               "height": "20mm",
           },
       };
-      pdf.create(data, options).toFile("report.pdf", function (err, data) {
-          if (err) {
-              res.send(err);
-          } else {
-              res.send("File created successfully");
-          }
+      // pdf.create(data, options).toFile("report.pdf", function (err, data) {
+      //     if (err) {
+      //       console.log(err);
+      //         res.send(err);
+      //     } else {
+      //         res.send("File created successfully");
+      //     }
+      // });
+      pdf.create(data, options).toStream((err, stream) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.setHeader('Content-disposition', 'attachment; filename=report.pdf');
+          res.setHeader('Content-type', 'application/pdf');
+          stream.pipe(res);
+        }
       });
   }
 });

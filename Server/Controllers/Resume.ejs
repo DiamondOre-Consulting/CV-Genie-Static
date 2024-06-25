@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Template</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .outer {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            /* padding: 20px; */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: rgb(216, 216, 216);
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+           
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        span{
+            line-height: 1.5;
+        }
+        .section1{
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="header">
+            <h1 class="name"><%= student.name %></h1>
+            <p class="address"><%= student.address %></p>
+            <p class='details'>+91 <%= student.phone %> | <%= student.email %> /p>
+         
+        </div>
+
+        <div class="section1">
+        <div class="section">
+            <h2>Summary</h2>
+            <hr></hr>
+            <p><%= student.summary %></p>
+        </div>
+
+        <div class="section">
+            <h2>Skill Heighlights</h2>
+            <hr>
+            <ul>
+                <li>Technical Skills</li> - <%= student.techSkills %>
+                <li>Soft Skills</li> - <%= student.softSkills %>
+            </ul>
+           
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <hr>
+            <p><%= student.designation %> - <%= student.experience.start_month %>-<%= student.experience.start_year %> to <%= student.experience.end_month %>-<%= student.experience.end_year %></p>
+            <p><%= student.experience.company %> , <%= student.experience.company_city %></p>
+            <p><%= student.experience.work_description %></p>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <hr>
+            <p><%= student.graduation.degree_name %> : <%= student.graduation.graduation_year %>  <%= student.graduation.university_name %> <%= student.graduation.university_city %> </p>
+           
+            <span> 12th: <%= student.twelfth.twelfth_year %> </span><br>
+            <span><%= student.twelfth.twelfth_school_name %> , <%= student.twelfth.twelfth_school_city %> , <%= student.twelfth.twelfth_board_name %></span>
+
+            <p>
+                <span> 10th: <%= student.tenth.tenth_year %> </span><br>
+                <span><%= student.tenth.tenth_school_name %> , <%= student.tenth.tenth_school_city %> , <%= student.tenth.tenth_board_name %></span>
+            </p>
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>
