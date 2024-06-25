@@ -3,18 +3,18 @@ import Navbar from '../Components/Commancomponents/Navbar'
 import Footer from '../Components/Commancomponents/Footer'
 import { Link } from 'react-router-dom'
 import freecv from '../assets/freecv.png'
+import axios from 'axios'
 
 const FreeCv = () => {
 
     const [showPopup, setShowPopup] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
-
     const [substep, setSubStep] = useState(1);
     const [url, setUrl] = useState(null);
     const [error, setError] = useState(null)
     const [formData, setFormData] = useState({
-        full_name: '',
+        name: '',
         email: '',
         phone: '',
         address: '',
@@ -22,9 +22,9 @@ const FreeCv = () => {
         summary: '',
         tech_skills: [],
         soft_skills: [],
-        graduation: { degree_name: '', degree_field: '', graduation_year: '', university_name: '', university_city: '' },
-        twelfth: { twelfth_field: '', twelfth_year: '', twelfth_school_name: '', twelfth_school_city: '', twelfth_board_name: '' },
-        tenth: { tenth_year: '', tenth_school_name: '', tenth_school_city: '', tenth_board_name: '', tenth_field: '' },
+        graduation: { degree_name: '', graduation_year: '', university_name: '', university_city: '' },
+        twelfth: {  twelfth_year: '', twelfth_school_name: '', twelfth_school_city: '', twelfth_board_name: '' },
+        tenth: { tenth_year: '', tenth_school_name: '', tenth_school_city: '', tenth_board_name: '' },
         experience: { designation: '', start_month: '', start_year: '', end_month: '', end_year: '', company: '', company_city: '', work_description: '' }
         // Add more fields for each step
     });
@@ -105,46 +105,39 @@ const FreeCv = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null)
-        if (!formData.full_name || !formData.email || !formData.phone || !formData.address || !formData.linkedinUrl || !formData.summary || !formData.tech_skills || !formData.soft_skills || !formData.experience || !formData.graduation || !formData.twelfth || !formData.tenth) {
-            console.log("please fill all the feilds")
-            setError("Filling all the feild are compulsory.")
-            return;
+        setError(null);
+      
+        if (!formData.name || !formData.email || !formData.phone || !formData.address || !formData.linkedinUrl || !formData.summary || !formData.tech_skills || !formData.soft_skills || !formData.experience || !formData.graduation || !formData.twelfth || !formData.tenth) {
+          setError("Filling all fields is compulsory.");
+          return;
         }
-        setUrl(null)
-        console.log(formData)
-        setIsLoading(false)
+      
         try {
-            const response = await axios.post("https://api.diamondore.in/api/candidates/free-resume"
-                , formData
-            )
-
-            if (response.status === 200) {
-                console.log(response.data)
-                setIsLoading(true)
-                const myurl = response.data
-                setUrl(myurl)
-                alert("form has been submitted click on dawnload button to dawunload your CV")
-                console.log('Form submitted:', formData);
-            }
-
+          const response = await axios.post("https://cv-genie-static-backend.onrender.com/api/client/generate-pdf", formData, {
+            responseType: 'arraybuffer' // Ensure response type is arraybuffer to handle binary data (like PDF)
+          });
+      
+          if (response.status === 200) {
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+      
+            // Open PDF in new tab/window
+            window.open(url, '_blank');
+      
+            // alert("Form has been submitted. Click on download button to download your CV.");
+            console.log('Form submitted:', formData);
+          }
+        } catch (error) {
+          console.error("Error in building resume", error);
+      
+          if (error.response) {
+            const status = error.response.status;
+            setError(`Error occurred in file submitting: ${status}`);
+          } else {
+            setError("Error occurred in file submitting.");
+          }
         }
-        catch (error) {
-            console.log("error in building resume", error)
-            if (error.response) {
-                const status = error.response.status;
-                if (status === 404) {
-                    setError("Error occured in file submitting");
-                } else {
-                    setError("Error occured in file submitting");
-                }
-            } else {
-                setError("Error occured in file submitting");
-            }
-        }
-        // Handle form submission, e.g., submit data to backend
-
-    };
+      };
 
     const nextSubStep = () => {
         setSubStep((prevSubStep) => prevSubStep + 1);
@@ -195,8 +188,8 @@ const FreeCv = () => {
                                     <h2 className='font-bold text-4xl '>Personal Details</h2>
                                     <input
                                         type="text"
-                                        name="full_name"
-                                        value={formData.full_name}
+                                        name="name"
+                                        value={formData.name}
                                         onChange={handleChange}
                                         placeholder="Full Name"
                                         className="border border-1 rounded-md px-3 py-2 mt-2 w-full"
@@ -277,19 +270,7 @@ const FreeCv = () => {
                                                                 )
                                                             }
                                                         />
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Enter Feild"
-                                                            className="border border-1 rounded-md px-3 py-2 mt-2 w-full"
-                                                            value={formData.graduation.degree_field}
-                                                            onChange={(e) =>
-                                                                handleInputChange(
-                                                                    "graduation",
-                                                                    "degree_field",
-                                                                    e.target.value
-                                                                )
-                                                            }
-                                                        />
+                                                     
                                                         <input
                                                             type="text"
                                                             placeholder="Graduation year"
@@ -339,19 +320,7 @@ const FreeCv = () => {
                                                         {/*  12th details */}
                                                         <h1>12th Details</h1>
 
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Twelfth Feild"
-                                                            className=" border border-1 rounded-md px-3 py-2 mt-2 w-full mb-2"
-                                                            value={formData.twelfth.twelfth_field}
-                                                            onChange={(e) =>
-                                                                handleInputChange(
-                                                                    "twelfth",
-                                                                    "twelfth_field",
-                                                                    e.target.value
-                                                                )
-                                                            }
-                                                        />
+                                                      
                                                         <input
                                                             type="text"
                                                             placeholder="Twelfth Year"
@@ -414,19 +383,7 @@ const FreeCv = () => {
                                                     <div>
                                                         <h1>10th Details</h1>
 
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Tenth Feild"
-                                                            className=" border border-1 rounded-md px-3 py-2 mt-2 w-full mb-2"
-                                                            value={formData.tenth.tenth_field}
-                                                            onChange={(e) =>
-                                                                handleInputChange(
-                                                                    "tenth",
-                                                                    "tenth_field",
-                                                                    e.target.value
-                                                                )
-                                                            }
-                                                        />
+                                                       
                                                         <input
                                                             type="text"
                                                             placeholder="Tenth Year"
@@ -710,14 +667,13 @@ const FreeCv = () => {
                                     </div>
             
                                         
-                                    {url ? (
-                                        <a href={url} className='bg-blue-800 hover:bg-teal-900 text-white uppercase px-4 py-2  flex justify-center mt-2 cursor-pointer w-full rounded-md'>Download Your Free CV</a>
-                                    ) : (
-                                        <button type="submit"
-                                            className="bg-teal-900 hover:bg-teal-800 text-white px-4 py-2 rounded-md mt-4 uppercase " style={{width:" 42vw"}}
+                                
+                                        <button type='submit' className='bg-teal-900 hover:bg-teal-900 text-white uppercase px-4 py-2  flex justify-center mt-2 cursor-pointer w-full rounded-md '>Download Your Free CV</button>
+                                   
+                                     
 
-                                        ><span> {isLoading ? 'Loading...' : 'Submit'}</span> </button>
-                                    )}
+                                     
+                                
 
                          
 

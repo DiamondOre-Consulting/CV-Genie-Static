@@ -14,7 +14,7 @@
         }
 
         .outer {
-            width: 50%;
+            width: 100%;
             margin: 0 auto;
             background-color: #fff;
             /* padding: 20px; */
@@ -70,7 +70,7 @@
         <div class="header">
             <h1 class="name"><%= student.name %></h1>
             <p class="address"><%= student.address %></p>
-            <p class='details'>+91 <%= student.phone %> | <%= student.email %> /p>
+            <p class='details'>+91 <%= student.phone %> | <%= student.email %> | <%= student.linkedinUrl %> </p>
          
         </div>
 
@@ -81,20 +81,36 @@
             <p><%= student.summary %></p>
         </div>
 
+       
         <div class="section">
-            <h2>Skill Heighlights</h2>
+            <h2>Skill Highlights</h2>
             <hr>
+            <h3>Technical Skills</h3>
             <ul>
-                <li>Technical Skills</li> - <%= student.techSkills %>
-                <li>Soft Skills</li> - <%= student.softSkills %>
+                <% if (student.tech_skills && Array.isArray(student.tech_skills)) { %>
+                    <% student.tech_skills.forEach(skill => { %>
+                        <li><%= skill %></li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No technical skills provided</li>
+                <% } %>
             </ul>
-           
+            <h3>Soft Skills</h3>
+            <ul>
+                <% if (student.soft_skills && Array.isArray(student.soft_skills)) { %>
+                    <% student.soft_skills.forEach(skill => { %>
+                        <li><%= skill %></li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No soft skills provided</li>
+                <% } %>
+            </ul>
         </div>
 
         <div class="section">
             <h2>Experience</h2>
             <hr>
-            <p><%= student.designation %> - <%= student.experience.start_month %>-<%= student.experience.start_year %> to <%= student.experience.end_month %>-<%= student.experience.end_year %></p>
+            <p><%= student.experience.designation %> - <%= student.experience.start_month %>-<%= student.experience.start_year %> to <%= student.experience.end_month %>-<%= student.experience.end_year %></p>
             <p><%= student.experience.company %> , <%= student.experience.company_city %></p>
             <p><%= student.experience.work_description %></p>
         </div>
