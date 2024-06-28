@@ -76,9 +76,7 @@ router.post("/login", async (req, res) => {
         username: user.userName,
       },
       secretKey,
-      {
-        expiresIn: "1h",
-      }
+     
     );
 
     return res.status(200).json({ token });
