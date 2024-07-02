@@ -364,41 +364,7 @@ router.post("/upload-product-image", async (req, res) => {
 // CREATE PORTFOLIO
 router.post("/create-portfolio", async (req, res) => {
   try {
-    // const file = req.files && req.files.myDocument; 
-
-    // // if (!file) {
-    // //   return res.status(400).send("No file uploaded");
-    // // }
-
-    // const uniqueIdentifier = uuidv4();
-
-    // const fileExtension = file.name.split(".").pop();
-
-    // const uniqueFileName = `${uniqueIdentifier}.${fileExtension}`;
-
-    // const base64Data = file.data.toString("base64");
-
-    // const fileBuffer = Buffer.from(base64Data, "base64");
-
-    // const uploadDataDoc = await s3ClientDocs.send(
-    //   new PutObjectCommand({
-    //     Bucket: "portfoliodocs",
-    //     Key: uniqueFileName, // Use the unique filename for the S3 object key
-    //     Body: fileBuffer, // Provide the file buffer as the Body
-    //   })
-    // );
-
-    // const getObjectCommandDoc = new GetObjectCommand({
-    //   Bucket: "portfoliodocs",
-    //   Key: uniqueFileName,
-    // });
-
-    // const signedUrlDoc = await getSignedUrl(s3ClientDocs, getObjectCommandDoc);
-
-    // // Parse the signed URL to extract the base URL
-    // const parsedUrlDoc = new URL(signedUrlDoc);
-    // const baseUrlDoc = `${parsedUrlDoc.protocol}//${parsedUrlDoc.hostname}${parsedUrlDoc.pathname}`;
-
+    const {portfolioId} = req.params;
     const {
       name,
       uniqueUserName,
@@ -430,6 +396,7 @@ router.post("/create-portfolio", async (req, res) => {
     // }
 
     const newPortfolio = new Portfolio({
+      portfolioId,
       name,
       uniqueUserName,
       email,
