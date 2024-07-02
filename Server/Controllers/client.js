@@ -165,30 +165,29 @@ const s3ClientFreeResumes = new S3Client({
 });
 
 // Read the template (assuming it's already in your project folder)
-const templatePath = path.resolve(__dirname, "SampleCV.docx");
-const template = fs.readFileSync(templatePath, "binary");
+// const templatePath = path.resolve(__dirname, "SampleCV.docx");
+// const template = fs.readFileSync(templatePath, "binary");
 // const template = fs.readFileSync('.../Server/Controllers/Template_Resume.docx');
 
 // Sample user input (replace with actual data)
-const sampleUserData = {
-  name: "John Doe",
-  email: "john@example.com",
-  // Add other fields as needed
-};
+// const sampleUserData = {
+//   name: "John Doe",
+//   email: "john@example.com",
+// };
 
 // Generate the filled Docx document
-async function generateDocx(userData) {
-  try {
-    const report = await createReport({
-      template,
-      data: userData,
-    });
-    return report;
-  } catch (error) {
-    console.error("Error generating Docx:", error);
-    throw error; // Rethrow the error
-  }
-}
+// async function generateDocx(userData) {
+//   try {
+//     const report = await createReport({
+//       template,
+//       data: userData,
+//     });
+//     return report;
+//   } catch (error) {
+//     console.error("Error generating Docx:", error);
+//     throw error; // Rethrow the error
+//   }
+// }
 
 // Generate the PDF from the filled Docx
 // function generatePdf(docxContent) {
@@ -196,132 +195,132 @@ async function generateDocx(userData) {
 // pdfStream.text('Hello, world!'); // Replace with actual content from docxContent
 // return pdfStream;
 // }
-async function generateAndSavePdf(docxContent) {
-  try {
-    const pdfStream = new PDFDocument();
-    pdfStream.text("Hello, world!"); // Replace with actual content from docxContent
+// async function generateAndSavePdf(docxContent) {
+//   try {
+//     const pdfStream = new PDFDocument();
+//     pdfStream.text("Hello, world!"); // Replace with actual content from docxContent
 
-    // Save the PDF to a file (e.g., output.pdf)
-    const outputPath = "./output.pdf";
-    pdfStream.pipe(fs.createWriteStream(outputPath));
+//     // Save the PDF to a file (e.g., output.pdf)
+//     const outputPath = "./output.pdf";
+//     pdfStream.pipe(fs.createWriteStream(outputPath));
 
-    return outputPath;
-  } catch (error) {
-    console.error("Error generating PDF:", error);
-    throw error; // Rethrow the error
-  }
-}
+//     return outputPath;
+//   } catch (error) {
+//     console.error("Error generating PDF:", error);
+//     throw error; // Rethrow the error
+//   }
+// }
 
-router.post("/free-resume", async (req, res) => {
-  try {
-    const { name, email } = req.body;
+// router.post("/free-resume", async (req, res) => {
+//   try {
+//     const { name, email } = req.body;
 
-    const templatePath = path.resolve(__dirname, "SampleCV.docx");
-    const content = fs.readFileSync(templatePath, "binary");
-    const zip = new PizZip(content);
-    const doc = new Docxtemplater(zip);
+//     const templatePath = path.resolve(__dirname, "SampleCV.docx");
+//     const content = fs.readFileSync(templatePath, "binary");
+//     const zip = new PizZip(content);
+//     const doc = new Docxtemplater(zip);
 
-    doc.render({
-      name,
-      email,
-    });
+//     doc.render({
+//       name,
+//       email,
+//     });
 
-    const buffer = doc
-      .getZip()
-      .generate({ type: "nodebuffer", compression: "DEFLATE" });
-    const outputPath = path.resolve(__dirname, `${name}_free_resume.docx`);
-    fs.writeFileSync(outputPath, buffer);
+//     const buffer = doc
+//       .getZip()
+//       .generate({ type: "nodebuffer", compression: "DEFLATE" });
+//     const outputPath = path.resolve(__dirname, `${name}_free_resume.docx`);
+//     fs.writeFileSync(outputPath, buffer);
 
-    // Convert DOCX to HTML
-    const html = await mammoth.convertToHtml({ path: outputPath });
+//     // Convert DOCX to HTML
+//     const html = await mammoth.convertToHtml({ path: outputPath });
 
-    // Convert HTML to PDF using Puppeteer
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.setContent(html.value);
-    const pdfBuffer = await page.pdf();
-    console.log(pdfBuffer);
-    await browser.close();
+//     // Convert HTML to PDF using Puppeteer
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+//     await page.setContent(html.value);
+//     const pdfBuffer = await page.pdf();
+//     console.log(pdfBuffer);
+//     await browser.close();
 
-    // Define the output path for the PDF
-    const pdfOutputPath = path.resolve(
-      __dirname,
-      `${full_name}_free_resume.pdf`
-    );
-    fs.writeFileSync(pdfOutputPath, pdfBuffer);
+//     // Define the output path for the PDF
+//     const pdfOutputPath = path.resolve(
+//       __dirname,
+//       `${full_name}_free_resume.pdf`
+//     );
+//     fs.writeFileSync(pdfOutputPath, pdfBuffer);
 
-    // Upload the generated PDF to S3
-    const uploadData = await s3ClientFreeResumes.send(
-      new PutObjectCommand({
-        Bucket: "freeresumesbuild",
-        Key: `${full_name}_free_resume.pdf`,
-        Body: fs.readFileSync(pdfOutputPath),
-      })
-    );
+//     // Upload the generated PDF to S3
+//     const uploadData = await s3ClientFreeResumes.send(
+//       new PutObjectCommand({
+//         Bucket: "freeresumesbuild",
+//         Key: `${full_name}_free_resume.pdf`,
+//         Body: fs.readFileSync(pdfOutputPath),
+//       })
+//     );
 
-    const getObjectCommand = new GetObjectCommand({
-      Bucket: "freeresumesbuild",
-      Key: `${full_name}_free_resume.pdf`,
-    });
+//     const getObjectCommand = new GetObjectCommand({
+//       Bucket: "freeresumesbuild",
+//       Key: `${full_name}_free_resume.pdf`,
+//     });
 
-    const signedUrl = await getSignedUrl(s3ClientFreeResumes, getObjectCommand);
-    const parsedUrl = new URL(signedUrl);
-    const baseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}${parsedUrl.pathname}`;
-    if (!baseUrl) {
-      return res.status(404).json({ message: "File not saved" });
-    }
+//     const signedUrl = await getSignedUrl(s3ClientFreeResumes, getObjectCommand);
+//     const parsedUrl = new URL(signedUrl);
+//     const baseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}${parsedUrl.pathname}`;
+//     if (!baseUrl) {
+//       return res.status(404).json({ message: "File not saved" });
+//     }
 
-    // const newFreeResume = new ResumeTemp({
-    //   full_name,
-    //   address,
-    //   phone,
-    //   email,
-    //   linkedinUrl,
-    //   summary,
-    //   tech_skills,
-    //   soft_skills,
-    //   experience: {
-    //     designation: experience.designation,
-    //     start_month: experience.start_month,
-    //     start_year: experience.start_year,
-    //     end_month: experience.end_month,
-    //     end_year: experience.end_year,
-    //     company: experience.company,
-    //     company_city: experience.company_city,
-    //     work_description: experience.work_description,
-    //   },
-    //   graduation: {
-    //     degree_name: graduation.degree_name,
-    //     degree_field: graduation.degree_field,
-    //     graduation_year: graduation.graduation_year,
-    //     university_name: graduation.university_name,
-    //     university_city: graduation.university_city,
-    //   },
-    //   twelfth: {
-    //     twelfth_field: twelfth.twelfth_field,
-    //     twelfth_year: twelfth.twelfth_year,
-    //     twelfth_school_name: twelfth.twelfth_school_name,
-    //     twelfth_school_city: twelfth.twelfth_school_city,
-    //     twelfth_board_name: twelfth.twelfth_board_name,
-    //   },
-    //   tenth: {
-    //     tenth_field: tenth.tenth_field,
-    //     tenth_year: tenth.tenth_year,
-    //     tenth_school_name: tenth.tenth_school_name,
-    //     tenth_school_city: tenth.tenth_school_city,
-    //     tenth_board_name: tenth.tenth_board_name,
-    //   },
-    //   resumeLink: baseUrl,
-    // });
+//     // const newFreeResume = new ResumeTemp({
+//     //   full_name,
+//     //   address,
+//     //   phone,
+//     //   email,
+//     //   linkedinUrl,
+//     //   summary,
+//     //   tech_skills,
+//     //   soft_skills,
+//     //   experience: {
+//     //     designation: experience.designation,
+//     //     start_month: experience.start_month,
+//     //     start_year: experience.start_year,
+//     //     end_month: experience.end_month,
+//     //     end_year: experience.end_year,
+//     //     company: experience.company,
+//     //     company_city: experience.company_city,
+//     //     work_description: experience.work_description,
+//     //   },
+//     //   graduation: {
+//     //     degree_name: graduation.degree_name,
+//     //     degree_field: graduation.degree_field,
+//     //     graduation_year: graduation.graduation_year,
+//     //     university_name: graduation.university_name,
+//     //     university_city: graduation.university_city,
+//     //   },
+//     //   twelfth: {
+//     //     twelfth_field: twelfth.twelfth_field,
+//     //     twelfth_year: twelfth.twelfth_year,
+//     //     twelfth_school_name: twelfth.twelfth_school_name,
+//     //     twelfth_school_city: twelfth.twelfth_school_city,
+//     //     twelfth_board_name: twelfth.twelfth_board_name,
+//     //   },
+//     //   tenth: {
+//     //     tenth_field: tenth.tenth_field,
+//     //     tenth_year: tenth.tenth_year,
+//     //     tenth_school_name: tenth.tenth_school_name,
+//     //     tenth_school_city: tenth.tenth_school_city,
+//     //     tenth_board_name: tenth.tenth_board_name,
+//     //   },
+//     //   resumeLink: baseUrl,
+//     // });
 
-    // await newFreeResume.save();
+//     // await newFreeResume.save();
 
-    res.status(200).send(html);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Something went wrong!!!" });
-  }
-});
+//     res.status(200).send(html);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Something went wrong!!!" });
+//   }
+// });
 
 // router.post("/generate-pdf", async (req, res) => {
 //   try {
