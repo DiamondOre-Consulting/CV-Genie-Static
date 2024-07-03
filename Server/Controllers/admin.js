@@ -364,8 +364,9 @@ router.post("/upload-product-image", async (req, res) => {
 // CREATE PORTFOLIO
 router.post("/create-portfolio", async (req, res) => {
   try {
-    const {portfolioId} = req.params;
+  
     const {
+      portfolioId,
       name,
       uniqueUserName,
       email,

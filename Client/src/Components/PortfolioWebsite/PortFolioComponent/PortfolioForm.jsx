@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../assets/template.png';
 import axios from 'axios';
 import AdminNavbar from '../../AdminComponent/AdminNavbar';
+import { useParams } from 'react-router-dom';
 
 const socialMediaIcons = {
     facebook: 'https://img.icons8.com/fluent/30/000000/facebook-new.png',
@@ -11,18 +12,72 @@ const socialMediaIcons = {
     instagram: 'https://img.icons8.com/fluent/30/000000/instagram-new.png',
 };
 
+
+
 const PortfolioForm = () => {
+    const { templateId } = useParams();
     const [popup, setPopUp] = useState(false)
     const [services, setServices] = useState([]);
     const [products, setProducts] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
-    const [backgroundColor, setBackgroundColor] = useState("#000000");
-    const [primaryTextColor, setPrimaryTextColor] = useState("#ced4da");
-    const [secondaryTextColor, setSecondaryTextColor] = useState("#dee2e6");
-    const [buttonBgColor, setButtonBgColor] = useState("#f97316");
+   
     const [profileImage, setProfileImage] = useState(null);
     const navigate = useNavigate();
     const [showLoader, setShowLoader] = useState(false);
+
+    // Function to get default colors based on condition
+    const getDefaultColors = () => {
+        if (templateId === '1') {
+            return {
+                backgroundColor: "#000000",
+                primaryTextColor: "#ced4da",
+                secondaryTextColor: "#dee2e6",
+                buttonBgColor: "#f97316",
+            };
+        } else if (templateId === '2') {
+            return {
+                backgroundColor: "#EDE9FE",
+                primaryTextColor: "#6B7280",
+                secondaryTextColor: "#F43F5E",
+                buttonBgColor: "#0891B2",
+            };
+        } else {
+            return {
+                backgroundColor: "#FF00FF",
+                primaryTextColor: "#FFFF00",
+                secondaryTextColor: "#FF0000",
+                buttonBgColor: "#0000FF",
+            };
+        }
+    };
+
+    // Initialize state with default colors
+    const {
+        backgroundColor: initialBgColor,
+        primaryTextColor: initialPrimaryTextColor,
+        secondaryTextColor: initialSecondaryTextColor,
+        buttonBgColor: initialButtonBgColor,
+    } = getDefaultColors();
+
+    const [backgroundColor, setBackgroundColor] = useState(initialBgColor);
+    const [primaryTextColor, setPrimaryTextColor] = useState(initialPrimaryTextColor);
+    const [secondaryTextColor, setSecondaryTextColor] = useState(initialSecondaryTextColor);
+    const [buttonBgColor, setButtonBgColor] = useState(initialButtonBgColor);
+
+    const getTemplateDetails = (id) => {
+        switch(id) {
+            case '1':
+                return "Template 1 Details";
+            case '2':
+                return "Template 2 Details";
+            case '3':
+                return "Template 3 Details";
+            default:
+                return "Unknown Template";
+        }
+    }
+
+    
     const handleProfileImageUpload = async (file) => {
         try {
             const formData = new FormData();
@@ -64,7 +119,8 @@ const PortfolioForm = () => {
     const handleSubmit = async (e) => {
         setShowLoader(true);
         e.preventDefault();
-        const formData = new FormData(e.target);
+      
+        const formData = new FormData(e.target);  
         let profileImageUrl = null;
         if (profileImage) {
             profileImageUrl = await handleProfileImageUpload(profileImage);
@@ -102,6 +158,7 @@ const PortfolioForm = () => {
             primaryTextColor: primaryTextColor,
             secondaryTextColor: secondaryTextColor,
             buttonColor: buttonBgColor,
+            portfolioId: templateId,
         };
 
         try {
@@ -109,6 +166,10 @@ const PortfolioForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                    ...formData,
+                    templateId: templateId, // Include templateId in form data
+                  }),
             });
             const data = response.data;
             const productsData = data.products.map(product => ({
@@ -119,7 +180,8 @@ const PortfolioForm = () => {
             }));
             // Do something with the response data if needed
             // navigate('web-preview'); // Navigate to web preview page
-            console.log('portfolio created sucessufully')
+            console.log('portfolio created sucessufully') 
+        
             setPopUp(true)
             setShowLoader(false);
         } catch (error) {
@@ -204,6 +266,7 @@ const PortfolioForm = () => {
                 <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3">
                     <div className="flex items-start justify-between p-5 border-b rounded-t">
                         <h3 className="text-xl font-semibold">Portfolio Website Form</h3>
+                        <h1 className='text-2xl text-center font-bold py-4'>Create Portfolio for {getTemplateDetails(templateId)}</h1>
                     </div>
                     <div className="p-6 space-y-6">
                         <form onSubmit={handleSubmit}>
