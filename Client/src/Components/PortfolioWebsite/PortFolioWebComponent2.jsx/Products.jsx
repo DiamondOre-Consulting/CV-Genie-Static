@@ -39,9 +39,9 @@ const Products = ({ portfolioData }) => {
     return (
         <>
             {shouldRender && (
-                <div className=" dark:bg-gray-900 text-gray-800 dark:text-white" id='products'>
+                <div className="  text-gray-800 " id='products'>
                     <div className="container mx-auto px-4 py-8">
-                        <h2 className="text-5xl md:text-6xl font-bold text-left text-gray-800 dark:text-gray-200 mb-20 px-4">
+                        <h2 className="text-5xl md:text-6xl font-bold text-left text-gray-800  mb-20 px-4">
                             Our Products
                         </h2>
                         
@@ -50,7 +50,7 @@ const Products = ({ portfolioData }) => {
                                 <div
                                     key={index}
                                     ref={(el) => (productsRef.current[index] = el)}
-                                    className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden"
+                                    className="bg-white  shadow-lg rounded-lg overflow-hidden"
                                 >
                                     <img
                                         src={product.productImage}
@@ -61,7 +61,7 @@ const Products = ({ portfolioData }) => {
                                         <h3 className="text-xl font-semibold  mb-2" style={{ color: portfolioData.secondaryTextColor }}>
                                             {product.productName}
                                         </h3>
-                                        <p className=" dark:text-gray-300 mb-2 two-lines" style={{ color: portfolioData.primaryTextColor }}>
+                                        <p className="  mb-2 two-lines" style={{ color: portfolioData.primaryTextColor }}>
                                             {product.productDescription}
                                         </p>
                                     </div>

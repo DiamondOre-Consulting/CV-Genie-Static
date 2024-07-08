@@ -40,7 +40,7 @@ const Nav = ({ portfolioData }) => {
                 <a href="#" className="flex items-center">
                     <div className='w-6 h-6  rounded-full' style={{ backgroundColor: buttonColor }}></div>
                     <div className='w-5 h-5  rounded-full -ml-2 z-10' style={{ backgroundColor: secondaryTextColor }}></div>
-                    <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white " style={{color: buttonColor}}>{name}</span>
+                    <span className="self-center text-xl font-semibold whitespace-nowrap  " style={{color: buttonColor}}>{name}</span>
                 </a>
                 <div className="flex items-center lg:order-2">
                     <div className="hidden mt-2 mr-4 sm:inline-block">
@@ -51,7 +51,7 @@ const Nav = ({ portfolioData }) => {
                         Let's Talk
                     </a>
                     <button onClick={toggleMobileMenu} type="button"
-                        className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   dark:focus:ring-gray-600"
                         aria-controls="mobile-menu-2" aria-expanded={showMobileMenu}>
                         <span className="sr-only">Open main menu</span>
                         <svg className={`w-6 h-6 ${showMobileMenu ? 'hidden' : ''}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -67,27 +67,27 @@ const Nav = ({ portfolioData }) => {
                     </button>
                 </div>
                 <div className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${showMobileMenu ? 'block' : 'hidden'}`} id="mobile-menu-2">
-                    <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    <ul className="flex text-center flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
                             <a href="/"
-                                className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-cyan-600 lg:p-0 dark:text-white"
+                                className="block py-2 pl-3 pr-4 text-white  rounded lg:bg-transparent lg:text-cyan-600 lg:p-0 " style={{color: buttonColor}}
                                 aria-current="page">Home</a>
                         </li>
                         <li>
                             <a href="#aboutme"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-600 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About me</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About me</a>
                         </li>
                         <li>
                             <a href="#products"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-600 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
                         </li>
                         <li>
                             <a href="#service"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-600 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Services</a>
                         </li>
                         <li>
                             <a href="#contact"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-600 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Get In Touch</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Get In Touch</a>
                         </li>
                     </ul>
                 </div>

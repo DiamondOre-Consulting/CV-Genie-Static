@@ -104,49 +104,49 @@ const PortfolioForm = () => {
             const formData = new FormData();
             formData.append('myProductImage', file);
             const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/admin/upload-product-image', formData);
-
+    
             if (!response.data) {
                 throw new Error('Error uploading product image');
             }
-
-            return response.data;
+    
+            return response.data; // Return the URL of the uploaded image
         } catch (error) {
             console.error('Error uploading product image:', error);
             return null;
         }
     };
+    
 
     const handleSubmit = async (e) => {
         setShowLoader(true);
         e.preventDefault();
-      
-        const formData = new FormData(e.target);  
+    
+        const formData = new FormData(e.target);
         let profileImageUrl = null;
         if (profileImage) {
             profileImageUrl = await handleProfileImageUpload(profileImage);
         }
-        const updatedProducts = await Promise.all(
-            products.map(async (product) => {
-                let productImageUrl = null;
-                if (product.image) {
-                    productImageUrl = await handleProductImageUpload(product.image);
-                }
-                return {
-                    productName: product.heading,
-                    productDescription: product.description,
-                    productImage: productImageUrl,
-                };
-            })
-        );
-
+    
+        const updatedProducts = await Promise.all(products.map(async (product) => {
+            let productImageUrl = product.image;
+            if (product.image && product.image instanceof File) {
+                productImageUrl = await handleProductImageUpload(product.image);
+            }
+            return {
+                productName: product.productName,
+                productDescription: product.productDescription,
+                productImage: productImageUrl
+            };
+        }));
+    
         const payload = {
             name: formData.get('full-name'),
             uniqueUserName: formData.get('userName'),
             tagline: formData.get('tagline'),
             aboutMe: formData.get('aboutme'),
-            profileImage: profileImageUrl, 
+            profileImage: profileImageUrl,
             services: services,
-            products: updatedProducts,
+            products: updatedProducts, // Ensure products array contains productName, productDescription, and productImage
             email: formData.get('email'),
             phone: formData.get('phone'),
             address: formData.get('address'),
@@ -160,35 +160,26 @@ const PortfolioForm = () => {
             buttonColor: buttonBgColor,
             portfolioId: templateId,
         };
-
+    
         try {
             const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/admin/create-portfolio', payload, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ...formData,
-                    templateId: templateId, // Include templateId in form data
-                  }),
             });
-            const data = response.data;
-            const productsData = data.products.map(product => ({
-                _id: product._id,
-                image: product.image,
-                heading: product.heading,
-                description: product.description,
-            }));
-            // Do something with the response data if needed
-            // navigate('web-preview'); // Navigate to web preview page
-            console.log('portfolio created sucessufully') 
-        
-            setPopUp(true)
+    
+            console.log('portfolio created successfully', response.data);
+    
+            setPopUp(true);
             setShowLoader(false);
         } catch (error) {
             console.error('Error:', error);
             setShowLoader(false);
         }
     };
+    
+
+    
 
     const handleBackgroundColorChange = (e) => {
         setBackgroundColor(e.target.value);
@@ -235,9 +226,13 @@ const PortfolioForm = () => {
 
     const handleProductChange = (index, field, value) => {
         const updatedProducts = [...products];
-        updatedProducts[index][field] = value;
+        updatedProducts[index] = {
+            ...updatedProducts[index],
+            [field]: value
+        };
         setProducts(updatedProducts);
     };
+    
 
     const handleProductImageChange = (index, e) => {
         const file = e.target.files[0];
@@ -334,45 +329,47 @@ const PortfolioForm = () => {
                                 </div>
 
                                 <div className="col-span-full">
-                                    <h4 className="text-lg font-medium text-gray-900 block mb-2">Products</h4>
-                                    {products.map((product, index) => (
-                                        <div key={index} className="space-y-4 mb-4">
-                                            <input
-                                                type="text"
-                                                value={product.heading}
-                                                onChange={(e) => handleProductChange(index, 'heading', e.target.value)}
-                                                placeholder="Product Heading"
-                                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            />
-                                            <textarea
-                                                value={product.description}
-                                                onChange={(e) => handleProductChange(index, 'description', e.target.value)}
-                                                rows="4"
-                                                placeholder="Product Description"
-                                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-                                            ></textarea>
-                                            <input
-                                                type="file"
-                                                onChange={(e) => handleProductImageChange(index, e)}
-                                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => removeProduct(index)}
-                                                className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                            >
-                                                Remove Product
-                                            </button>
-                                        </div>
-                                    ))}
-                                    <button
-                                        type="button"
-                                        onClick={addProduct}
-                                        className="text-white bg-teal-900 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    >
-                                        Add Product
-                                    </button>
-                                </div>
+    <h4 className="text-lg font-medium text-gray-900 block mb-2">Products</h4>
+    {products.map((product, index) => (
+        <div key={index} className="space-y-4 mb-4">
+            <input
+                type="text"
+                value={product.productName || ''}
+                onChange={(e) => handleProductChange(index, 'productName', e.target.value)}
+                placeholder="Product Name"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+            />
+            <textarea
+                value={product.productDescription || ''}
+                onChange={(e) => handleProductChange(index, 'productDescription', e.target.value)}
+                rows="4"
+                placeholder="Product Description"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+            ></textarea>
+            <input
+                type="file"
+                onChange={(e) => handleProductImageChange(index, e)}
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+            />
+            <button
+                type="button"
+                onClick={() => removeProduct(index)}
+                className="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+                Remove Product
+            </button>
+        </div>
+    ))}
+    <button
+        type="button"
+        onClick={addProduct}
+        className="text-white bg-teal-900 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+    >
+        Add Product
+    </button>
+</div>
+
+
 
                                 {/*                                 
                                 <div className="col-span-full">

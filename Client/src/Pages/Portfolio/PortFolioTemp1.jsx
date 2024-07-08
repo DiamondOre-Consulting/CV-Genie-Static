@@ -1,5 +1,4 @@
-import React from 'react';
-import PortfolioNav from '../../Components/PortfolioWebsite/PortFolioComponent/PortfolioNav';
+import React, { useEffect, useState } from 'react';
 import WebNav from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/WebNav';
 import WebHero from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/WebHero';
 import Aboutme from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/Aboutme';
@@ -9,9 +8,39 @@ import WebFooter from '../../Components/PortfolioWebsite/PortFolioWebComponent.j
 import WebAttachment from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/WebAttachment';
 import WebProducts from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/WebProducts';
 
-const PortFolioTemp1 = ({ portfolioData, backgroundColor }) => {
+const PortFolioTemp1 = ({ uniqueUserName }) => {
+  const [portfolioData, setPortfolioData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPortfolioData = async () => {
+      try {
+        const response = await fetch(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setPortfolioData(data);
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPortfolioData();
+  }, [uniqueUserName]);
+
+  if (loading) return <div className='flex justify-center items-center h-screen text-center text-2xl'>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  const backgroundColor = portfolioData.bgColor || '#000000';
+
   return (
-    <div className='overflow-x-hidden' style={{ backgroundColor }}>
+    <div style={{ backgroundColor }}>
       <WebNav portfolioData={portfolioData} />
       <WebHero portfolioData={portfolioData} />
       <Aboutme portfolioData={portfolioData} />
