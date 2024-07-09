@@ -432,6 +432,94 @@ router.post("/create-portfolio", async (req, res) => {
   }
 });
 
+// EDIT PORTFOLIO
+router.put("/edit-portfolio/:uniqueUserName", AdminAuthenticateToken, async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      phone,
+      tagline,
+      aboutMe,
+      profileImage,
+      services,
+      products,
+      address,
+      facebook,
+      twitter,
+      linkedin,
+      instagram
+    } = req.body;
+      const {uniqueUserName} = req.params;
+
+      const findPortfolio = await Portfolio.findOne({uniqueUserName});
+      if(!findPortfolio) {
+        return res.status(402).json({message: "No portfolio found with this username!!!"});
+      }
+
+      if(name) {
+        findPortfolio.name = name
+        await findPortfolio.save();
+      }
+
+      if(email) {
+        findPortfolio.email = email;
+        await findPortfolio.save();
+      }
+
+      if(phone) {
+        findPortfolio.phone = phone;
+        await findPortfolio.save();
+      }
+
+      if(tagline) {
+        findPortfolio.tagline = tagline;
+        await findPortfolio.save();
+      }
+      if(aboutMe) {
+        findPortfolio.aboutMe = aboutMe;
+        await findPortfolio.save();
+      }
+      if(profileImage) {
+        findPortfolio.profileImage = profileImage;
+        await findPortfolio.save();
+      }
+      if(services) {
+        findPortfolio.services = services;
+        await findPortfolio.save();
+      }
+      if(products) {
+        findPortfolio.products = products;
+        await findPortfolio.save();
+      }
+      if(address) {
+        findPortfolio.address = address;
+        await findPortfolio.save();
+      }
+      if(facebook) {
+        findPortfolio.facebook = facebook;
+        await findPortfolio.save();
+      }
+      if(twitter) {
+        findPortfolio.twitter = twitter;
+        await findPortfolio.save();
+      }
+      if(linkedin) {
+        findPortfolio.linkedin = linkedin;
+        await findPortfolio.save();
+      }
+      if(instagram) {
+        findPortfolio.instagram = instagram;
+        await findPortfolio.save();
+      }
+
+      res.status(200).json({message: "Portfolio updated successfully!!!"});
+  } catch(error) {
+    console.log(error.message);
+    res.status(500).json({message: "Something went wrong!!!", error});
+  }
+})
+
 // GET PORTFOLIO
 router.get("/portfolio/:uniqueUserName", async (req, res) => {
   try{
