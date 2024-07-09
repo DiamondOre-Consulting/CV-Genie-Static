@@ -6,6 +6,8 @@ import Services from '../../Components/PortfolioWebsite/PortFolioWebComponent2.j
 import Products from '../../Components/PortfolioWebsite/PortFolioWebComponent2.jsx/Products';
 import ContactUs from '../../Components/PortfolioWebsite/PortFolioWebComponent2.jsx/ContactUs';
 import Footer from '../../Components/PortfolioWebsite/PortFolioWebComponent2.jsx/Footer';
+import axios from 'axios';
+import portfolioerrorpage from '..//../assets/portfolioErrorPage.svg'
 
 const PortFolioTemp2 = ({ uniqueUserName }) => {
   const [portfolioData, setPortfolioData] = useState(null);
@@ -15,13 +17,14 @@ const PortFolioTemp2 = ({ uniqueUserName }) => {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await fetch(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`);
-        const data = await response.json();
+        const response = await axios.get(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`)
+        
 
-        if (response.ok) {
+        if (response.status === 200 ) {
+          const data = response.data
           setPortfolioData(data);
         } else {
-          setError(data.message);
+          setError(response.message);
         }
       } catch (error) {
         setError(error.message);
@@ -34,7 +37,7 @@ const PortFolioTemp2 = ({ uniqueUserName }) => {
   }, [uniqueUserName]);
 
   if (loading) return <div className='flex justify-center items-center h-screen text-center text-2xl'>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div><img src={portfolioerrorpage} alt="" /> </div>;
 
   const backgroundColor = portfolioData.bgColor || '#000000';
 
