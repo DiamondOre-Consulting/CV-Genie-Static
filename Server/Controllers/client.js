@@ -457,44 +457,83 @@ let students = [
    country: "USA"
 }];
 
-router.post("/generate-pdf", (req, res) => {
+// router.post("/generate-pdf", (req, res) => {
+//   const userData = req.body;
+//   console.log(userData);
+//   ejs.renderFile(path.join(__dirname, "Resume.ejs"), {student: userData }, (err, data) => {
+//   if (err) {
+//     console.log(err);
+//         res.send(err);
+//   } else {
+//       let options = {
+//           "height": "11.25in",
+//           "width": "8.5in",
+//           "header": {
+//               "height": "20mm"
+//           },
+//           "footer": {
+//               "height": "20mm",
+//           },
+//       };
+//       // pdf.create(data, options).toFile("report.pdf", function (err, data) {
+//       //     if (err) {
+//       //       console.log(err);
+//       //         res.send(err);
+//       //     } else {
+//       //         res.send("File created successfully");
+//       //     }
+//       // });
+//       pdf.create(data, options).toStream((err, stream) => {
+//         if (err) {
+//           console.log(err);
+//           res.status(500).send(err);
+//         } else {
+//           res.setHeader('Content-disposition', 'attachment; filename=report.pdf');
+//           res.setHeader('Content-type', 'application/pdf');
+//           stream.pipe(res);
+//         }
+//       });
+//   }
+// });
+// })
+
+router.post("/generate-pdf", async (req, res) => {
   const userData = req.body;
-  console.log(userData);
-  ejs.renderFile(path.join(__dirname, "Resume.ejs"), {student: userData }, (err, data) => {
-  if (err) {
-    console.log(err);
-        res.send(err);
-  } else {
-      let options = {
-          "height": "11.25in",
-          "width": "8.5in",
-          "header": {
-              "height": "20mm"
-          },
-          "footer": {
-              "height": "20mm",
-          },
-      };
-      // pdf.create(data, options).toFile("report.pdf", function (err, data) {
-      //     if (err) {
-      //       console.log(err);
-      //         res.send(err);
-      //     } else {
-      //         res.send("File created successfully");
-      //     }
-      // });
-      pdf.create(data, options).toStream((err, stream) => {
-        if (err) {
-          console.log(err);
-          res.status(500).send(err);
-        } else {
-          res.setHeader('Content-disposition', 'attachment; filename=report.pdf');
-          res.setHeader('Content-type', 'application/pdf');
-          stream.pipe(res);
-        }
+  console.log("User data:", userData);
+
+  const filePath = path.join(__dirname, "Resume.ejs");
+  console.log("File path:", filePath);
+
+  ejs.renderFile(filePath, { student: userData }, async (err, data) => {
+    if (err) {
+      console.error("EJS render error:", err);
+      return res.status(500).send(err);
+    }
+
+    try {
+      const browser = await puppeteer.launch({
+        headless: false, // Set to true when not debugging
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
-  }
+      const page = await browser.newPage();
+      await page.setContent(data, { waitUntil: 'networkidle0', timeout: 60000 });
+
+      const pdfBuffer = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+        margin: { top: '20mm', bottom: '20mm' },
+      });
+
+      await browser.close();
+
+      res.setHeader('Content-disposition', 'attachment; filename=report.pdf');
+      res.setHeader('Content-type', 'application/pdf');
+      res.send(pdfBuffer);
+    } catch (err) {
+      console.error("Puppeteer error:", err);
+      res.status(500).send(err);
+    }
+  });
 });
-})
 
 export default router;
