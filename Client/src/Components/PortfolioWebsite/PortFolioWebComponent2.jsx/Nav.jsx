@@ -51,7 +51,7 @@ const Nav = ({ portfolioData }) => {
                         Let's Talk
                     </a>
                     <button onClick={toggleMobileMenu} type="button"
-                        className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   dark:focus:ring-gray-600"
+                        className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
                         aria-controls="mobile-menu-2" aria-expanded={showMobileMenu}>
                         <span className="sr-only">Open main menu</span>
                         <svg className={`w-6 h-6 ${showMobileMenu ? 'hidden' : ''}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -75,19 +75,19 @@ const Nav = ({ portfolioData }) => {
                         </li>
                         <li>
                             <a href="#aboutme"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About me</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:    ">About me</a>
                         </li>
                         <li>
                             <a href="#products"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:    ">Products</a>
                         </li>
                         <li>
                             <a href="#service"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:    ">Services</a>
                         </li>
                         <li>
                             <a href="#contact"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:dark:hover:text-white  dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Get In Touch</a>
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0  lg:p-0  lg:    ">Get In Touch</a>
                         </li>
                     </ul>
                 </div>
