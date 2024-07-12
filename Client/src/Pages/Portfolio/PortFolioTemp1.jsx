@@ -24,11 +24,14 @@ const PortFolioTemp1 = ({ uniqueUserName }) => {
         if (response.status === 200 ) {
           const data = response.data
           setPortfolioData(data);
+          setLoading(false);
         } else {
           setError(response.message);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
+        setLoading(false);
       } finally {
         setLoading(false);
       }
