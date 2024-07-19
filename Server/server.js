@@ -13,7 +13,7 @@ app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = 7001;
+const PORT = 7002;
 
 mongoose
   .connect(process.env.MONGO_URI)
