@@ -9,7 +9,12 @@ import WebAttachment from '../../Components/PortfolioWebsite/PortFolioWebCompone
 import WebProducts from '../../Components/PortfolioWebsite/PortFolioWebComponent.jsx/WebProducts';
 import axios from 'axios';
 import portfolioerrorpage from '..//../assets/portfolioErrorPage.svg'
-
+import vedio1 from './/..//..//assets/1.mp4'
+import vedio2 from './..//../assets/2.mp4';
+import vedio3 from './..//../assets/3.mp4';
+import vedio4 from './..//../assets/4.mp4';
+import vedio5 from './..//../assets/5.mp4';
+ 
 const PortFolioTemp1 = ({ uniqueUserName }) => {
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,9 +24,9 @@ const PortFolioTemp1 = ({ uniqueUserName }) => {
     const fetchPortfolioData = async () => {
       try {
         const response = await axios.get(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`)
-        
 
-        if (response.status === 200 ) {
+
+        if (response.status === 200) {
           const data = response.data
           setPortfolioData(data);
           setLoading(false);
@@ -41,7 +46,15 @@ const PortFolioTemp1 = ({ uniqueUserName }) => {
   }, [uniqueUserName]);
 
   if (loading) return <div className='flex justify-center items-center h-screen text-center text-2xl'>Loading...</div>;
-  if (error) return <div><img src={portfolioerrorpage} alt="" /> </div>;
+  if (error) return <div>
+    {/* <img src={portfolioerrorpage} alt="" /> */}
+    <video src={vedio1} className="w-full" autoPlay muted loop></video>
+    <video src={vedio2} className="w-full" autoPlay muted loop></video>
+    <video src={vedio3} className="w-full" autoPlay muted loop></video>
+    <video src={vedio4} className="w-full" autoPlay muted loop></video>
+    <video src={vedio5} className="w-full" autoPlay muted loop></video>
+
+  </div>;
 
   const backgroundColor = portfolioData.bgColor || '#000000';
 
