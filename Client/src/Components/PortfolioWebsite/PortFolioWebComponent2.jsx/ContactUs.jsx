@@ -2,9 +2,37 @@ import React from 'react';
 
 const ContactUs = ({ portfolioData }) => {
 
+    const name = portfolioData.name;
+    const email = portfolioData.email;
+    const phone = portfolioData.phone;
+
     const primaryTextColor = portfolioData.primaryTextColor;
     const buttonBgColor = portfolioData.buttonColor;
     const secondaryTextColor = portfolioData.secondaryTextColor
+
+    const generateVCard = (name, email, phone) => {
+        console.log(name, email, phone);
+        return `
+BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+EMAIL;TYPE=INTERNET:${email}
+TEL;TYPE=CELL:${phone}
+END:VCARD
+        `;
+      };
+
+    const downloadVCard = (name, email, phone) => {
+        console.log(name, email, phone);
+        const vCardContent = generateVCard(name, email, phone).trim();
+        const blob = new Blob([vCardContent], { type: 'text/vcard' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${name}.vcf`;
+        a.click();
+        URL.revokeObjectURL(url);
+      };
 
     return (
         <div className=" mt-10 md:mt-20 px-4" id='contact'>
@@ -91,6 +119,17 @@ const ContactUs = ({ portfolioData }) => {
 
                     </dl>
                 </div>
+
+                <div className="lg:text-center">
+
+                    <button onClick={() => downloadVCard(name, email, phone)} className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl bg-blue-400 px-12 py-2 rounded-full hover:bg-blue-600 hover:text-gray-100 transition duration-300">
+                        Download VCF
+                    </button>
+                    {/* <p className="mt-4 max-w-2xl text-xl  lg:mx-auto" style={{ color: primaryTextColor }}>
+                        Want to contact us? Choose an option below and we'll be happy to show you how we can transform your company's web experience.
+                    </p> */}
+                </div>
+
             </div>
         </div>
     );
