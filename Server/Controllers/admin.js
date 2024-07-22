@@ -432,6 +432,21 @@ router.post("/create-portfolio", async (req, res) => {
   }
 });
 
+// GET ALL PORTFOLIOS
+router.get("/all-portfolios", AdminAuthenticateToken, async (req, res) => {
+  try {
+    const allPortfolios = await Portfolio.find();
+    if(allPortfolios.length === 0) {
+      return res.status(402).json({message: "No portfolio found!!!"});
+    }
+
+    res.status(200).json(allPortfolios);
+  } catch(error) {
+    console.log(error.message);
+    res.status(500).json({message: "Something went wrong!!!", error});
+  }
+})
+
 // EDIT PORTFOLIO
 router.put("/edit-portfolio/:uniqueUserName", AdminAuthenticateToken, async (req, res) => {
   try {
