@@ -216,8 +216,8 @@ const AdminForm = () => {
     return (
         <div>
             <AdminNavbar />
-            <Link to='/admin/portfolio-form' className='mt-4 bg-teal-900 text-white rounded-md float-right mx-10 py-4 px-4'>Create Portfolio</Link>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-28 md:mt-40 mb-20 px-8 md:px-20'>
+            {/* <Link to='/admin/portfolio-form' className='mt-4 bg-teal-900 text-white rounded-md float-right mx-10 py-4 px-4'>Create Portfolio</Link> */}
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-10 md:mt-10 mb-20 px-8 md:px-20'>
                 <div>
                     <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-lg">
                         <h1 className="text-2xl font-bold text-center mb-4">Add Details</h1>

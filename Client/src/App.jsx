@@ -13,6 +13,8 @@ import PortfolioForm from './Components/PortfolioWebsite/PortFolioComponent/Port
 import PortfolioTemplates from './Pages/Portfolio/PortfolioTemplates';
 import MainPortfolio from './Pages/Portfolio/MainPortfolio';
 import Facebook from './tracking/Facebook';
+import AllPortfolio from './Pages/Portfolio/AllPortfolio';
+import EditPortfolio from './Pages/Portfolio/EditPortfolio';
 
 function App() {
   return (
@@ -30,7 +32,9 @@ function App() {
         <Route path='/return-and-refund' element={<ReturnAndRefund />} />
         <Route path='/admin/portfolio-form/:templateId' element={<PortfolioForm />} />
         <Route path='/admin/portfolio-templates' element={<PortfolioTemplates />} />
+        <Route path='/admin/all-portfolio' element={<AllPortfolio/>}/>
         <Route path='/portfolio/:portfolioId/:uniqueUserName' element={<MainPortfolio />} />
+        <Route path='/edit-portfolio/:uniqueUserName' element={<EditPortfolio/>}/>
       </Routes>
     </BrowserRouter>
   );

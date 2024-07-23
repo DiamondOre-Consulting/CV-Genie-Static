@@ -257,8 +257,8 @@ const PortfolioForm = () => {
     return (
         <>
            <AdminNavbar/>
-            <div className="grid md:grid-cols-4 grid-cols-1">
-                <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3">
+            <div className="grid md:grid-cols-4 grid-cols-1 ">
+                <div className="bg-white border rounded-lg shadow relative m-4 md:m-10 col-span-4 md:col-span-3 mx-auto">
                     <div className="flex items-start justify-between p-5 border-b rounded-t">
                         <h3 className="text-xl font-semibold">Portfolio Website Form</h3>
                         <h1 className='text-2xl text-center font-bold py-4'>Create Portfolio for {getTemplateDetails(templateId)}</h1>
@@ -474,9 +474,9 @@ const PortfolioForm = () => {
                         </form>
                     </div>
                 </div>
-                <div className="mt-10 ml-10 md:ml-0 mr-10">
+                {/* <div className="mt-10 ml-10 md:ml-0 mr-10">
                     <img src={img} alt="Portfolio" />
-                </div>
+                </div> */}
             </div>
 
             {popup && (

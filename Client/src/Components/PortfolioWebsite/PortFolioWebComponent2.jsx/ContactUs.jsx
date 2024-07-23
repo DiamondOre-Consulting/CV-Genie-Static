@@ -20,7 +20,7 @@ EMAIL;TYPE=INTERNET:${email}
 TEL;TYPE=CELL:${phone}
 END:VCARD
         `;
-      };
+    };
 
     const downloadVCard = (name, email, phone) => {
         console.log(name, email, phone);
@@ -32,7 +32,7 @@ END:VCARD
         a.download = `${name}.vcf`;
         a.click();
         URL.revokeObjectURL(url);
-      };
+    };
 
     return (
         <div className=" mt-10 md:mt-20 px-4" id='contact'>
@@ -60,15 +60,15 @@ END:VCARD
                                 </div>
                             </div>
                             {portfolioData.contact?.address && (
-                                    <div class="ml-4">
-                                        <dt class="text-lg leading-6 font-medium " style={{ color: primaryTextColor }}>
-                                            Address
-                                        </dt>
-                                        <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
-                                            {portfolioData.contact.address}
-                                        </dd>
-                                    </div>
-                                )}
+                                <div class="ml-4">
+                                    <dt class="text-lg leading-6 font-medium " style={{ color: primaryTextColor }}>
+                                        Address
+                                    </dt>
+                                    <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
+                                        {portfolioData.contact.address}
+                                    </dd>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex">
@@ -82,15 +82,15 @@ END:VCARD
                                 </div>
                             </div>
                             {portfolioData?.phone && (
-                                    <div class="ml-4">
-                                        <dt class="text-lg leading-6 font-medium " style={{ color: primaryTextColor }}>
-                                            Phone number
-                                        </dt>
-                                        <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
-                                            <a href={`tel:+91${portfolioData.phone}`}>{portfolioData.phone}</a>
-                                        </dd>
-                                    </div>
-                                )}
+                                <div class="ml-4">
+                                    <dt class="text-lg leading-6 font-medium " style={{ color: primaryTextColor }}>
+                                        Phone number
+                                    </dt>
+                                    <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
+                                        <a href={`tel:+91${portfolioData.phone}`}>{portfolioData.phone}</a>
+                                    </dd>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex">
@@ -105,15 +105,15 @@ END:VCARD
                                 </div>
                             </div>
                             {portfolioData?.email && (
-                                    <div class="ml-4">
-                                        <dt class="text-lg leading-6 font-medium" style={{ color: primaryTextColor }}>
-                                            Email
-                                        </dt>
-                                        <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
-                                            <a href={`mailto:${portfolioData.email}`}>{portfolioData.email}</a>
-                                        </dd>
-                                    </div>
-                                )}
+                                <div class="ml-4">
+                                    <dt class="text-lg leading-6 font-medium" style={{ color: primaryTextColor }}>
+                                        Email
+                                    </dt>
+                                    <dd class="mt-2 text-base " style={{ color: primaryTextColor }}>
+                                        <a href={`mailto:${portfolioData.email}`}>{portfolioData.email}</a>
+                                    </dd>
+                                </div>
+                            )}
                         </div>
 
 
@@ -122,7 +122,7 @@ END:VCARD
 
                 <div className="lg:text-center">
 
-                    <button onClick={() => downloadVCard(name, email, phone)} className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl bg-blue-400 px-12 py-2 rounded-full hover:bg-blue-600 hover:text-gray-100 transition duration-300">
+                    <button onClick={() => downloadVCard(name, email, phone)} className="mt-2 text-lg leading-4 font-bold tracking-tight sm:text-2xl px-12 py-2 mb-4 text-gray-100 rounded-full hover:shadow-xl transition duration-300" style={{backgroundColor : buttonBgColor }}>
                         Download VCF
                     </button>
                     {/* <p className="mt-4 max-w-2xl text-xl  lg:mx-auto" style={{ color: primaryTextColor }}>

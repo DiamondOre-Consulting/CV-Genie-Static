@@ -41,6 +41,11 @@ const AdminNavbar = () => {
                         <li className='relative group'>
                             <Link to={'/admin-form'}><a href="#home" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0" aria-current="page">Home</a></Link>
                         </li>
+
+                        <li className='relative group'>
+                            <Link to={'/admin/all-portfolio'} className="block py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:p-0">All Portfolio</Link>
+                        </li>
+
                         <li className='relative group'>
                             <Link to={'/admin/portfolio-templates'} className="block py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:p-0">PortFolio Templates</Link>
                         </li>
