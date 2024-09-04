@@ -13,6 +13,7 @@ const Aboutme = ({ portfolioData }) => {
     const primaryTextColor = portfolioData.primaryTextColor;
     const secondaryTextColor = portfolioData.secondaryTextColor;
     const buttonBgColor = portfolioData.buttonColor;
+    
 
     return shouldRender ? (
         <div id='aboutme'>
