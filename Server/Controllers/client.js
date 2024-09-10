@@ -54,105 +54,105 @@ router.post("/my-profile", async (req, res) => {
 
 //PAYMENT GATEWAY 
 
-// router.post("/payment", async (req, res) => {
-//   try {
-//     const { name, number, amount } = req.body;
-//     console.log(name, number, amount);
-//     const data = {
-//       merchantId: "M224FNY56Q0NM",
-//       merchantTransactionId: generateTransactionId(),
-//       merchantUserId: "MUID123",
-//       name: name,
-//       amount: amount * 100,
-//       redirectUrl:
-//         "https://cv-genie-static-backend.onrender.com/api/client/status",
-//       redirectMode: "POST",
-//       // callbackUrl: "https://webhook.site/callback-url",
-//       mobileNumber: number,
-//       paymentInstrument: {
-//         type: "PAY_PAGE",
-//       },
-//     };
-//     const payload = JSON.stringify(data);
-//     const payloadMain = Buffer.from(payload).toString("base64");
-//     const key = "2ce3994f-5cdb-4a87-b0a1-2a779d2c90fd";
-//     const keyIndex = 1;
-//     const string = payloadMain + "/pg/v1/pay" + key;
-//     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
-//     const checksum = sha256 + "###" + keyIndex;
+router.post("/payment", async (req, res) => {
+  try {
+    const { name, number, amount } = req.body;
+    console.log(name, number, amount);
+    const data = {
+      merchantId: "M224FNY56Q0NM",
+      merchantTransactionId: generateTransactionId(),
+      merchantUserId: "MUID123",
+      name: name,
+      amount: amount * 100,
+      redirectUrl:
+        "https://cv-genie-static-backend.onrender.com/api/client/status",
+      redirectMode: "POST",
+      // callbackUrl: "https://webhook.site/callback-url",
+      mobileNumber: number,
+      paymentInstrument: {
+        type: "PAY_PAGE",
+      },
+    };
+    const payload = JSON.stringify(data);
+    const payloadMain = Buffer.from(payload).toString("base64");
+    const key = "2ce3994f-5cdb-4a87-b0a1-2a779d2c90fd";
+    const keyIndex = 1;
+    const string = payloadMain + "/pg/v1/pay" + key;
+    const sha256 = crypto.createHash("sha256").update(string).digest("hex");
+    const checksum = sha256 + "###" + keyIndex;
 
-//     console.log(sha256, checksum);
+    console.log(sha256, checksum);
 
-//     const options = {
-//       method: "POST",
-//       url: "https://api.phonepe.com/apis/hermes/pg/v1/pay",
-//       headers: {
-//         accept: "application/json",
-//         "Content-Type": "application/json",
-//         "X-VERIFY": checksum,
-//       },
-//       data: {
-//         request: payloadMain,
-//       },
-//     };
+    const options = {
+      method: "POST",
+      url: "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "X-VERIFY": checksum,
+      },
+      data: {
+        request: payloadMain,
+      },
+    };
 
-//     console.log(options);
+    console.log(options);
 
-//     axios
-//       .request(options)
-//       .then(function (response) {
-//         console.log(response.data);
-//         return res
-//           .status(200)
-//           .send(response.data.data.instrumentResponse.redirectInfo.url);
-//       })
-//       .catch(function (error) {
-//         console.error(error);
-//       });
-//   } catch (error) {
-//     console.log(error.message);
-//     res.status(500).send({
-//       message: error.message,
-//       success: false,
-//     });
-//   }
-// });
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        return res
+          .status(200)
+          .send(response.data.data.instrumentResponse.redirectInfo.url);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({
+      message: error.message,
+      success: false,
+    });
+  }
+});
 
-// router.post("/status", async (req, res) => {
-//   console.log(res.body);
+router.post("/status", async (req, res) => {
+  console.log(res.body);
 
-//   const merchantTransactionId = res.req.body.transactionId;
-//   const merchantId = res.req.body.merchantId;
-//   const keyIndex = 1;
-//   const key = "2ce3994f-5cdb-4a87-b0a1-2a779d2c90fd";
-//   const string = `/pg/v1/status/${merchantId}/${merchantTransactionId}` + key;
-//   const sha256 = crypto.createHash("sha256").update(string).digest("hex");
-//   const checksum = sha256 + "###" + keyIndex;
+  const merchantTransactionId = res.req.body.transactionId;
+  const merchantId = res.req.body.merchantId;
+  const keyIndex = 1;
+  const key = "2ce3994f-5cdb-4a87-b0a1-2a779d2c90fd";
+  const string = `/pg/v1/status/${merchantId}/${merchantTransactionId}` + key;
+  const sha256 = crypto.createHash("sha256").update(string).digest("hex");
+  const checksum = sha256 + "###" + keyIndex;
 
-//   console.log(merchantTransactionId, merchantId, sha256, checksum);
+  console.log(merchantTransactionId, merchantId, sha256, checksum);
 
-//   const URL = `https://api.phonepe.com/apis/hermes/pg/v1/status/${merchantId}/${merchantTransactionId}`;
+  const URL = `https://api.phonepe.com/apis/hermes/pg/v1/status/${merchantId}/${merchantTransactionId}`;
 
-//   const options = {
-//     method: "GET",
-//     url: URL,
-//     headers: {
-//       accept: "application/json",
-//       "Content-Type": "application/json",
-//       "X-VERIFY": checksum,
-//       "X-MERCHANT-ID": merchantId,
-//     },
-//   };
+  const options = {
+    method: "GET",
+    url: URL,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "X-VERIFY": checksum,
+      "X-MERCHANT-ID": merchantId,
+    },
+  };
 
-//   axios
-//     .request(options)
-//     .then(async (response) => {
-//       console.log(response);
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//     });
-// });
+  axios
+    .request(options)
+    .then(async (response) => {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
 
 // TEBI CREDS
 
