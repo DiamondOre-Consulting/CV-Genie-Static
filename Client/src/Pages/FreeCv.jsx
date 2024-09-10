@@ -116,7 +116,7 @@ const FreeCv = () => {
         }
 
         try {
-            const response = await axios.post("https://cv-genie-static-backend.onrender.com/api/client/generate-pdf", formData, {
+            const response = await axios.post("https://sea-turtle-app-aiigf.ondigitalocean.app/api/client/generate-pdf", formData, {
                 responseType: 'arraybuffer' // Ensure response type is arraybuffer to handle binary data (like PDF)
             });
 

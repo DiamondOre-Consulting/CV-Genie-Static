@@ -27,7 +27,7 @@ const AdminForm = () => {
                 navigate("/admin-login");
                 return;
             }
-            const clientsResponse = await axios.get('https://cv-genie-static-backend.onrender.com/api/admin/all-clients', {
+            const clientsResponse = await axios.get('https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/all-clients', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -56,7 +56,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.post(
-                "https://cv-genie-static-backend.onrender.com/api/admin/register",
+                "https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/register",
                 {
                     name,
                     email,
@@ -105,7 +105,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.put(
-                `https://cv-genie-static-backend.onrender.com/api/admin/client/${id}`,
+                `https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/client/${id}`,
                 { paid },
                 {
                     headers: {
@@ -149,7 +149,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.put(
-                `https://cv-genie-static-backend.onrender.com/api/admin/edit-account/${currentClient._id}`,
+                `https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/edit-account/${currentClient._id}`,
                 {
                     name,
                     email,
@@ -190,7 +190,7 @@ const AdminForm = () => {
                 return;
             }
             const response = await axios.delete(
-                `https://cv-genie-static-backend.onrender.com/api/admin/delete-account/${currentClient._id}`,
+                `https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/delete-account/${currentClient._id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

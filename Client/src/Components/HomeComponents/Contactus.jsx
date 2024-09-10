@@ -39,7 +39,7 @@ const Contactus = () => {
                 const formData = new FormData();
                 formData.append('myFileResume', resumeFile);
 
-                const uploadResponse = await axios.post('https://cv-genie-static-backend.onrender.com/api/users/upload-resume', formData, {
+                const uploadResponse = await axios.post('https://sea-turtle-app-aiigf.ondigitalocean.app/api/users/upload-resume', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -53,7 +53,7 @@ const Contactus = () => {
                 pdf: resumeUrl
             };
 
-            await axios.post('https://cv-genie-static-backend.onrender.com/api/users/contact-form', contactFormData);
+            await axios.post('https://sea-turtle-app-aiigf.ondigitalocean.app/api/users/contact-form', contactFormData);
 
             setShowLoader(false);
             setShowPopup(true);

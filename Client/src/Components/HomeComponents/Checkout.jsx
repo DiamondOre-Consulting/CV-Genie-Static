@@ -16,7 +16,7 @@ const Checkout = () => {
     const handleSearch = async () => {
         try {
             setShowLoader(true);
-            const response = await axios.post('https://cv-genie-static-backend.onrender.com/api/client/my-profile', { phone });
+            const response = await axios.post('https://sea-turtle-app-aiigf.ondigitalocean.app/api/client/my-profile', { phone });
             if (response.status === 200) {
                 setProfile(response.data);
                 console.log(response.data)
@@ -44,7 +44,7 @@ const Checkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(profile);
-        axios.post('https://cv-genie-static-backend.onrender.com/api/client/payment', {
+        axios.post('https://sea-turtle-app-aiigf.ondigitalocean.app/api/client/payment', {
             name: profile.name,
             number: profile.phone,
             amount: profile.amount

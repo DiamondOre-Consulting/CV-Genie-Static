@@ -17,7 +17,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setShowLoader(true);
         try {
-            const response = await axios.post("https://cv-genie-static-backend.onrender.com/api/admin/login",
+            const response = await axios.post("https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/login",
                 {
                     userName,
                     password

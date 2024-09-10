@@ -23,7 +23,7 @@ const PortFolioTemp1 = ({ uniqueUserName }) => {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await axios.get(`https://cv-genie-static-backend.onrender.com/api/admin/portfolio/${uniqueUserName}`)
+        const response = await axios.get(`https://sea-turtle-app-aiigf.ondigitalocean.app/api/admin/portfolio/${uniqueUserName}`)
 
 
         if (response.status === 200) {
